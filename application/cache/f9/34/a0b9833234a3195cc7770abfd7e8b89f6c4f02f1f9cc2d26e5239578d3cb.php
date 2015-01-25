@@ -86,8 +86,59 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t</div>
 
 \t<div class=\"row\">
-
-\t\t<div class=\"col-sm-4 col-lg-4 col-md-4\">
+\t
+\t\t";
+        // line 49
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["productosDest"]) ? $context["productosDest"] : null));
+        foreach ($context['_seq'] as $context["_key"] => $context["producto"]) {
+            // line 50
+            echo "\t\t<div class=\"col-sm-4 col-lg-4 col-md-4\">
+\t\t\t<div class=\"thumbnail\">
+\t\t\t\t<img src=\"";
+            // line 52
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "imagen", array()), "html", null, true);
+            echo "\" alt=\"\">
+\t\t\t\t<div class=\"caption\">
+\t\t\t\t\t
+\t\t\t\t\t<h4>
+\t\t\t\t\t\t<a href=\"#\">";
+            // line 56
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
+            echo "</a>
+\t\t\t\t\t</h4>
+\t\t\t\t
+\t\t\t\t\t<h4>";
+            // line 59
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
+            echo " €</h4>
+\t\t\t\t\t
+\t\t\t\t\t<p>
+\t\t\t\t\t\tSee more snippets like this online store item at <a
+\t\t\t\t\t\t\ttarget=\"_blank\" href=\"http://www.bootsnipp.com\">Bootsnipp -
+\t\t\t\t\t\t\thttp://bootsnipp.com</a>.\t\t\t\t\t\t
+\t\t\t\t\t</p>
+\t\t\t\t</div>
+\t\t\t\t<!-- <div class=\"ratings\">
+\t\t\t\t\t<p class=\"pull-right\">15 reviews</p>
+\t\t\t\t\t<p>
+\t\t\t\t\t\t<span class=\"glyphicon glyphicon-star\"></span> <span
+\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-star\"></span> <span
+\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-star\"></span> <span
+\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-star\"></span> <span
+\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-star\"></span>
+\t\t\t\t\t</p>
+\t\t\t\t</div> -->
+\t\t\t</div>
+\t\t</div>\t\t
+\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 80
+        echo "
+\t\t<!--  <div class=\"col-sm-4 col-lg-4 col-md-4\">
 \t\t\t<div class=\"thumbnail\">
 \t\t\t\t<img src=\"http://placehold.it/320x150\" alt=\"\">
 \t\t\t\t<div class=\"caption\">
@@ -208,7 +259,7 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t\t\t\t\t</p>
 \t\t\t\t</div>
 \t\t\t</div>
-\t\t</div>
+\t\t</div>-->
 \t</div>
 </div>
 
@@ -228,6 +279,6 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
     public function getDebugInfo()
     {
-        return array (  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  140 => 80,  113 => 59,  107 => 56,  100 => 52,  96 => 50,  92 => 49,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }

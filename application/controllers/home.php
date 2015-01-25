@@ -2,7 +2,7 @@
 /**
  * Clase: Home
  * 
- * Controlador Home, pantalla principal, muestra productos especiales y categorías
+ * Controlador Home, pantalla principal, muestra productos especiales y categorï¿½as
  * 
  * @author 2DAWT
  *
@@ -20,11 +20,12 @@ class Home extends CI_Controller {
 	 */
 	public function index() {
 		$categorias = $this->home_model->getCategorias ();
+		$productosDest = $this->home_model->getProductosDestacados();		
 		
 						
-						
 		echo $this->twig->render('home/index.twig', array(
-				'categorias'=>$categorias->result_array()
+				'categorias' =>	$categorias->result_array(),
+				'productosDest' => $productosDest->result_array()
 		));	
 		
 		
