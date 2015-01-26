@@ -18,17 +18,26 @@ class Home extends CI_Controller {
 	
 	/**
 	 */
-	public function index() {
-		$categorias = $this->home_model->getCategorias ();
+	public function index() {		
+		
+		$pagination = 3;
+		$config['base_url'] = base_url().'home/index';
+		$config['total_rows'] = 100; //$this->db->get('producto')->num_rows();
+		$config['per_page'] = $pagination;
+		$config["uri_segment"] = 3;//el segmento de la paginación
+		$config['num_links'] = 5;				
+		
+		
+		$this->pagination->initialize($config);
+		
+		$categorias = $this->home_model->getCategorias ( $pagination,$this->uri->segment(3));
 		$productosDest = $this->home_model->getProductosDestacados();		
-		
-		
-		//$this->carrito->AddItems(1, $itemData = null,1);
 		
 						
 		echo $this->twig->render('home/index.twig', array(
 				'categorias' =>	$categorias->result_array(),
-				'productosDest' => $productosDest->result_array()
+				'productosDest' => $productosDest->result_array(),
+				'pagination' => $this->pagination->create_links()
 		));	
 		
 	}

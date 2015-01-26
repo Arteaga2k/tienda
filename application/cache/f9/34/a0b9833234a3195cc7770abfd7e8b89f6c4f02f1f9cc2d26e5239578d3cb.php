@@ -52,6 +52,12 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
 <div class=\"col-md-9\">
 
+
+\t\t\t";
+        // line 15
+        echo (isset($context["pagination"]) ? $context["pagination"] : null);
+        echo "
+    
 \t<!-- <div class=\"row carousel-holder\">
 
 \t\t <div class=\"col-md-12\">
@@ -88,28 +94,28 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t<div class=\"row\">
 \t
 \t\t";
-        // line 49
+        // line 52
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["productosDest"]) ? $context["productosDest"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["producto"]) {
-            // line 50
+            // line 53
             echo "\t\t<div class=\"col-sm-4 col-lg-4 col-md-4\">
 \t\t\t<div class=\"thumbnail\">
 \t\t\t\t<img src=\"";
-            // line 52
+            // line 55
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "imagen", array()), "html", null, true);
             echo "\" alt=\"\">
 \t\t\t\t<div class=\"caption\">
 \t\t\t\t\t
 \t\t\t\t\t<h4>
 \t\t\t\t\t\t<a href=\"#\">";
-            // line 56
+            // line 59
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
             echo "</a>
 \t\t\t\t\t</h4>
 \t\t\t\t
 \t\t\t\t\t<h4>";
-            // line 59
+            // line 62
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
             echo " €</h4>
 \t\t\t\t\t
@@ -136,7 +142,7 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 80
+        // line 83
         echo "
 \t\t<!--  <div class=\"col-sm-4 col-lg-4 col-md-4\">
 \t\t\t<div class=\"thumbnail\">
@@ -279,6 +285,6 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
     public function getDebugInfo()
     {
-        return array (  140 => 80,  113 => 59,  107 => 56,  100 => 52,  96 => 50,  92 => 49,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  146 => 83,  119 => 62,  113 => 59,  106 => 55,  102 => 53,  98 => 52,  58 => 15,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }
