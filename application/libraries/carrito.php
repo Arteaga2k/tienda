@@ -3,26 +3,14 @@
 if (! defined ( 'BASEPATH' ))
 	exit ( 'No direct script access allowed' );
 
-/**
- * Cart item class
- */
-class CartItem {
-	var $_itemID;
-	var $_itemData;
-	
-	/**
-	 * Constructor of Cart Item Class
-	 * 
-	 * @param mixed $itemID
-	 *        	Item ID
-	 * @param mixed $itemData
-	 *        	Item data
-	 */
-	function __construct($itemID, $itemData) {
-		$this->_itemID = $itemID;
-		$this->_itemData = $itemData;
-	}
-}
+$data = array(
+               'id'      => 'sku_123ABC',
+               'qty'     => 1,
+               'price'   => 39.95,
+               'name'    => 'T-Shirt'               
+            );
+
+
 
 /**
  * Librería carrito de la compra
@@ -44,8 +32,9 @@ class Carrito {
 		
 		// Grab the shopping cart array from the session table, if it exists
 		if ($this->CI->session->userdata ( 'cart' ) !== FALSE) {
+			$this->_cart = $this->CI->session->userdata('cart');
 		} else {
-			$this->_cart = unserialize ( $this->CI->session->userdata ( 'cart' ) );
+			$this->_cart = $this->CI->session->userdata ( 'cart' ) ;
 		}
 	}
 	
@@ -55,8 +44,8 @@ class Carrito {
 	function __destruct() {
 		unset ( $this->_cart );
 		
-		$this->_cart ['cart_total'] = 0;
-		$this->_cart ['total_items'] = 0;
+		/*$this->_cart ['cart_total'] = 0;
+		$this->_cart ['total_items'] = 0;*/
 		
 		$this->CI->session->unset_userdata ( 'cart' );
 	}
@@ -65,7 +54,11 @@ class Carrito {
 	 * Función que guarda carrito en sesion
 	 */
 	public function GuardaCarrito() {
-		$this->CI->session->userdata ( 'cart' ) = serialize ( $this->GetCarrito () );
+		$carrito = $this->CI->session->userdata ( 'cart' ) ;
+		
+		if (!empty($carrito)){
+			$carrito = $this->_cart;
+		}
 	}
 	
 	/**
@@ -75,15 +68,17 @@ class Carrito {
 	 * @param mixed $itemData        	
 	 * @param int $count        	
 	 */
-	public function AddItems($itemID, $itemData = null, $count = 1) {
+	public function AddItems($items = array()) {
 		if (( int ) $count <= 0)
 			return;
-		if (isset ( $this->_cart [$itemID] )) {
-			$this->_cart [$itemID] ['count'] += $count;
+		if (isset ( $this->_cart [$items['id']] )) {
+			$this->_cart [$items['id']] ['cantidad'] += $cantidad;
 		} else {
-			$this->_cart [$itemID] ['count'] = $count;
-			$this->_cart [$itemID] ['data'] = new CartItem ( $itemID, $itemData );
+			$this->_cart [$items['id']] ['cantidad'] = $items['cantidad'];
+			$this->_cart [$items['id']] ['precio'] = $items['precio'];
+			$this->_cart [$items['id']] ['nombre'] = $items['nombre'];
 		}
+		
 		$this->GuardaCarrito ();
 	}
 	

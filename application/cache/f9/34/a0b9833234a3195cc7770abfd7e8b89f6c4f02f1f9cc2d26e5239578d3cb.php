@@ -41,7 +41,7 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
             echo " <a href=\"#\" class=\"list-group-item\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "nombre", array()), "html", null, true);
             // line 8
-            echo " 1</a> ";
+            echo "</a> ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['categoria'], $context['_parent'], $context['loop']);
@@ -52,9 +52,9 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
 <div class=\"col-md-9\">
 
-\t<div class=\"row carousel-holder\">
+\t<!-- <div class=\"row carousel-holder\">
 
-\t\t<div class=\"col-md-12\">
+\t\t <div class=\"col-md-12\">
 \t\t\t<div id=\"carousel-example-generic\" class=\"carousel slide\"
 \t\t\t\tdata-ride=\"carousel\">
 \t\t\t\t<ol class=\"carousel-indicators\">
@@ -83,7 +83,7 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t\t\t</div>
 \t\t</div>
 
-\t</div>
+\t</div>-->
 
 \t<div class=\"row\">
 \t

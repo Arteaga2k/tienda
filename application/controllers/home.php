@@ -23,13 +23,13 @@ class Home extends CI_Controller {
 		$productosDest = $this->home_model->getProductosDestacados();		
 		
 		
-		$this->carrito->AddItems(1, $itemData = null,1);
+		//$this->carrito->AddItems(1, $itemData = null,1);
 		
-		/*				
+						
 		echo $this->twig->render('home/index.twig', array(
 				'categorias' =>	$categorias->result_array(),
 				'productosDest' => $productosDest->result_array()
-		));	*/
+		));	
 		
 	}
 }

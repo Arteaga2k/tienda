@@ -36,7 +36,9 @@ class Home_model extends CI_Model {
 					FROM producto_destacado
 					INNER JOIN producto
 					ON producto_destacado.idProducto=producto.idProducto
-					WHERE producto_destacado.fecha_inicio <= "'.date("Y-m-d").'"
+					WHERE (producto_destacado.fecha_inicio <= "'.date("Y-m-d").'" 
+					AND producto_destacado.fecha_fin >= "'.date("Y-m-d").'") 
+					OR (producto_destacado.fecha_inicio is null AND producto_destacado.fecha_fin is null)										
 					';
 		
 		
@@ -47,17 +49,7 @@ class Home_model extends CI_Model {
 		
 		echo $consulta;
 		
-		$productosDest = $this->db->query($consulta);
-		
-		/*= $this->db
-		->select('*')
-		->from('producto_destacado')
-		->from('producto')
-		->where('fecha_inicio <=' , date("Y-m-d"))		
-		->where('fecha_fin >=', date("Y-m-d"))
-		->or_where($condFecha)
-		->join('producto_destacado', 'producto_destacado.idProducto_destacado = producto.idProducto', 'left')
-		->get();*/
+		$productosDest = $this->db->query($consulta);		
 		
 		return $productosDest;
 	}
