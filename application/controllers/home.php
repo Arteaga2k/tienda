@@ -22,12 +22,14 @@ class Home extends CI_Controller {
 		$categorias = $this->home_model->getCategorias ();
 		$productosDest = $this->home_model->getProductosDestacados();		
 		
-						
+		
+		$this->carrito->AddItems(1, $itemData = null,1);
+		
+		/*				
 		echo $this->twig->render('home/index.twig', array(
 				'categorias' =>	$categorias->result_array(),
 				'productosDest' => $productosDest->result_array()
-		));	
-		
+		));	*/
 		
 	}
 }
