@@ -30,6 +30,11 @@ class Home extends CI_Controller {
 		
 		$this->pagination->initialize($config);
 		
+		$this->carrito->InsertarItem(array('id' => 1,
+										'cantidad'=>2,
+										'precio'=>34
+		));
+		
 		$categorias = $this->home_model->getCategorias ( $pagination,$this->uri->segment(3));
 		$productosDest = $this->home_model->getProductosDestacados();		
 		

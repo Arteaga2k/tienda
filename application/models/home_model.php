@@ -41,7 +41,7 @@ class Home_model extends CI_Model {
 					OR (producto_destacado.fecha_inicio is null AND producto_destacado.fecha_fin is null)													
 					';
 				
-		echo $consulta;
+		//echo $consulta;
 		
 		
 		$productosDest = $this->db->query($consulta);		
