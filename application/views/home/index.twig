@@ -4,7 +4,7 @@
 <div class="col-md-3">
 	<p class="lead">Tienda Virtual</p>
 	<div class="list-group">
-		{% for categoria in categorias %} <a href="#" class="list-group-item">{{
+		{% for categoria in categorias %} <a href="{{ base_url() }}home/index/{{ categoria.idCategoria}}" class="list-group-item">{{
 			categoria.nombre }}</a> {% endfor %}
 	</div>
 </div>
@@ -13,7 +13,7 @@
 
 
 			{{ pagination|raw }}
-    
+		    
 	<!-- <div class="row carousel-holder">
 
 		 <div class="col-md-12">

@@ -38,7 +38,11 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["categorias"]) ? $context["categorias"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["categoria"]) {
-            echo " <a href=\"#\" class=\"list-group-item\">";
+            echo " <a href=\"";
+            echo twig_escape_filter($this->env, base_url(), "html", null, true);
+            echo "home/index/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "idCategoria", array()), "html", null, true);
+            echo "\" class=\"list-group-item\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "nombre", array()), "html", null, true);
             // line 8
             echo "</a> ";
@@ -57,7 +61,7 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
         // line 15
         echo (isset($context["pagination"]) ? $context["pagination"] : null);
         echo "
-    
+\t\t    
 \t<!-- <div class=\"row carousel-holder\">
 
 \t\t <div class=\"col-md-12\">
@@ -285,6 +289,6 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
     public function getDebugInfo()
     {
-        return array (  146 => 83,  119 => 62,  113 => 59,  106 => 55,  102 => 53,  98 => 52,  58 => 15,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  150 => 83,  123 => 62,  117 => 59,  110 => 55,  106 => 53,  102 => 52,  62 => 15,  54 => 9,  48 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }
