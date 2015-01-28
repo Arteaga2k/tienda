@@ -35,15 +35,17 @@ class Home extends CI_Controller {
 										'precio'=>34
 		));
 		
+		
+		
 		$categorias = $this->home_model->getCategorias ( $pagination,$this->uri->segment(3));
 		$productosDest = $this->home_model->getProductosDestacados();		
 		
 						
-		echo $this->twig->render('home/index.twig', array(
+		/*echo $this->twig->render('home/index.twig', array(
 				'categorias' =>	$categorias->result_array(),
 				'productosDest' => $productosDest->result_array(),
 				'pagination' => $this->pagination->create_links()
-		));	
+		));	*/
 		
 	}
 }

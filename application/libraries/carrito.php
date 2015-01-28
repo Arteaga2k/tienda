@@ -21,8 +21,8 @@ class Carrito {
 		$this->CI->load->library ( 'session' );		
 		
 		// Grab the shopping cart array from the session table, if it exists
-		if ($this->CI->session->userdata ( 'cart' ) !== FALSE) {
-			$this->_cart =unserialize($this->CI->session->userdata ( 'cart' ));
+		if ($this->CI->session->userdata ( 'carro' ) !== FALSE) {
+			$this->_cart =unserialize($this->CI->session->userdata ( 'carro' ));
 		}		
 		
 	}
@@ -48,10 +48,16 @@ class Carrito {
 		}		
 		
 		
-		if ($this->CI->session->userdata ( 'cart' ) !== FALSE){
-			$this->CI->session->userdata ( serialize($this->_cart) ) ;
-		}
-		
+		//if ($this->CI->session->userdata ( 'cart' ) !== FALSE){
+			$this->CI->session->set_userdata ( 'carro', serialize($this->_cart) ) ;
+			
+			$carro = unserialize($this->CI->session->userdata('carro'));
+			
+			//$carro = $this->session->userdata('carro');
+			var_dump($carro);
+			
+		//}		
+	
 		//return($this->_cart);
 		
 		
