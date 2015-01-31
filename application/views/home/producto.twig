@@ -1,0 +1,59 @@
+{% extends "_templates/base.twig" %} {% block contenido %}
+
+
+<div class="col-md-3">
+	<p class="lead">Tienda Virtual</p>
+	<div class="list-group">
+		{% for categoria in categorias %} <a
+			href="{{ base_url() }}home/categoria/{{ categoria.idCategoria}}"
+			class="list-group-item">{{ categoria.nombre }}</a> {% endfor %}
+	</div>
+</div>
+
+<div class="col-md-9">
+	<div class="row">
+		{% for producto in productos %}
+
+		<h1>
+			<a href="{{ base_url() }}home/producto/{{ producto.idProducto}}">{{
+				producto.nombre }}</a>
+		</h1>
+		<hr>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-6 col-lg-6 col-md-6">
+			<img src="{{ producto.imagen }}" alt="">
+		</div>
+		<div class="col-sm-6 col-lg-6 col-md-6">
+			<address>
+				<strong>Código Producto:</strong> <span>{{ producto.codigo }}</span><br />
+				<strong>Stock:</strong> <span>En Stock</span><br />
+			</address>
+		</div>
+		<div class="col-sm-6 col-lg-6 col-md-6">
+			<h2>
+				<strong>Precio: €{{ producto.precio }}</strong> <small>Iva incluído:
+					{{ producto.iva }}%</small><br /> <br />
+			</h2>
+		</div>
+		<div class="col-sm-6 col-lg-6 col-md-6">			
+			{{ form.form_open|raw }}
+				<div class="form-group">
+					<label for="cantidad">Unidades</label> <input type="text"
+						class="form-control" id="cantidad" name="cantidad" placeholder="1">
+				</div>				
+				<button type="submit" class="btn btn-primary">Comprar</button>
+			 </form>
+		</div>
+	</div>
+
+	{% endfor %}
+</div>
+
+
+{% endblock %}
+
+
+
+

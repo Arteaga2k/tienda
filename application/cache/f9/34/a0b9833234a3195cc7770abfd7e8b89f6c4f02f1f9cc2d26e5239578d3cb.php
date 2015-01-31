@@ -38,30 +38,33 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["categorias"]) ? $context["categorias"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["categoria"]) {
-            echo " <a href=\"";
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "home/index/";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "idCategoria", array()), "html", null, true);
-            echo "\" class=\"list-group-item\">";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "nombre", array()), "html", null, true);
+            echo " <a
+\t\t\thref=\"";
             // line 8
+            echo twig_escape_filter($this->env, base_url(), "html", null, true);
+            echo "home/categoria/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "idCategoria", array()), "html", null, true);
+            echo "\"
+\t\t\tclass=\"list-group-item\">";
+            // line 9
+            echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "nombre", array()), "html", null, true);
             echo "</a> ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['categoria'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 9
+        // line 10
         echo "\t</div>
 </div>
 
 <div class=\"col-md-9\">
 
 
-\t\t\t";
-        // line 15
+\t";
+        // line 16
         echo (isset($context["pagination"]) ? $context["pagination"] : null);
         echo "
-\t\t    
+
 \t<!-- <div class=\"row carousel-holder\">
 
 \t\t <div class=\"col-md-12\">
@@ -96,38 +99,52 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t</div>-->
 
 \t<div class=\"row\">
-\t
+
 \t\t";
-        // line 52
+        // line 53
         $context['_parent'] = (array) $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["productosDest"]) ? $context["productosDest"] : null));
+        $context['_seq'] = twig_ensure_traversable((isset($context["productos"]) ? $context["productos"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["producto"]) {
-            // line 53
+            // line 54
             echo "\t\t<div class=\"col-sm-4 col-lg-4 col-md-4\">
 \t\t\t<div class=\"thumbnail\">
 \t\t\t\t<img src=\"";
-            // line 55
+            // line 56
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "imagen", array()), "html", null, true);
             echo "\" alt=\"\">
 \t\t\t\t<div class=\"caption\">
-\t\t\t\t\t
+
 \t\t\t\t\t<h4>
-\t\t\t\t\t\t<a href=\"#\">";
-            // line 59
+\t\t\t\t\t\t<a href=\"";
+            // line 60
+            echo twig_escape_filter($this->env, base_url(), "html", null, true);
+            echo "home/producto/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "idProducto", array()), "html", null, true);
+            echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
-            echo "</a>
+            echo "</a>\t\t\t\t\t\t
 \t\t\t\t\t</h4>
-\t\t\t\t
+
 \t\t\t\t\t<h4>";
-            // line 62
+            // line 63
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
             echo " €</h4>
-\t\t\t\t\t
+
 \t\t\t\t\t<p>
 \t\t\t\t\t\tSee more snippets like this online store item at <a
 \t\t\t\t\t\t\ttarget=\"_blank\" href=\"http://www.bootsnipp.com\">Bootsnipp -
-\t\t\t\t\t\t\thttp://bootsnipp.com</a>.\t\t\t\t\t\t
+\t\t\t\t\t\t\thttp://bootsnipp.com</a>.
 \t\t\t\t\t</p>
+\t\t\t\t\t<p>
+\t\t\t\t\t<div class=\"progress\">
+\t\t\t\t\t\t<div class=\"progress-bar progress-bar-success\" role=\"progressbar\"
+\t\t\t\t\t\t\taria-valuenow=\"40\" aria-valuemin=\"0\" aria-valuemax=\"100\"
+\t\t\t\t\t\t\tstyle=\"width: 40%\">
+    <span class=\"sr-only\">40% Complete (success)</span>
+  </div>
+</div>\t\t\t\t\t</p>
+\t\t\t\t\t
+\t\t\t\t\t
 \t\t\t\t</div>
 \t\t\t\t<!-- <div class=\"ratings\">
 \t\t\t\t\t<p class=\"pull-right\">15 reviews</p>
@@ -146,7 +163,7 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 83
+        // line 94
         echo "
 \t\t<!--  <div class=\"col-sm-4 col-lg-4 col-md-4\">
 \t\t\t<div class=\"thumbnail\">
@@ -289,6 +306,6 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
     public function getDebugInfo()
     {
-        return array (  150 => 83,  123 => 62,  117 => 59,  110 => 55,  106 => 53,  102 => 52,  62 => 15,  54 => 9,  48 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  167 => 94,  130 => 63,  120 => 60,  113 => 56,  109 => 54,  105 => 53,  65 => 16,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }
