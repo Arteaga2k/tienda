@@ -108,17 +108,30 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
             echo "%</small><br /> <br />
 \t\t\t</h2>
 \t\t</div>
-\t\t<div class=\"col-sm-6 col-lg-6 col-md-6\">\t\t\t
+\t\t<div class=\"col-sm-6 col-lg-6 col-md-6\">
 \t\t\t";
             // line 41
             echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "form_open", array());
             echo "
-\t\t\t\t<div class=\"form-group\">
-\t\t\t\t\t<label for=\"cantidad\">Unidades</label> <input type=\"text\"
-\t\t\t\t\t\tclass=\"form-control\" id=\"cantidad\" name=\"cantidad\" placeholder=\"1\">
-\t\t\t\t</div>\t\t\t\t
-\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Comprar</button>
-\t\t\t </form>
+\t\t\t<div class=\"form-group\">
+\t\t\t\t<label for=\"cantidad\">Unidades</label> <input type=\"text\"
+\t\t\t\t\tclass=\"form-control\" id=\"cantidad\" name=\"cantidad\" placeholder=\"1\">
+\t\t\t\t\t";
+            // line 45
+            echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "error_cantidad", array());
+            echo "
+\t\t\t\t<input type=\"hidden\" name=\"idproducto\"
+\t\t\t\t\tvalue=\"";
+            // line 47
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "idProducto", array()), "html", null, true);
+            echo "\"> <input type=\"hidden\"
+\t\t\t\t\tname=\"idproducto\" value=\"";
+            // line 48
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
+            echo "\">
+\t\t\t</div>
+\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Comprar</button>
+\t\t\t</form>
 \t\t</div>
 \t</div>
 
@@ -127,7 +140,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 52
+        // line 56
         echo "</div>
 
 
@@ -146,6 +159,6 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
     public function getDebugInfo()
     {
-        return array (  131 => 52,  114 => 41,  107 => 37,  103 => 36,  94 => 30,  87 => 26,  78 => 19,  72 => 18,  68 => 16,  64 => 15,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  144 => 56,  130 => 48,  126 => 47,  121 => 45,  114 => 41,  107 => 37,  103 => 36,  94 => 30,  87 => 26,  78 => 19,  72 => 18,  68 => 16,  64 => 15,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }

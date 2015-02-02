@@ -37,14 +37,18 @@
 					{{ producto.iva }}%</small><br /> <br />
 			</h2>
 		</div>
-		<div class="col-sm-6 col-lg-6 col-md-6">			
+		<div class="col-sm-6 col-lg-6 col-md-6">
 			{{ form.form_open|raw }}
-				<div class="form-group">
-					<label for="cantidad">Unidades</label> <input type="text"
-						class="form-control" id="cantidad" name="cantidad" placeholder="1">
-				</div>				
-				<button type="submit" class="btn btn-primary">Comprar</button>
-			 </form>
+			<div class="form-group">
+				<label for="cantidad">Unidades</label> <input type="text"
+					class="form-control" id="cantidad" name="cantidad" placeholder="1">
+					{{ form.error_cantidad|raw }}
+				<input type="hidden" name="idproducto"
+					value="{{ producto.idProducto}}"> <input type="hidden"
+					name="idproducto" value="{{ producto.precio}}">
+			</div>
+			<button type="submit" class="btn btn-primary">Comprar</button>
+			</form>
 		</div>
 	</div>
 

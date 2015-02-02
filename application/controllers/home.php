@@ -38,17 +38,6 @@ class Home extends CI_Controller
         
         $this->pagination->initialize($config);
         
-        // prueba
-        
-         $this->carrito->InsertarItem(array('id' => 1,
-         'cantidad'=>2,
-         'precio'=>34
-         ));
-         
-        echo (unserialize($this->session->userdata('carro')));
-         
-        /*
-        
         $segmento = ! empty($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         
         $categorias = $this->home_model->getCategorias();
@@ -58,14 +47,14 @@ class Home extends CI_Controller
             'categorias' => $categorias->result_array(),
             'productos' => $productosDest->result_array(),
             'pagination' => $this->pagination->create_links()
-        ));*/
+        ));
     }
 
     /**
      * PÁGINA: categoria
      *
      * http://tienda/categoria/{id}
-     * 
+     *
      * @param string $categoria            
      */
     public function categoria($idCategoria)
@@ -95,7 +84,7 @@ class Home extends CI_Controller
      * PÁGINA: producto
      *
      * http://tienda/producto/{id}
-     * 
+     *
      * @param string $id            
      */
     public function producto($idProducto)
@@ -107,6 +96,8 @@ class Home extends CI_Controller
         $form["form_open"] = form_open("", array(
             "class" => "form-inline"
         ));
+        $form['error_cantidad'] = form_error('cantidad'); 
+        echo form_error('cantidad'); 
         
         // Comprueba validación formulario
         if ($this->form_validation->run() == FALSE) {
@@ -116,7 +107,22 @@ class Home extends CI_Controller
                 'form' => $form
             ));
         } else {
-            // ir a proceso de compra
+            // añadimos producto al carro
+            $this->addProducto();
         }
+    }
+
+    /**
+     * ACCIÓN: insertar un producto al carrro
+     * de la compra
+     */
+    public function addProducto()
+    {
+        $this->carrito->InsertarItem(array(
+            'id' => $this->input->post('idproducto'),
+            'cantidad'=>$this->input->post('cantidad'),
+            'precio'=>$this->input->post('precio')
+        ));
+        
     }
 }
