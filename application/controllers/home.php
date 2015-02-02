@@ -10,7 +10,6 @@
  */
 class Home extends CI_Controller
 {
-    
 
     /**
      * Constructor clase Home
@@ -19,14 +18,13 @@ class Home extends CI_Controller
     {
         parent::__construct();
         $this->load->model('home_model');
-    }   
+    }
 
-  
-   /**
-    * PÁGINA: index
-    * 
-    * http://tienda/home    
-    */
+    /**
+     * PÁGINA: index
+     *
+     * http://tienda/home
+     */
     public function index()
     {
         
@@ -41,12 +39,15 @@ class Home extends CI_Controller
         $this->pagination->initialize($config);
         
         // prueba
+        
+         $this->carrito->InsertarItem(array('id' => 1,
+         'cantidad'=>2,
+         'precio'=>34
+         ));
+         
+        echo (unserialize($this->session->userdata('carro')));
+         
         /*
-         * $this->carrito->InsertarItem(array('id' => 1,
-         * 'cantidad'=>2,
-         * 'precio'=>34
-         * ));
-         */
         
         $segmento = ! empty($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         
@@ -57,17 +58,18 @@ class Home extends CI_Controller
             'categorias' => $categorias->result_array(),
             'productos' => $productosDest->result_array(),
             'pagination' => $this->pagination->create_links()
-        ));
+        ));*/
     }
-    
+
     /**
      * PÁGINA: categoria
-     * 
+     *
      * http://tienda/categoria/{id}
-     * @param string $categoria
+     * 
+     * @param string $categoria            
      */
-    public function categoria($idCategoria){
-        
+    public function categoria($idCategoria)
+    {
         $pagination = 5;
         $config['base_url'] = base_url() . 'home/categoria/' . $idCategoria . '';
         $config['total_rows'] = $this->home_model->getTotalProductos($idCategoria);
@@ -88,34 +90,33 @@ class Home extends CI_Controller
             'pagination' => $this->pagination->create_links()
         ));
     }
-    
-  
+
     /**
-     * PÁGINA:  producto
-     * 
+     * PÁGINA: producto
+     *
      * http://tienda/producto/{id}
-     * @param string $id
+     * 
+     * @param string $id            
      */
-    public function producto($idProducto){
+    public function producto($idProducto)
+    {
         $categorias = $this->home_model->getCategorias();
         $producto = $this->home_model->getProducto($idProducto);
         
-        $this->form_validation->set_rules('cantidad', 'Cantidad', 'trim|required|min_length[1]|numeric|xss_clean');       
-        $form["form_open"] = form_open("", array("class"=>"form-inline"));
+        $this->form_validation->set_rules('cantidad', 'Cantidad', 'trim|required|min_length[1]|numeric|xss_clean');
+        $form["form_open"] = form_open("", array(
+            "class" => "form-inline"
+        ));
         
         // Comprueba validación formulario
-        if ($this->form_validation->run() == FALSE)
-        {
+        if ($this->form_validation->run() == FALSE) {
             echo $this->twig->render('home/producto.twig', array(
-            'categorias' => $categorias->result_array(),
-            'productos' => $producto->result_array(),
-            'form' => $form         
-        ));
+                'categorias' => $categorias->result_array(),
+                'productos' => $producto->result_array(),
+                'form' => $form
+            ));
+        } else {
+            // ir a proceso de compra
         }
-        else
-        {
-            //ir a proceso de compra
-        }        
-        
     }
 }

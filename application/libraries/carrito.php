@@ -12,7 +12,7 @@ class Carrito
 {
 
     private $_cart = array();
- // Datos carrito
+    // Datos carrito
     
     /**
      * Constructor clase carrito
@@ -24,10 +24,14 @@ class Carrito
         // Load the Sessions class
         $this->CI->load->library('session');
         
-        // Grab the shopping cart array from the session table, if it exists
-        if ($this->CI->session->userdata('carro') !== FALSE) {
-            $this->_cart = unserialize($this->CI->session->userdata('carro'));
+        if ($this->CI->session->userdata('carro') == FALSE) {
+            $this->CI->session->set_userdata('carro', NULL);
+            
+            $this->cart["precio_total"] = 0;
+            $this->cart["articulos_total"] = 0;
         }
+        
+        $this->_cart = unserialize($this->CI->session->userdata('carro'));
     }
 
     /**
@@ -50,7 +54,51 @@ class Carrito
         }
         
         $this->CI->session->set_userdata('carro', serialize($this->_cart));
+        
+        // actualizamos el precio total y el número de artículos del carrito
+        // una vez hemos añadido el producto
+        $this->update_precio_cantidad();
     }
-    
-    
+
+    /**
+     * Actualiza precio total y cantidad de productos total del carrito
+     */
+    private function update_precio_cantidad()
+    {
+        // seteamos las variables precio y artículos a 0
+        $precio = 0;
+        $articulos = 0;
+        
+        // recorrecmos el contenido del carrito para actualizar
+        // el precio total y el número de artículos
+        foreach ($this->_cart as $row) {
+            $precio += ($row['precio'] * $row['cantidad']);
+            $articulos += $row['cantidad'];
+        }
+        
+        $this->_cart = unserialize($this->CI->session->userdata('carro'));
+        $this->_cart[$itemid]['precio'] = $data['precio'];
+        
+        
+        // asignamos a articulos_total el número de artículos actual
+        // y al precio el precio actual
+        $this->_cart["articulos_total"] = $articulos;
+        $this->_cart["precio_total"] = $precio;
+        
+        // refrescamos él contenido del carrito para que quedé actualizado
+        $this->CI->session->set_userdata('carro', serialize($this->_cart));
+    }
+
+    /**
+     * Devuelve el contenido del carrito
+     *
+     * @return Ambigous <NULL, multitype:>
+     */
+    public function getCarrito()
+    {
+        // asignamos el carrito a una variable
+        $carrito = $this->_cart;
+        
+        return $carrito == null ? null : $carrito;
+    }
 }
