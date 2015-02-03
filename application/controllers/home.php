@@ -125,4 +125,10 @@ class Home extends CI_Controller
         ));
         
     }
+    
+    // probando ajax
+    public function ajax(){        
+       
+        //echo json_encode($value);
+    }
 }

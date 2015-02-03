@@ -14,6 +14,7 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
             'contenido' => array($this, 'block_contenido'),
             'footer' => array($this, 'block_footer'),
             'javascripts' => array($this, 'block_javascripts'),
+            'script' => array($this, 'block_script'),
         );
     }
 
@@ -33,6 +34,7 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
         $this->displayBlock('stylesheets', $context, $blocks);
         // line 17
         echo "
+
 
 
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -77,11 +79,11 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t\t\t\t
 \t\t\t\t\t</a>
 \t\t\t\t\t\t<ul class=\"dropdown-menu\" role=\"menu\">
-\t\t\t\t\t\t\t<li><a href=\"#\">Action</a></li>
-\t\t\t\t\t\t\t<li><a href=\"#\">Another action</a></li>
-\t\t\t\t\t\t\t<li><a href=\"#\">Something else here</a></li>
-\t\t\t\t\t\t\t<li class=\"divider\"></li>
-\t\t\t\t\t\t\t<li><a href=\"#\">Separated link</a></li>
+\t\t\t\t\t\t\t<table id=\"table_cart\">
+\t\t\t\t\t\t\t<tr>
+\t\t\t\t\t\t\t <td>hola</td>
+\t\t\t\t\t\t\t</tr>
+\t\t\t\t\t\t\t</table>
 \t\t\t\t\t\t</ul></li>
 \t\t\t\t</ul>
 \t\t\t</div>
@@ -94,7 +96,7 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t<!-- Page Content -->
 \t<div class=\"container\">
 \t\t<div class=\"row\">";
-        // line 78
+        // line 79
         $this->displayBlock('contenido', $context, $blocks);
         echo "</div>
 \t</div>
@@ -107,9 +109,9 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 
 
 \t";
-        // line 88
-        $this->displayBlock('footer', $context, $blocks);
         // line 89
+        $this->displayBlock('footer', $context, $blocks);
+        // line 90
         echo "
 
 
@@ -117,9 +119,9 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 
 \t</div>
 \t";
-        // line 95
+        // line 96
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 107
+        // line 113
         echo "</body>
 </html>
 
@@ -144,39 +146,54 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 ";
     }
 
-    // line 78
+    // line 79
     public function block_contenido($context, array $blocks = array())
     {
     }
 
-    // line 88
+    // line 89
     public function block_footer($context, array $blocks = array())
     {
     }
 
-    // line 95
+    // line 96
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 96
-        echo "\t<script src=\"";
+        echo "\t
+\t<script src=\"";
+        // line 97
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/jquery-1.11.1.min.js\"
 \t\ttype=\"text/javascript\"></script>
 \t<script src=\"";
-        // line 98
+        // line 99
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/bootstrap.min.js\"
 \t\ttype=\"text/javascript\"></script>
 \t<script src=\"";
-        // line 100
+        // line 101
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/jquery.cleditor.min.js\"
 \t\ttype=\"text/javascript\"></script>
 \t<script src=\"//code.jquery.com/ui/1.11.2/jquery-ui.js\"></script>
 \t<!--Load the AJAX API-->
 \t<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>
+\t
+\t ";
+        // line 107
+        $this->displayBlock('script', $context, $blocks);
+        // line 110
+        echo "\t
 
 \t";
+    }
+
+    // line 107
+    public function block_script($context, array $blocks = array())
+    {
+        // line 108
+        echo "\t <!-- bloques scripts que heredarán cada pag -->
+\t ";
     }
 
     public function getTemplateName()
@@ -186,6 +203,6 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 
     public function getDebugInfo()
     {
-        return array (  172 => 100,  167 => 98,  161 => 96,  158 => 95,  153 => 88,  148 => 78,  142 => 15,  133 => 10,  130 => 9,  123 => 107,  121 => 95,  113 => 89,  111 => 88,  98 => 78,  35 => 17,  33 => 9,  23 => 1,);
+        return array (  195 => 108,  192 => 107,  186 => 110,  184 => 107,  175 => 101,  170 => 99,  165 => 97,  160 => 96,  155 => 89,  150 => 79,  144 => 15,  135 => 10,  132 => 9,  125 => 113,  123 => 96,  115 => 90,  113 => 89,  100 => 79,  36 => 17,  34 => 9,  24 => 1,);
     }
 }

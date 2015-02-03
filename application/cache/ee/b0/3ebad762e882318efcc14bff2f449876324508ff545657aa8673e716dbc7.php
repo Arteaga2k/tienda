@@ -11,6 +11,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
         $this->blocks = array(
             'contenido' => array($this, 'block_contenido'),
+            'script' => array($this, 'block_script'),
         );
     }
 
@@ -116,21 +117,20 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\t<div class=\"form-group\">
 \t\t\t\t<label for=\"cantidad\">Unidades</label> <input type=\"text\"
 \t\t\t\t\tclass=\"form-control\" id=\"cantidad\" name=\"cantidad\" placeholder=\"1\">
-\t\t\t\t\t";
+\t\t\t\t";
             // line 45
             echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "error_cantidad", array());
-            echo "
-\t\t\t\t<input type=\"hidden\" name=\"idproducto\"
+            echo " <input type=\"hidden\" name=\"idproducto\"
 \t\t\t\t\tvalue=\"";
-            // line 47
+            // line 46
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "idProducto", array()), "html", null, true);
             echo "\"> <input type=\"hidden\"
 \t\t\t\t\tname=\"idproducto\" value=\"";
-            // line 48
+            // line 47
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
             echo "\">
 \t\t\t</div>
-\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Comprar</button>
+\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Añadir al carro</button>
 \t\t\t</form>
 \t\t</div>
 \t</div>
@@ -140,10 +140,36 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 56
+        // line 55
         echo "</div>
+";
+    }
+
+    // line 57
+    public function block_script($context, array $blocks = array())
+    {
+        // line 58
+        echo "
+
+<script type=\"text/javascript\">
+
+\t\$(document).ready(function(){
+\t\t
+\t\t\$.get(\"";
+        // line 64
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "home/ajax/\",\"2\",function(data)
+\t\t{
+\t\t\t \$(\"#table_cart\").html(\"<tr><td>hola</td></tr>\");
+\t\t});
+
+\t\t
+\t\t
+\t});
 
 
+
+</script>
 ";
     }
 
@@ -159,6 +185,6 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
     public function getDebugInfo()
     {
-        return array (  144 => 56,  130 => 48,  126 => 47,  121 => 45,  114 => 41,  107 => 37,  103 => 36,  94 => 30,  87 => 26,  78 => 19,  72 => 18,  68 => 16,  64 => 15,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  160 => 64,  152 => 58,  149 => 57,  144 => 55,  130 => 47,  126 => 46,  122 => 45,  115 => 41,  108 => 37,  104 => 36,  95 => 30,  88 => 26,  79 => 19,  73 => 18,  69 => 16,  65 => 15,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
     }
 }

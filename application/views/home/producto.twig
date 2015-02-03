@@ -42,20 +42,43 @@
 			<div class="form-group">
 				<label for="cantidad">Unidades</label> <input type="text"
 					class="form-control" id="cantidad" name="cantidad" placeholder="1">
-					{{ form.error_cantidad|raw }}
-				<input type="hidden" name="idproducto"
+				{{ form.error_cantidad|raw }} <input type="hidden" name="idproducto"
 					value="{{ producto.idProducto}}"> <input type="hidden"
 					name="idproducto" value="{{ producto.precio}}">
 			</div>
-			<button type="submit" class="btn btn-primary">Comprar</button>
+			<button type="submit" class="btn btn-primary">Añadir al carro</button>
 			</form>
 		</div>
 	</div>
 
 	{% endfor %}
 </div>
+{% endblock %} 
+{% block script %}
 
 
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		
+		$.get("{{ base_url() }}home/ajax/","2",function(data)
+		{
+			var json = JSON.parse(data);
+			 $("#table_cart").html("<tr><td>hola</td></tr>");
+
+			 var html = "";
+			 for (producto in json){
+				    html += "" json[producto].nombre;
+			 }
+		});
+
+		
+		
+	});
+
+
+
+</script>
 {% endblock %}
 
 
