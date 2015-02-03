@@ -98,12 +98,13 @@ class Home extends CI_Controller
         ));
         $form['error_cantidad'] = form_error('cantidad'); 
         echo form_error('cantidad'); 
+      
         
         // Comprueba validación formulario
         if ($this->form_validation->run() == FALSE) {
             echo $this->twig->render('home/producto.twig', array(
                 'categorias' => $categorias->result_array(),
-                'productos' => $producto->result_array(),
+                'producto' => $producto->result_array()[0],
                 'form' => $form
             ));
         } else {
@@ -127,8 +128,31 @@ class Home extends CI_Controller
     }
     
     // probando ajax
-    public function ajax(){        
+    public function ajaxAddCart($cantidad,$idproducto,$precio){   
        
-        //echo json_encode($value);
+        $this->carrito->InsertarItem(array(
+            'id' => $idproducto,
+            'cantidad'=>$cantidad,
+            'precio'=>$precio
+        ));
+        
+        $carrito = $this->carrito->getCarrito();
+        
+        var_dump($carrito);
+        
+        
+        
+       //echo json_encode($value);
+       
+       //$value = $this->session->userdata('UserID');
+       //$value = $_SESSION['UserID'];
+     
+        echo $cantidad.$idproducto.$precio;
     }
+    
+   
+    
+    
+    
+    
 }

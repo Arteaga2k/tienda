@@ -164,7 +164,7 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
         // line 97
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/jquery-1.11.1.min.js\"
-\t\ttype=\"text/javascript\"></script>
+\t\ttype=\"text/javascript\"></script>\t
 \t<script src=\"";
         // line 99
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
