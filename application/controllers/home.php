@@ -48,6 +48,10 @@ class Home extends CI_Controller
             'productos' => $productosDest->result_array(),
             'pagination' => $this->pagination->create_links()
         ));
+        
+        //todo prueba
+        //$this->ajaxAddCart(10,4,28);
+        
     }
 
     /**
@@ -129,25 +133,18 @@ class Home extends CI_Controller
     
     // probando ajax
     public function ajaxAddCart($cantidad,$idproducto,$precio){   
-       
+        
         $this->carrito->InsertarItem(array(
             'id' => $idproducto,
             'cantidad'=>$cantidad,
             'precio'=>$precio
         ));
         
-        $carrito = $this->carrito->getCarrito();
-        
-        var_dump($carrito);
-        
-        
-        
-       //echo json_encode($value);
+        $carrito = $this->carrito->getCarrito();          
        
-       //$value = $this->session->userdata('UserID');
-       //$value = $_SESSION['UserID'];
-     
-        echo $cantidad.$idproducto.$precio;
+       echo json_encode($carrito);
+       
+       
     }
     
    

@@ -147,16 +147,27 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
         echo "/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "precio", array()), "html", null, true);
         echo "\",\"\",function(data)
-\t\t\t\t\t\t{
-\t\t\t\t\t\t\talert(data);
-\t\t\t    \t\t\t// var json = JSON.parse(data);
-\t\t\t    \t\t\t/* \$(\"#table_cart\").html(\"<tr><td>hola</td></tr>\");
-\t\t\t    \t\t\t\t\t
-\t\t\t    \t\t\t var html = \"\";
-\t\t\t    \t\t\t for (producto in json){
-\t\t\t    \t\t\t  html += \"\" json[producto].nombre;
-\t\t\t    \t\t\t }*/
-\t\t\t\t\t\t });
+\t\t\t\t{
+\t\t\t\t    var json = JSON.parse(data);
+\t\t\t\t    //console.log(json);
+\t\t\t    \tvar html = \"\";
+
+\t\t\t    \tvar articulos_total = json.articulos_total;
+\t\t\t    \tvar precio_total = json.precio_total;\t
+\t\t\t    \t
+
+\t\t\t    \t\$.each(json.items, function(key, value) {
+\t\t\t    \t    console.log(key,value);
+\t\t\t    \t    html += \"<tr><td></td><td>nombre producto</td><td>\"+value.precio+\" € x \" +value.cantidad+ \"</td></tr>\";
+\t\t\t    \t    //console.log(value.cantidad);
+\t\t\t    \t\t/*\$.each(value, function(key, value) {
+\t\t\t\t    \t\thtml += \"<tr><td></td><td>nombre producto</td><td>\"+value+\"</td></tr>\";
+\t\t \t\t\t  \t    //console.log(key,value);
+\t\t\t\t    \t});*/\t\t\t    \t\t \t\t\t  \t    
+\t\t\t    \t});
+\t\t\t    \thtml += \"<hr><p class='btn btn-primary'>Ver carrito</p>\";
+\t\t\t    \t\$('#table_cart').html(html);\t\t\t    \t\t\t 
+\t\t\t\t});
 \t\t\t}
 \t\t\telse
 \t\t\t{

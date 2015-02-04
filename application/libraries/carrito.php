@@ -24,17 +24,15 @@ class Carrito
         // Load the Sessions class
         $this->CI->load->library('session');
         
-        if ($this->CI->session->userdata('carro') == FALSE) {          
+        if ($this->CI->session->userdata('carro') == FALSE) {
             
             $this->_cart['precio_total'] = 0;
-            $this->_cart['articulos_total'] = 0;    
+            $this->_cart['articulos_total'] = 0;
             
-            $this->CI->session->set_userdata('carro', serialize($this->_cart));           
-          
-        }    
-         
-        $this->_cart = unserialize($this->CI->session->userdata('carro'));
+            $this->CI->session->set_userdata('carro', serialize($this->_cart));
+        }
         
+        $this->_cart = unserialize($this->CI->session->userdata('carro'));
     }
 
     /**
@@ -42,23 +40,21 @@ class Carrito
      * @param unknown $data            
      */
     public function InsertarItem($data = array())
-    {     
-        
-       if (! is_array($data) or count($data) == 0) {
+    {
+        if (! is_array($data) or count($data) == 0) {
             return;
         }
         
         $itemid = $data['id'];
         
         if (isset($this->_cart[$itemid])) {
-            $this->_cart[$itemid]['cantidad'] += $data['cantidad'];
+            $this->_cart['items'][$itemid]['cantidad'] += $data['cantidad'];
         } else {
-            $this->_cart[$itemid]['cantidad'] = $data['cantidad'];
-            $this->_cart[$itemid]['precio'] = $data['precio'];
+            $this->_cart['items'][$itemid]['cantidad'] = $data['cantidad'];
+            $this->_cart['items'][$itemid]['precio'] = $data['precio'];
         }
         
-        $this->CI->session->set_userdata('carro', serialize($this->_cart));        
-        
+        $this->CI->session->set_userdata('carro', serialize($this->_cart));
         
         // actualizamos el precio total y el número de artículos del carrito
         // una vez hemos añadido el producto
@@ -76,12 +72,12 @@ class Carrito
         
         // recorremos el contenido del carrito para actualizar
         // el precio total y el número de artículos
-        foreach ($this->_cart as $row) {
+        foreach ($this->_cart['items'] as $row) {            
             $precio += ($row['precio'] * $row['cantidad']);
             $articulos += $row['cantidad'];
         }
         
-        $this->_cart = unserialize($this->CI->session->userdata('carro'));            
+        $this->_cart = unserialize($this->CI->session->userdata('carro'));
         
         // asignamos a articulos_total el número de artículos actual
         // y al precio el precio actual
@@ -104,22 +100,22 @@ class Carrito
         
         return $carrito == null ? null : $carrito;
     }
-    
+
     /**
      * Destroy the cart
      *
      * Empties the cart and kills the session
      *
-     * @access	public
-     * @return	null
+     * @access public
+     * @return null
      */
     function destroy()
     {
         unset($this->_cart);
-    
+        
         $this->__cart['cart_total'] = 0;
         $this->__cart['total_items'] = 0;
-    
+        
         $this->CI->session->unset_userdata('carro');
     }
 }
