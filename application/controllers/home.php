@@ -46,11 +46,14 @@ class Home extends CI_Controller
         echo $this->twig->render('home/index.twig', array(
             'categorias' => $categorias->result_array(),
             'productos' => $productosDest->result_array(),
-            'pagination' => $this->pagination->create_links()
+            'pagination' => $this->pagination->create_links(),
+            'carrito' => $this->carrito->getCarrito()
         ));
-        
+       
+     
+        //$this->carrito->destroy();
         //todo prueba
-        //$this->ajaxAddCart(10,4,28);
+       //$this->ajaxAddCart(10,5);
         
     }
 
@@ -80,7 +83,8 @@ class Home extends CI_Controller
         echo $this->twig->render('home/index.twig', array(
             'categorias' => $categorias->result_array(),
             'productos' => $productosDest->result_array(),
-            'pagination' => $this->pagination->create_links()
+            'pagination' => $this->pagination->create_links(),
+            'carrito' => $this->carrito->getCarrito()
         ));
     }
 
@@ -108,43 +112,39 @@ class Home extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             echo $this->twig->render('home/producto.twig', array(
                 'categorias' => $categorias->result_array(),
-                'producto' => $producto->result_array()[0],
-                'form' => $form
+                'producto' => $producto,
+                'form' => $form,
+                'carrito' => $this->carrito->getCarrito()
             ));
         } else {
             // añadimos producto al carro
             $this->addProducto();
         }
     }
-
-    /**
-     * ACCIÓN: insertar un producto al carrro
-     * de la compra
-     */
-    public function addProducto()
-    {
-        $this->carrito->InsertarItem(array(
-            'id' => $this->input->post('idproducto'),
-            'cantidad'=>$this->input->post('cantidad'),
-            'precio'=>$this->input->post('precio')
-        ));
-        
-    }
+   
     
     // probando ajax
-    public function ajaxAddCart($cantidad,$idproducto,$precio){   
+    public function ajaxAddCart($cantidad,$idproducto){      
+
+        //echo "cantidad: [$cantidad]\n";        
+               
+        $producto = $this->home_model->getProducto($idproducto);     
+
+        if ($producto->cantidad <= $producto->stock){
+            $cantidadFinal = $producto->stock >= $cantidad ? $cantidad : $producto->stock;
+            
+            $this->carrito->InsertarItem(array(
+                'id' => $idproducto,
+                'cantidad' => $cantidadFinal,
+                'precio' => $producto->precio,
+                'nombre' => $producto->nombre
+            ));            
+            
+        }    
         
-        $this->carrito->InsertarItem(array(
-            'id' => $idproducto,
-            'cantidad'=>$cantidad,
-            'precio'=>$precio
-        ));
-        
-        $carrito = $this->carrito->getCarrito();          
-       
-       echo json_encode($carrito);
-       
-       
+        $carrito = $this->carrito->getCarrito();
+        echo json_encode($carrito);        
+              
     }
     
    

@@ -60,13 +60,14 @@
 
 		$('#add').click(function(){
 						
-			var cantidad = $('#cantidad').val();  
+			var cantidad = parseInt($('#cantidad').val());  
+			
 			// filtramos valor
 			if ($.isNumeric(cantidad) && cantidad > 0){
-				$.get("{{ base_url() }}home/ajaxAddCart/"+cantidad+"/{{ producto.codigo }}/{{ producto.precio }}","",function(data)
+				$.get("{{ base_url() }}home/ajaxAddCart/"+cantidad+"/{{ producto.idProducto }}","",function(data)
 				{
 				    var json = JSON.parse(data);
-				    //console.log(json);
+				    console.log(json);
 			    	var html = "";
 
 			    	var articulos_total = json.articulos_total;
@@ -75,15 +76,10 @@
 
 			    	$.each(json.items, function(key, value) {
 			    	    console.log(key,value);
-			    	    html += "<tr><td></td><td>nombre producto</td><td>"+value.precio+" € x " +value.cantidad+ "</td></tr>";
-			    	    //console.log(value.cantidad);
-			    		/*$.each(value, function(key, value) {
-				    		html += "<tr><td></td><td>nombre producto</td><td>"+value+"</td></tr>";
-		 			  	    //console.log(key,value);
-				    	});*/			    		 			  	    
+			    	    html += "<tr><td></td><td>"+value.nombre+"</td><td>"+value.precio+" € x " +value.cantidad+ "</td></tr>";			    	   		    		 			  	    
 			    	});
-			    	html += "<hr><p class='btn btn-primary'>Ver carrito</p>";
-			    	$('#table_cart').html(html);			    			 
+			    	
+			    	$('#table_cart').html(html);		    			 
 				});
 			}
 			else

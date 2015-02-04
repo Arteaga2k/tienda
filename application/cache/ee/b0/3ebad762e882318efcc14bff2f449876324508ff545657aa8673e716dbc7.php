@@ -136,20 +136,19 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
 \t\t\$('#add').click(function(){
 \t\t\t\t\t\t
-\t\t\tvar cantidad = \$('#cantidad').val();  
+\t\t\tvar cantidad = parseInt(\$('#cantidad').val());  
+\t\t\t
 \t\t\t// filtramos valor
 \t\t\tif (\$.isNumeric(cantidad) && cantidad > 0){
 \t\t\t\t\$.get(\"";
-        // line 66
+        // line 67
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "home/ajaxAddCart/\"+cantidad+\"/";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "codigo", array()), "html", null, true);
-        echo "/";
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "precio", array()), "html", null, true);
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "idProducto", array()), "html", null, true);
         echo "\",\"\",function(data)
 \t\t\t\t{
 \t\t\t\t    var json = JSON.parse(data);
-\t\t\t\t    //console.log(json);
+\t\t\t\t    console.log(json);
 \t\t\t    \tvar html = \"\";
 
 \t\t\t    \tvar articulos_total = json.articulos_total;
@@ -158,15 +157,10 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
 \t\t\t    \t\$.each(json.items, function(key, value) {
 \t\t\t    \t    console.log(key,value);
-\t\t\t    \t    html += \"<tr><td></td><td>nombre producto</td><td>\"+value.precio+\" € x \" +value.cantidad+ \"</td></tr>\";
-\t\t\t    \t    //console.log(value.cantidad);
-\t\t\t    \t\t/*\$.each(value, function(key, value) {
-\t\t\t\t    \t\thtml += \"<tr><td></td><td>nombre producto</td><td>\"+value+\"</td></tr>\";
-\t\t \t\t\t  \t    //console.log(key,value);
-\t\t\t\t    \t});*/\t\t\t    \t\t \t\t\t  \t    
+\t\t\t    \t    html += \"<tr><td></td><td>\"+value.nombre+\"</td><td>\"+value.precio+\" € x \" +value.cantidad+ \"</td></tr>\";\t\t\t    \t   \t\t    \t\t \t\t\t  \t    
 \t\t\t    \t});
-\t\t\t    \thtml += \"<hr><p class='btn btn-primary'>Ver carrito</p>\";
-\t\t\t    \t\$('#table_cart').html(html);\t\t\t    \t\t\t 
+\t\t\t    \t
+\t\t\t    \t\$('#table_cart').html(html);\t\t    \t\t\t 
 \t\t\t\t});
 \t\t\t}
 \t\t\telse
@@ -205,6 +199,6 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
     public function getDebugInfo()
     {
-        return array (  144 => 66,  131 => 55,  128 => 54,  110 => 41,  103 => 37,  99 => 36,  90 => 30,  83 => 26,  74 => 19,  68 => 18,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
+        return array (  145 => 67,  131 => 55,  128 => 54,  110 => 41,  103 => 37,  99 => 36,  90 => 30,  83 => 26,  74 => 19,  68 => 18,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
     }
 }

@@ -47,11 +47,12 @@ class Carrito
         
         $itemid = $data['id'];
         
-        if (isset($this->_cart[$itemid])) {
+        if (isset($this->_cart['items'][$itemid])) {
             $this->_cart['items'][$itemid]['cantidad'] += $data['cantidad'];
         } else {
             $this->_cart['items'][$itemid]['cantidad'] = $data['cantidad'];
             $this->_cart['items'][$itemid]['precio'] = $data['precio'];
+            $this->_cart['items'][$itemid]['nombre'] = $data['nombre'];
         }
         
         $this->CI->session->set_userdata('carro', serialize($this->_cart));

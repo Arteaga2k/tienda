@@ -60,9 +60,17 @@
 							
 					</a>
 						<ul class="dropdown-menu" role="menu">
-							<table id="table_cart" class="table table-bordered">							
+							<table id="table_cart" class="table">	
+							{% for producto in carrito.items %}
+							<tr>
+							 <td>{{ producto.nombre  }}</td>
+							 <td>{{ producto.precio }}€ x {{ producto.cantidad }}</td>
+							</tr>
+							{% endfor %}						
 							</table>
-						</ul></li>
+							<a href="" class="btn btn-primary">Ver Carrito</a>	
+						</ul>
+					</li>
 				</ul>
 			</div>
 

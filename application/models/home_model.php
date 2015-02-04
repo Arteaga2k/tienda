@@ -49,14 +49,14 @@ class Home_model extends CI_Model
         return $productosDest;
     }
     
-    public function getProducto($idProducto){
-        
+    
+    public function getProducto($idProducto){        
                 
         $producto = $this->db
         ->where('idProducto',$idProducto)
         ->get('producto');
         
-        return $producto;
+        return $producto->row();
         
     }
 
