@@ -49,12 +49,10 @@ class Home extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'carrito' => $this->carrito->getCarrito()
         ));
-       
-     
-        //$this->carrito->destroy();
-        //todo prueba
-       //$this->ajaxAddCart(10,5);
         
+        // $this->carrito->destroy();
+        // todo prueba
+        //$this->ajaxAddCart(10,5);
     }
 
     /**
@@ -91,7 +89,7 @@ class Home extends CI_Controller
     /**
      * PÁGINA: producto
      *
-     * http://tienda/producto/{id}
+     * http://tienda/home/producto/{id}
      *
      * @param string $id            
      */
@@ -104,9 +102,8 @@ class Home extends CI_Controller
         $form["form_open"] = form_open("", array(
             "class" => "form-inline"
         ));
-        $form['error_cantidad'] = form_error('cantidad'); 
-        echo form_error('cantidad'); 
-      
+        $form['error_cantidad'] = form_error('cantidad');
+        echo form_error('cantidad');
         
         // Comprueba validación formulario
         if ($this->form_validation->run() == FALSE) {
@@ -121,16 +118,31 @@ class Home extends CI_Controller
             $this->addProducto();
         }
     }
-   
+    
+    /**
+     * PÁGINA: carro
+     * 
+     * http://tienda/home/carro
+     */
+    public function verCarro(){
+        
+        $carrito = $this->carrito->getCarrito();
+        var_dump($carrito);
+        echo $this->twig->render('home/carro.twig', array( 
+            'carrito' => $this->carrito->getCarrito()
+        ));
+    }
     
     // probando ajax
-    public function ajaxAddCart($cantidad,$idproducto){      
-
-        //echo "cantidad: [$cantidad]\n";        
-               
-        $producto = $this->home_model->getProducto($idproducto);     
-
-        if ($producto->cantidad <= $producto->stock){
+    public function ajaxAddCart($cantidad, $idproducto)
+    {
+        
+        // echo "cantidad: [$cantidad]\n";
+        $producto = $this->home_model->getProducto($idproducto);
+        $carrito = $this->carrito->getCarrito();
+        
+       
+        if ($carrito['items'][$idproducto]['cantidad'] <= $producto->stock) {         
             $cantidadFinal = $producto->stock >= $cantidad ? $cantidad : $producto->stock;
             
             $this->carrito->InsertarItem(array(
@@ -138,18 +150,9 @@ class Home extends CI_Controller
                 'cantidad' => $cantidadFinal,
                 'precio' => $producto->precio,
                 'nombre' => $producto->nombre
-            ));            
-            
-        }    
-        
-        $carrito = $this->carrito->getCarrito();
-        echo json_encode($carrito);        
-              
+            ));
+        }        
+       
+        echo json_encode($carrito);
     }
-    
-   
-    
-    
-    
-    
 }
