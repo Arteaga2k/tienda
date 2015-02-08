@@ -149,6 +149,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\t\t{
 \t\t\t\t    var json = JSON.parse(data);
 \t\t\t\t    console.log(json);
+\t\t\t\t   
 \t\t\t    \tvar html = \"\";
 
 \t\t\t    \tvar articulos_total = json.articulos_total;

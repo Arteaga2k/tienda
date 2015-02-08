@@ -24,7 +24,7 @@ class Home_model extends CI_Model
     {
         $categorias = $this->db->where('revisado', true)->get('categoria');
         
-        return $categorias;
+        return $categorias->result_array();
     }
 
     /**
@@ -43,29 +43,24 @@ class Home_model extends CI_Model
 					LIMIT ' . $segmento . ', ' . $por_pagina . '												
 					';
         
-                
         $productosDest = $this->db->query($consulta);
         
-        return $productosDest;
+        return $productosDest->result_array();
     }
-    
-    
-    public function getProducto($idProducto){        
-                
-        $producto = $this->db
-        ->where('idProducto',$idProducto)
-        ->get('producto');
+
+    public function getProducto($idProducto)
+    {
+        $producto = $this->db->where('idProducto', $idProducto)->get('producto');
         
         return $producto->row();
-        
     }
 
     /**
      * Devuelte listado de productos según categoría
-     * 
-     * @param unknown $categoria
-     * @param unknown $por_pagina
-     * @param unknown $segmento
+     *
+     * @param unknown $categoria            
+     * @param unknown $por_pagina            
+     * @param unknown $segmento            
      * @return unknown
      */
     public function getProductos($categoria, $por_pagina, $segmento)
@@ -79,14 +74,14 @@ class Home_model extends CI_Model
         
         $productos = $this->db->query($consulta);
         
-        return $productos;
+        return $productos->result_array();
     }
 
-   /**
-    * Devuelve numero total productos destacados
-    * 
-    * @return unknown
-    */
+    /**
+     * Devuelve numero total productos destacados
+     *
+     * @return unknown
+     */
     public function getTotalProdDestacados()
     {
         $consulta = 'SELECT COUNT(*) as filas
@@ -102,11 +97,11 @@ class Home_model extends CI_Model
         
         return $totalfilas;
     }
-    
+
     /**
      * Devuelve numero total productos según categoria
-     * 
-     * @param unknown $categoria
+     *
+     * @param unknown $categoria            
      * @return unknown
      */
     public function getTotalProductos($categoria)
@@ -116,9 +111,21 @@ class Home_model extends CI_Model
 					WHERE producto.idCategoria = ' . $categoria . '
 		            AND revisado = 1
 					';
-    
+        
         $totalfilas = $this->db->query($consulta)->row()->filas;
-    
+        
         return $totalfilas;
+    }
+
+    /**
+     * Obtenemos provincias
+     *
+     * @return listado provincias
+     */
+    public function getProvincias()
+    {
+        $provincias = $this->db->get('provincia');
+        
+        return $provincias->result_array();
     }
 }

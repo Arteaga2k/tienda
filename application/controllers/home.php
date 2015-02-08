@@ -44,15 +44,15 @@ class Home extends CI_Controller
         $productosDest = $this->home_model->getProductosDestacados($pagination, $segmento);
         
         echo $this->twig->render('home/index.twig', array(
-            'categorias' => $categorias->result_array(),
-            'productos' => $productosDest->result_array(),
+            'categorias' => $categorias,
+            'productos' => $productosDest,
             'pagination' => $this->pagination->create_links(),
             'carrito' => $this->carrito->getCarrito()
         ));
         
         // $this->carrito->destroy();
         // todo prueba
-        //$this->ajaxAddCart(10,5);
+        // $this->ajaxAddCart(10,5);
     }
 
     /**
@@ -79,8 +79,8 @@ class Home extends CI_Controller
         $productosDest = $this->home_model->getProductos($idCategoria, $pagination, $segmento);
         
         echo $this->twig->render('home/index.twig', array(
-            'categorias' => $categorias->result_array(),
-            'productos' => $productosDest->result_array(),
+            'categorias' => $categorias,
+            'productos' => $productosDest,
             'pagination' => $this->pagination->create_links(),
             'carrito' => $this->carrito->getCarrito()
         ));
@@ -108,7 +108,7 @@ class Home extends CI_Controller
         // Comprueba validación formulario
         if ($this->form_validation->run() == FALSE) {
             echo $this->twig->render('home/producto.twig', array(
-                'categorias' => $categorias->result_array(),
+                'categorias' => $categorias,
                 'producto' => $producto,
                 'form' => $form,
                 'carrito' => $this->carrito->getCarrito()
@@ -119,30 +119,26 @@ class Home extends CI_Controller
         }
     }
     
-    /**
-     * PÁGINA: carro
-     * 
-     * http://tienda/home/carro
-     */
-    public function verCarro(){
-        
-        $carrito = $this->carrito->getCarrito();
-        var_dump($carrito);
-        echo $this->twig->render('home/carro.twig', array( 
-            'carrito' => $this->carrito->getCarrito()
-        ));
-    }
-    
     // probando ajax
     public function ajaxAddCart($cantidad, $idproducto)
     {
+        /*
+         * echo 'cantidad: '.$cantidad;
+         * echo 'idproducto: '.$idproducto;
+         */
         
         // echo "cantidad: [$cantidad]\n";
         $producto = $this->home_model->getProducto($idproducto);
         $carrito = $this->carrito->getCarrito();
         
-       
-        if ($carrito['items'][$idproducto]['cantidad'] <= $producto->stock) {         
+        /*
+         * echo 'items cantidad: '.$carrito['items'][$idproducto]['cantidad'];
+         * echo 'producto stock: '.$producto->stock;
+         */
+        
+        // var_dump($producto);
+        
+        if (intval($carrito['items'][$idproducto]['cantidad']) <= intval($producto->stock)) {
             $cantidadFinal = $producto->stock >= $cantidad ? $cantidad : $producto->stock;
             
             $this->carrito->InsertarItem(array(
@@ -151,8 +147,8 @@ class Home extends CI_Controller
                 'precio' => $producto->precio,
                 'nombre' => $producto->nombre
             ));
-        }        
-       
-        echo json_encode($carrito);
+        }
+        
+        echo json_encode($this->carrito->getCarrito());
     }
 }

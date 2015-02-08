@@ -59,7 +59,10 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t\t\tclass=\"icon-bar\"></span> <span class=\"icon-bar\"></span> <span
 \t\t\t\t\t\tclass=\"icon-bar\"></span>
 \t\t\t\t</button>
-\t\t\t\t<a class=\"navbar-brand\" href=\"#\">Mi Tienda</a>
+\t\t\t\t<a class=\"navbar-brand\" href=\"";
+        // line 43
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "home\">Mi Tienda</a>
 \t\t\t</div>
 \t\t\t<!-- Collect the nav links, forms, and other content for toggling -->
 \t\t\t<div class=\"collapse navbar-collapse\"
@@ -109,7 +112,7 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t\t\t\t<a href=\"";
         // line 71
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "home/verCarro\" class=\"btn btn-primary\">Ver Carrito</a>\t
+        echo "carro/verCarro\" class=\"btn btn-primary\">Ver Carrito</a>\t
 \t\t\t\t\t\t</ul>
 \t\t\t\t\t</li>
 \t\t\t\t</ul>
@@ -235,6 +238,6 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 
     public function getDebugInfo()
     {
-        return array (  222 => 113,  219 => 112,  213 => 115,  211 => 112,  202 => 106,  197 => 104,  192 => 102,  187 => 101,  182 => 94,  177 => 84,  171 => 15,  162 => 10,  159 => 9,  152 => 118,  150 => 101,  142 => 95,  140 => 94,  127 => 84,  111 => 71,  107 => 69,  96 => 67,  92 => 66,  89 => 65,  85 => 64,  36 => 17,  34 => 9,  24 => 1,);
+        return array (  225 => 113,  222 => 112,  216 => 115,  214 => 112,  205 => 106,  200 => 104,  195 => 102,  190 => 101,  185 => 94,  180 => 84,  174 => 15,  165 => 10,  162 => 9,  155 => 118,  153 => 101,  145 => 95,  143 => 94,  130 => 84,  114 => 71,  110 => 69,  99 => 67,  95 => 66,  92 => 65,  88 => 64,  64 => 43,  36 => 17,  34 => 9,  24 => 1,);
     }
 }

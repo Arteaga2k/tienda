@@ -73,7 +73,7 @@ class Carrito
         
         // recorremos el contenido del carrito para actualizar
         // el precio total y el número de artículos
-        foreach ($this->_cart['items'] as $row) {            
+        foreach ($this->_cart['items'] as $row) {
             $precio += ($row['precio'] * $row['cantidad']);
             $articulos += $row['cantidad'];
         }

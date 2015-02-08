@@ -40,7 +40,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Mi Tienda</a>
+				<a class="navbar-brand" href="{{ base_url() }}home">Mi Tienda</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
@@ -68,7 +68,7 @@
 							</tr>
 							{% endfor %}						
 							</table>
-							<a href="{{ base_url() }}home/verCarro" class="btn btn-primary">Ver Carrito</a>	
+							<a href="{{ base_url() }}carro/verCarro" class="btn btn-primary">Ver Carrito</a>	
 						</ul>
 					</li>
 				</ul>
