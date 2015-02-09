@@ -98,10 +98,11 @@ class Usuario extends CI_Controller
     }
 
     /**
+     * Valida formulario acceso de usuario
      */
     public function loginUsuario()
     {
-        $this->form_validation->set_rules('emailLogin', 'Username', 'required');
+        $this->form_validation->set_rules('usernameLogin', 'Username', 'required');
         $this->form_validation->set_rules('passwordLogin', 'Password', 'trim|required|md5');
         
         $form["form_alta"] = form_open("usuario/nuevoUsuario", array(
@@ -128,9 +129,9 @@ class Usuario extends CI_Controller
             ));
         } else {
             
-            $email = $this->input->post('emailLogin');
+            $username = $this->input->post('usernameLogin');
             $password = $this->input->post('passwordLogin');
-            $usuario = $this->usuario_model->login_user($email, $password);
+            $usuario = $this->usuario_model->login_user($username, $password);
             
             if ($usuario == TRUE) {
                 $data = array(
@@ -138,9 +139,13 @@ class Usuario extends CI_Controller
                     'id_usuario' => $usuario->idUsuario,
                     'username' => $usuario->username
                 );
-                $this->session->set_userdata($data);
                 
-                // TODO redireccionar al proceso de compra
+                // guardamos en session datos login
+                $this->session->set_userdata("login",$data);                
+              
+                // redireccionamos al paso realizar pedido 
+                // estando logueado
+                redirect(base_url() . 'carro/realizaPedido');
             }
         }
     }

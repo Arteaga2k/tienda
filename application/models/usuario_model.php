@@ -17,21 +17,34 @@ class Usuario_model extends CI_Model
         $this->load->database();
     }
     
-    
+    /**
+     * Obtiene datos de un usuario 
+     * 
+     * @param string $email
+     * @param string $username
+     */
     public function getUsuario($email, $username){
         $this->db->where('username', $username);
     }
     
-    
-    public function insertarUsuario($data){        
+    /**
+     * Inserta un nuevo usuario en la bbdd
+     * @param unknown $data
+     */
+    public function insertarUsuario($data){       
         
         $this->db->insert('usuario', $data);        
-        // Produces: INSERT INTO mytable (title, name, date) VALUES ('My title', 'My name', 'My date')
+       
     }
     
-    public function login_user($email,$password)
+    /**
+     * 
+     * @param string $email
+     * @param string $password
+     */
+    public function login_user($username,$password)
     {
-        $this->db->where('email',$email);
+        $this->db->where('username',$username);
         $this->db->where('password',$password);
         $this->db->where('estado',1); // usuarios revisados por administrador
        

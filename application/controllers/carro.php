@@ -17,14 +17,24 @@ class Carro extends CI_Controller
         $this->load->model('home_model');
     }
 
+    /**
+     * 
+     */
     public function realizaPedido()
-    {
-        // si estamos logueado
+    {        
+        $login = $this->session->userdata("login");
         
-        // si no
-        redirect(base_url().'usuario/nuevoUsuario');
-    }
-
+        // comprobamos si estamos logueados
+        if ($login['is_logued_in']) {            
+            // siguiente paso realizar compra
+        } else {
+            redirect(base_url() . 'usuario/nuevoUsuario');
+        }
+    }    
+    
+    /**
+     * 
+     */
     public function verCarro()
     {
         $carrito = $this->carrito->getCarrito();
