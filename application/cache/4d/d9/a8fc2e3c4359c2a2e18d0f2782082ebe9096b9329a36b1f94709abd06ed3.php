@@ -31,180 +31,215 @@ class __TwigTemplate_4dd9a8fc2e3c4359c2a2e18d0f2782082ebe9096b9329a36b1f94709abd
         echo "
 
 <div class=\"row\"> 
-    <div class=\"alert alert-danger\" role=\"alert\">";
+    ";
         // line 6
-        echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "error", array());
-        echo "</div>
-\t<div class=\"col-md-5\">
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "error", array()))) {
+            // line 7
+            echo "    
+    <div class=\"alert alert-danger\" role=\"alert\">";
+            // line 8
+            echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "error", array());
+            echo "</div>
+    
+    ";
+        }
+        // line 11
+        echo "\t<div class=\"col-md-5\">
 \t<h3>Nuevo Usuario</h3>
 \t<hr />
        ";
-        // line 10
+        // line 14
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "form_alta", array());
         echo "\t\t
          <div class=\"form-group ";
-        // line 11
+        // line 15
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "username", array()))) {
             echo "has-error";
         }
-        echo "\"\">
+        echo "\">
             <label for=\"username\" class=\"col-sm-2 control-label\">Username</label>
             <div class=\"col-sm-10\">
               <input type=\"text\" class=\"form-control\" id=\"username\" name=\"username\" value=\"";
-        // line 14
+        // line 18
         echo twig_escape_filter($this->env, set_value("username"), "html", null, true);
         echo "\">
                 <span>";
-        // line 15
+        // line 19
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "username", array());
         echo "</span>
             </div>
           
          </div>
-          <div class=\"form-group\">
+          <div class=\"form-group ";
+        // line 23
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array()))) {
+            echo "has-error";
+        }
+        echo "\">
             <label for=\"email\" class=\"col-sm-2 control-label\">Email</label>
             <div class=\"col-sm-10\">
               <input type=\"email\" class=\"form-control\" id=\"email\" name=\"email\" value=\"";
-        // line 22
+        // line 26
         echo twig_escape_filter($this->env, set_value("email"), "html", null, true);
         echo "\">
                 <span>";
-        // line 23
+        // line 27
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array());
         echo "</span>
             </div>
            
           </div>
           
-          <div class=\"form-group\">
+          <div class=\"form-group ";
+        // line 32
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "password", array()))) {
+            echo "has-error";
+        }
+        echo "\">
             <label for=\"password\" class=\"col-sm-2 control-label\">Password</label>
             <div class=\"col-sm-10\">
               <input type=\"password\" class=\"form-control\" id=\"password\" name=\"password\" placeholder=\"Password\">
                 <span>";
-        // line 32
+        // line 36
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "password", array());
         echo "</span>
             </div>
           </div> 
                     
-           <div class=\"form-group\">
+           <div class=\"form-group ";
+        // line 40
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "passconf", array()))) {
+            echo "has-error";
+        }
+        echo "\">
             <label for=\"passconf\" class=\"col-sm-2 control-label\">Confirmar Password</label>
             <div class=\"col-sm-10\">
               <input type=\"password\" class=\"form-control\" name=\"passconf\" id=\"passconf\" placeholder=\"Password\">
                 <span>";
-        // line 40
+        // line 44
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "passconf", array());
         echo "</span>
             </div>
           </div> 
                   
           <hr />
-           <div class=\"form-group\">
+           <div class=\"form-group ";
+        // line 49
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "nombre", array()))) {
+            echo "has-error";
+        }
+        echo "\">
             <label for=\"nombre\" class=\"col-sm-2 control-label\">Nombre</label>
             <div class=\"col-sm-10\">
               <input type=\"text\" class=\"form-control\" name=\"nombre\" id=\"nombre\" value=\"";
-        // line 48
+        // line 52
         echo twig_escape_filter($this->env, set_value("nombre"), "html", null, true);
         echo "\">
                <span>";
-        // line 49
+        // line 53
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "nombre", array());
         echo "</span>
             </div>
           </div>
-           <div class=\"form-group\">
+           <div class=\"form-group ";
+        // line 56
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "apellidos", array()))) {
+            echo "has-error";
+        }
+        echo "\">
             <label for=\"apellidos\" class=\"col-sm-2 control-label\">Apellidos</label>
             <div class=\"col-sm-10\">
               <input type=\"text\" class=\"form-control\" name=\"apellidos\" id=\"apellidos\" value=\"";
-        // line 55
+        // line 59
         echo twig_escape_filter($this->env, set_value("apellidos"), "html", null, true);
         echo "\">
                <span>";
-        // line 56
+        // line 60
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "apellidos", array());
         echo "</span>
             </div>
           </div>
           
-          <div class=\"form-group\">
+          <div class=\"form-group ";
+        // line 64
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "dni", array()))) {
+            echo "has-error";
+        }
+        echo "\">
             <label for=\"dni\" class=\"col-sm-2 control-label\">DNI</label>
             <div class=\"col-sm-10\">
               <input type=\"text\" class=\"form-control\" name=\"dni\" id=\"dni\" value=\"";
-        // line 63
+        // line 67
         echo twig_escape_filter($this->env, set_value("dni"), "html", null, true);
         echo "\">
                <span>";
-        // line 64
+        // line 68
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "dni", array());
         echo "</span>
             </div>
           </div>
           
-          <div class=\"form-group\">
+          <div class=\"form-group ";
+        // line 72
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "direccion", array()))) {
+            echo "has-error";
+        }
+        echo "\">
             <label for=\"direccion\" class=\"col-sm-2 control-label\">Dirección</label>
             <div class=\"col-sm-10\">
               <input type=\"text\" class=\"form-control\" name=\"direccion\" id=\"direccion\" value=\"";
-        // line 71
+        // line 75
         echo twig_escape_filter($this->env, set_value("direccion"), "html", null, true);
         echo "\">
             </div>
           </div>
           
-          <div class=\"form-group\">
+          <div class=\"form-group \">
 \t\t  <label for=\"provincia\" class=\"col-sm-2 control-label\">Provincia</label>
     \t\t  <div class=\"col-sm-10\">
     \t\t\t<select class=\"form-control\" name=\"provincia\" id=\"provincia\">
     \t\t\t\t";
-        // line 79
+        // line 83
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["provincias"]) ? $context["provincias"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["provincia"]) {
-            // line 80
+            // line 84
             echo "    \t\t\t\t<option value=\"";
             echo twig_escape_filter($this->env, $this->getAttribute($context["provincia"], "idProvincia", array()), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["provincia"], "nombre", array()), "html", null, true);
-            // line 81
+            // line 85
             echo "</option> ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['provincia'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 82
+        // line 86
         echo "    \t\t\t</select>
     \t\t  </div>
 \t      </div>
           
-           <div class=\"form-group\">
+           <div class=\"form-group ";
+        // line 90
+        if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "cp", array()))) {
+            echo "has-error";
+        }
+        echo "\">
             <label for=\"cp\" class=\"col-sm-2 control-label\">Código Postal</label>
             <div class=\"col-sm-10\">
               <input type=\"text\" class=\"form-control\" name=\"cp\" id=\"cp\" value=\"";
-        // line 89
+        // line 93
         echo twig_escape_filter($this->env, set_value("cp"), "html", null, true);
         echo "\">
                <span>";
-        // line 90
-        echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "cp", array());
-        echo "</span>
-            </div>
-          </div>
-          
-           <div class=\"form-group\">
-            <label for=\"token\" class=\"col-sm-2 control-label\">Código Postal</label>
-            <div class=\"col-sm-10\">
-              <input type=\"text\" class=\"form-control\" name=\"token\" id=\"token\" value=\"";
-        // line 97
-        echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "token", array());
-        echo "\">
-               <span>";
-        // line 98
+        // line 94
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "cp", array());
         echo "</span>
             </div>
           </div>
           
           <input type=\"hidden\" value=\"";
-        // line 102
+        // line 98
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "token", array()), "html", null, true);
         echo "\" name=\"token\" />
          
@@ -220,7 +255,7 @@ class __TwigTemplate_4dd9a8fc2e3c4359c2a2e18d0f2782082ebe9096b9329a36b1f94709abd
     <h3>Usuario Registrado</h3>
     <hr />
     ";
-        // line 115
+        // line 111
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "form_login", array());
         echo "\t\t
          <div class=\"form-group\">
@@ -236,6 +271,11 @@ class __TwigTemplate_4dd9a8fc2e3c4359c2a2e18d0f2782082ebe9096b9329a36b1f94709abd
               <input type=\"password\" class=\"form-control\" name=\"passwordLogin\" id=\"passwordLogin\" placeholder=\"\">
             </div>
         </div> 
+        
+         <input type=\"hidden\" value=\"";
+        // line 126
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "token", array()), "html", null, true);
+        echo "\" name=\"tokenLogin\" />
         
          <div class=\"form-group\">
             <div class=\"col-sm-offset-2 col-sm-10\">
@@ -260,6 +300,6 @@ class __TwigTemplate_4dd9a8fc2e3c4359c2a2e18d0f2782082ebe9096b9329a36b1f94709abd
 
     public function getDebugInfo()
     {
-        return array (  224 => 115,  208 => 102,  201 => 98,  197 => 97,  187 => 90,  183 => 89,  174 => 82,  168 => 81,  163 => 80,  159 => 79,  148 => 71,  138 => 64,  134 => 63,  124 => 56,  120 => 55,  111 => 49,  107 => 48,  96 => 40,  85 => 32,  73 => 23,  69 => 22,  59 => 15,  55 => 14,  47 => 11,  43 => 10,  36 => 6,  31 => 3,  28 => 2,);
+        return array (  277 => 126,  259 => 111,  243 => 98,  236 => 94,  232 => 93,  224 => 90,  218 => 86,  212 => 85,  207 => 84,  203 => 83,  192 => 75,  184 => 72,  177 => 68,  173 => 67,  165 => 64,  158 => 60,  154 => 59,  146 => 56,  140 => 53,  136 => 52,  128 => 49,  120 => 44,  111 => 40,  104 => 36,  95 => 32,  87 => 27,  83 => 26,  75 => 23,  68 => 19,  64 => 18,  56 => 15,  52 => 14,  47 => 11,  41 => 8,  38 => 7,  36 => 6,  31 => 3,  28 => 2,);
     }
 }

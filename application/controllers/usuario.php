@@ -16,37 +16,49 @@ class Usuario extends CI_Controller
     }
 
     /**
-     * formularios alta y login usuario
+     * muestra formularios alta y login usuario
      */
     public function index()
     {
-        $this->form["form_alta"] = form_open("usuario/nuevoUsuario", array(
+        $this->form['id'] = 0;
+        
+        $this->form["form_alta"] = form_open("usuario/formUsuario", array(
             "class" => "form-horizontal",
-            "name" => "nuevousuario"
+            "name" => "formUsuario"
         ));
         
-        $this->form["form_login"] = form_open("usuario/loginUsuario", array(
+        $this->form["form_login"] = form_open("usuario/formLogin", array(
             "class" => "form-horizontal",
-            "name" => "loginusuario"
+            "name" => "formLogin"
         ));
         
         $this->form['token'] = $this->token();
         $provincias = $this->home_model->getProvincias();
         
-        echo $this->twig->render('usuario/formulario.twig', array(
+        echo $this->twig->render('usuario/alta_formulario.twig', array(
             'provincias' => $provincias,
             'form' => $this->form
         ));
+    }
+    
+    /**
+     * Muestra formulario edición usuario
+     */
+    public function editaUsuario($id)
+    {   
+        $this->form['id'] = $id;
+        
+       
     }
 
     /**
      * Da de alta un nuevo usuario
      */
-    public function nuevoUsuario()
+    public function formUsuario()
     {
         // existe variable post token y es igual
         // a la sesión llamada token que se ha creado
-        if ($this->input->post('token') && $this->input->post('token') == $this->session->userdata('token')) {
+        if ($this->verificaToken('token')) {
             
             $this->form_validation->set_rules('username', 'Username', 'required');
             $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
@@ -91,38 +103,37 @@ class Usuario extends CI_Controller
                 $result = $this->usuario_model->insertarUsuario($usuario);
                 if ($result) {
                     // seguimos con el pedido
+                    redirect(base_url() . 'carro/verCarro');
                 } else {
                     // guardamos mensaje de error producido
                     $this->form['error'] = $this->session->flashdata('usuario_incorrecto');
                     $this->index();
                 }
             }
-        } else {
-            redirect(base_url() . 'usuario');
         }
     }
+    
 
     /**
      * Valida formulario acceso de usuario
      */
-    public function loginUsuario()
+    public function formLogin()
     {
-        
-        // existe variable post token y es igual
-        // a la sesión llamada token que se ha creado
-        if ($this->input->post('token') && $this->input->post('token') == $this->session->userdata('token')) {
+        if ($this->verificaToken('tokenLogin')) {
+            // existe variable post token y es igual
+            // a la sesión llamada token que se ha creado
             
             $this->form_validation->set_rules('usernameLogin', 'Username', 'required');
             $this->form_validation->set_rules('passwordLogin', 'Password', 'trim|required|md5');
             
-            $form["form_alta"] = form_open("usuario/nuevoUsuario", array(
-                "class" => "form-horizontal",
-                "name" => "nuevousuario"
+            $form['form_alta'] = form_open('usuario/formUsuario', array(
+                'class' => 'form-horizontal',
+                'name' => 'formUsuario'
             ));
             
-            $form["form_login"] = form_open("usuario/loginUsuario", array(
+            $form["form_login"] = form_open("usuario/formLogin", array(
                 "class" => "form-horizontal",
-                "name" => "loginusuario"
+                "name" => "formLogin"
             ));
             
             // guardamos error
@@ -143,16 +154,29 @@ class Usuario extends CI_Controller
                         'is_logued_in' => TRUE,
                         'id_usuario' => $usuario->idUsuario,
                         'username' => $usuario->username
-                    );
-                    
+                    );                    
                     // guardamos en session datos login
-                    $this->session->set_userdata("login", $data);
-                    
+                    $this->session->set_userdata("login", $data);                    
                     // redireccionamos al paso realizar pedido
                     // estando logueado
                     redirect(base_url() . 'carro/realizaPedido');
+                }else{
+                    $this->index();
                 }
             }
+        }
+    }
+
+    /**
+     * Verifica token formulario
+     *
+     * @param unknown $cadena            
+     * @return boolean
+     */
+    public function verificaToken($cadena)
+    {
+        if ($this->input->post($cadena) && $this->input->post($cadena) == $this->session->userdata('token')) {
+            return true;
         } else {
             redirect(base_url() . 'usuario');
         }
@@ -175,9 +199,10 @@ class Usuario extends CI_Controller
     /**
      * eliminamos sesion
      */
-    public function logout_ci()
+    public function logout()
     {
-        $this->session->sess_destroy();
-        // TODO redirect pantalla principal
+        $this->session->unset_userdata('login');
+        
+        redirect(base_url() . 'home');
     }
 }

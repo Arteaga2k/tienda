@@ -42,7 +42,7 @@ class Usuario_model extends CI_Model
         // comprobamos si ya existe una cuenta con ese email o username
         $usuario = $this->getUsuario($data['email'], $data['username']);
         
-        //var_dump($usuario);
+        // var_dump($usuario);
         
         if (empty($usuario)) {
             $this->db->insert('usuario', $data);
@@ -50,7 +50,6 @@ class Usuario_model extends CI_Model
         } else {
             $this->session->set_flashdata('usuario_incorrecto', 'Ya existe una cuenta con los datos introducidos');
             return false;
-            //redirect(base_url() . 'usuario/loginUsuario', 'refresh');
         }
     }
 
@@ -71,7 +70,7 @@ class Usuario_model extends CI_Model
             return $query->row();
         } else {
             $this->session->set_flashdata('usuario_incorrecto', 'Los datos introducidos son incorrectos');
-            redirect(base_url() . 'usuario/loginUsuario', 'refresh');
+            return false;
         }
     }
 }

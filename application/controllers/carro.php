@@ -21,24 +21,41 @@ class Carro extends CI_Controller
      */
     public function realizaPedido()
     {
-        $login = $this->session->userdata("login");
-        
+        $login = $this->session->userdata("login");           
+             
         // comprobamos si estamos logueados
-        if (!$login['is_logued_in']) {
+        if ($login != false && $login['is_logued_in']) {
             // siguiente paso realizar compra
+          
         } else {
-            redirect(base_url() . 'usuario/nuevoUsuario');
+           redirect(base_url() . 'usuario');
         }
     }
 
     /**
+     * muestra contenido del carro
      */
     public function verCarro()
     {
         $carrito = $this->carrito->getCarrito();
-        // var_dump($carrito);
+        
+        
         echo $this->twig->render('carro/carro.twig', array(
-            'carrito' => $this->carrito->getCarrito()
+            'carrito' => $carrito,
+            'usuario' => $this->usuarioLogueado()
         ));
+    }
+    
+    /**
+     * Devuelve username del usuario logueado
+     * O vacío si no existe     
+     * 
+     * @return string <string, unknown>
+     */
+    public function usuarioLogueado(){
+        $usuario =  $this->session->userdata("login");        
+        
+        return  $usuario['username'] ? $usuario['username'] : '';
+        
     }
 }
