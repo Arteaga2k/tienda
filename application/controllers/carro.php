@@ -18,22 +18,20 @@ class Carro extends CI_Controller
     }
 
     /**
-     * 
      */
     public function realizaPedido()
-    {        
+    {
         $login = $this->session->userdata("login");
         
         // comprobamos si estamos logueados
-        if ($login['is_logued_in']) {            
+        if (!$login['is_logued_in']) {
             // siguiente paso realizar compra
         } else {
             redirect(base_url() . 'usuario/nuevoUsuario');
         }
-    }    
-    
+    }
+
     /**
-     * 
      */
     public function verCarro()
     {
