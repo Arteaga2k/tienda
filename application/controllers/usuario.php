@@ -19,13 +19,14 @@ class Usuario extends CI_Controller
      * Función crea formulario login
      */
     public function loginUsuario()
-    {
-        $this->form["form_login"] = form_open("usuario/procesaFormLogin", array(
+    {              
+       $this->form["form_login"] = form_open("usuario/procesaFormLogin", array(
             "class" => "form-horizontal",
             "name" => "procesaFormLogin"
         ));
         
-        $this->form['token'] = $this->token();
+        $this->form['redirect'] = $this->agent->referrer();
+        $this->form['token'] = $this->token();        
         $provincias = $this->home_model->getProvincias();
         
         echo $this->twig->render('usuario/login_formulario.twig', array(
@@ -86,7 +87,7 @@ class Usuario extends CI_Controller
             $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
             $this->form_validation->set_rules('nombre', 'Nombre', 'required');
             $this->form_validation->set_rules('apellidos', 'Apellidos', 'required');
-            $this->form_validation->set_rules('dni', 'Dni', 'required');
+            $this->form_validation->set_rules('dni', 'Dni', 'required|callback_dni_check');
             $this->form_validation->set_rules('direccion', 'Direccion', 'required');
             $this->form_validation->set_rules('cp', 'Código Postal', 'required|numeric');
             
@@ -103,7 +104,7 @@ class Usuario extends CI_Controller
                 $this->form["direccion"] = form_error('direccion');
                 $this->form["cp"] = form_error('cp');
                 
-                $this->index();
+                $this->creaUsuario();
             } else {
                 // damos de alta usuario
                 // TODO comprobar que exista otro usuario con mismos datos
@@ -120,7 +121,7 @@ class Usuario extends CI_Controller
                     'idProvincia' => $this->input->post('provincia'),
                     'estado' => 0
                 );
-                $id = $this->input->post('id');
+               
                 
                 if (isset($id) && ! empty($id)){
                     //modo edicion    
@@ -144,7 +145,8 @@ class Usuario extends CI_Controller
      * Valida formulario acceso de usuario
      */
     public function procesaFormLogin()
-    {
+    {       
+        
         if ($this->verificaToken('tokenLogin')) {
             // existe variable post token y es igual
             // a la sesión llamada token que se ha creado
@@ -164,7 +166,7 @@ class Usuario extends CI_Controller
             // Comprueba validación formulario
             if ($this->form_validation->run() == FALSE) {
                 
-                $this->index();
+                $this->loginUsuario();
             } else {
                 
                 $username = $this->input->post('usernameLogin');
@@ -181,9 +183,10 @@ class Usuario extends CI_Controller
                     $this->session->set_userdata("login", $data);
                     // redireccionamos al paso realizar pedido
                     // estando logueado
-                    redirect(base_url() . 'carro/realizaPedido');
+                   
+                    redirect($this->input->post('redirect'));                   
                 } else {
-                    $this->index();
+                    $this->loginUsuario();
                 }
             }
         }
@@ -201,6 +204,20 @@ class Usuario extends CI_Controller
             return true;
         } else {
             redirect(base_url() . 'usuario');
+        }
+    }
+    
+    /*
+     * función verifica dni
+     */
+    public function dni_check($dni){
+        $letra = substr($dni, -1);
+        $numeros = substr($dni, 0, -1);
+        if ( substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeros%23, 1) == $letra && strlen($letra) == 1 && strlen ($numeros) == 8 ){
+            return TRUE;
+        }else{
+            $this->form_validation->set_message('dni', 'The %s is invalid"');
+            return FALSE;
         }
     }
 

@@ -164,7 +164,8 @@ class Home extends CI_Controller
     public function usuarioLogueado(){
         $usuario =  $this->session->userdata("login");
     
-        return  $usuario['username'] ? $usuario['username'] : '';
+        return $usuario;
+        //return  $usuario['username'] ? $usuario['username'] : '';
     
     }
 }
