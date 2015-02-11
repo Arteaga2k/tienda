@@ -16,20 +16,34 @@ class Usuario extends CI_Controller
     }
 
     /**
-     * muestra formularios alta y login usuario
+     * Función crea formulario login
      */
-    public function index()
+    public function loginUsuario()
+    {
+        $this->form["form_login"] = form_open("usuario/procesaFormLogin", array(
+            "class" => "form-horizontal",
+            "name" => "procesaFormLogin"
+        ));
+        
+        $this->form['token'] = $this->token();
+        $provincias = $this->home_model->getProvincias();
+        
+        echo $this->twig->render('usuario/login_formulario.twig', array(
+            'provincias' => $provincias,
+            'form' => $this->form
+        ));
+    }
+
+    /**
+     * Función crear formulario
+     */
+    public function creaUsuario()
     {
         $this->form['id'] = 0;
         
-        $this->form["form_alta"] = form_open("usuario/formUsuario", array(
+        $this->form["form_alta"] = form_open("usuario/procesaFormUsuario", array(
             "class" => "form-horizontal",
-            "name" => "formUsuario"
-        ));
-        
-        $this->form["form_login"] = form_open("usuario/formLogin", array(
-            "class" => "form-horizontal",
-            "name" => "formLogin"
+            "name" => "procesaFormUsuario"
         ));
         
         $this->form['token'] = $this->token();
@@ -40,21 +54,27 @@ class Usuario extends CI_Controller
             'form' => $this->form
         ));
     }
-    
+
     /**
      * Muestra formulario edición usuario
      */
-    public function editaUsuario($id)
-    {   
+    public function editaUsuario($id = 0)
+    {
         $this->form['id'] = $id;
         
-       
+        if ($id != 0) {
+            $result = $this->usuario_model->findByPk($id);
+            if (empty($result)) {
+                // TODO
+            } else
+                $form['update_data'] = $result;
+        }
     }
 
     /**
      * Da de alta un nuevo usuario
      */
-    public function formUsuario()
+    public function procesaFormUsuario()
     {
         // existe variable post token y es igual
         // a la sesión llamada token que se ha creado
@@ -100,40 +120,42 @@ class Usuario extends CI_Controller
                     'idProvincia' => $this->input->post('provincia'),
                     'estado' => 0
                 );
-                $result = $this->usuario_model->insertarUsuario($usuario);
-                if ($result) {
-                    // seguimos con el pedido
-                    redirect(base_url() . 'carro/verCarro');
-                } else {
-                    // guardamos mensaje de error producido
-                    $this->form['error'] = $this->session->flashdata('usuario_incorrecto');
-                    $this->index();
+                $id = $this->input->post('id');
+                
+                if (isset($id) && ! empty($id)){
+                    //modo edicion    
+                }else{
+                    $result = $this->usuario_model->insertarUsuario($usuario);
+                    if ($result) {
+                        // seguimos con el pedido
+                        redirect(base_url() . 'carro/verCarro');
+                    } else {
+                        // guardamos mensaje de error producido
+                        $this->form['error'] = $this->session->flashdata('usuario_incorrecto');
+                        $this->index();
+                    }
                 }
+                
             }
         }
     }
-    
 
     /**
      * Valida formulario acceso de usuario
      */
-    public function formLogin()
+    public function procesaFormLogin()
     {
         if ($this->verificaToken('tokenLogin')) {
             // existe variable post token y es igual
             // a la sesión llamada token que se ha creado
             
             $this->form_validation->set_rules('usernameLogin', 'Username', 'required');
-            $this->form_validation->set_rules('passwordLogin', 'Password', 'trim|required|md5');
+            $this->form_validation->set_rules('passwordLogin', 'Password', 'trim|required|md5');            
             
-            $form['form_alta'] = form_open('usuario/formUsuario', array(
-                'class' => 'form-horizontal',
-                'name' => 'formUsuario'
-            ));
             
-            $form["form_login"] = form_open("usuario/formLogin", array(
+            $form["form_login"] = form_open("usuario/procesaFormLogin", array(
                 "class" => "form-horizontal",
-                "name" => "formLogin"
+                "name" => "procesaFormLogin"
             ));
             
             // guardamos error
@@ -154,13 +176,13 @@ class Usuario extends CI_Controller
                         'is_logued_in' => TRUE,
                         'id_usuario' => $usuario->idUsuario,
                         'username' => $usuario->username
-                    );                    
+                    );
                     // guardamos en session datos login
-                    $this->session->set_userdata("login", $data);                    
+                    $this->session->set_userdata("login", $data);
                     // redireccionamos al paso realizar pedido
                     // estando logueado
                     redirect(base_url() . 'carro/realizaPedido');
-                }else{
+                } else {
                     $this->index();
                 }
             }

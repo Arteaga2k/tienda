@@ -227,8 +227,7 @@ class Productodestacado extends CI_Controller
             "sEcho" => intval($_GET["sEcho"]),
             "iTotalRecords" => $config["total_rows"],
             "iTotalDisplayRecords" => $config["total_rows"]
-        )
-        ;
+        );
         echo json_encode($output);
         
         exit();
