@@ -8,6 +8,8 @@
 class Carro extends CI_Controller
 {
 
+    private $form = array();
+
     /**
      * Constructor clase Carro
      */
@@ -15,47 +17,62 @@ class Carro extends CI_Controller
     {
         parent::__construct();
         $this->load->model('home_model');
-    }
-
-    /**
-     */
-    public function realizaPedido()
-    {
-        $login = $this->session->userdata("login");           
-             
-        // comprobamos si estamos logueados
-        if ($login != false && $login['is_logued_in']) {
-            // siguiente paso realizar compra
-          
-        } else {
-           redirect(base_url() . 'usuario');
-        }
-    }
+        $this->load->model('usuario_model');
+        $this->load->model('pedido_model');
+    }   
 
     /**
      * muestra contenido del carro
      */
     public function verCarro()
     {
-        $carrito = $this->carrito->getCarrito();
+        $form['error'] = $this->session->flashdata('carro_incorrecto');
         
-        
-        echo $this->twig->render('carro/carro.twig', array(
-            'carrito' => $carrito,
-            'usuario' => $this->usuarioLogueado()
+        echo $this->twig->render('carro/detalle_carro.twig', array(
+            'carrito' => $this->carrito->getCarrito(),
+            'usuario' => $this->session->userdata('login'),
+            'form' => $form
         ));
     }
-    
+
     /**
-     * Devuelve username del usuario logueado
-     * O vacío si no existe     
-     * 
-     * @return string <string, unknown>
+     * Vacía el contenido del carrito
      */
-    public function usuarioLogueado(){
-        $usuario =  $this->session->userdata("login");        
-        
-        return  $usuario['username'] ? $usuario['username'] : '';
-        
+    public function vaciaCarro()
+    {
+        $carrito = $this->carrito->destroy();
+         redirect(base_url() . 'home');
     }
+    
+    // probando ajax
+    public function ajaxAddCart($cantidad, $idproducto)
+    {
+        $cantidadFinal = $cantidad;
+        $producto = $this->home_model->getProducto($idproducto);
+        $carrito = $this->carrito->getCarrito();
+    
+        // comprobamos que hay stock
+        if (intval($producto->stock) > 0) {
+    
+            if (! empty($carrito) && isset($carrito['items'][$idproducto])) {
+                $cantidad1 = intval($carrito['items'][$idproducto]['cantidad']);
+                $suma = $cantidad1 + intval($cantidad);
+                $cantidadFinal = $producto->stock >= $suma ? $cantidad : $producto->stock;
+            }
+    
+            $this->carrito->InsertarItem(array(
+                'id' => $idproducto,
+                'cantidad' => $cantidadFinal,
+                'precio' => $producto->precio,
+                'nombre' => $producto->nombre
+            ));
+        }
+    
+        echo json_encode($this->carrito->getCarrito());
+    }
+
+    
+    
+
+  
 }

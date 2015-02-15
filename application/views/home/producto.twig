@@ -64,7 +64,7 @@
 			
 			// filtramos valor
 			if ($.isNumeric(cantidad) && cantidad > 0){
-				$.get("{{ base_url() }}home/ajaxAddCart/"+cantidad+"/{{ producto.idProducto }}","",function(data)
+				$.get("{{ base_url() }}carro/ajaxAddCart/"+cantidad+"/{{ producto.idProducto }}","",function(data)
 				{
 				    var json = JSON.parse(data);
 				    console.log(json);
@@ -77,7 +77,7 @@
 
 			    	$.each(json.items, function(key, value) {
 			    	    console.log(key,value);
-			    	    html += "<tr><td></td><td>"+value.nombre+"</td><td>"+value.precio+" € x " +value.cantidad+ "</td></tr>";			    	   		    		 			  	    
+			    	    html += "<tr><td>"+value.nombre+"</td><td>"+value.precio+" € x " +value.cantidad+ "</td></tr>";					    	   	   		    		 			  	    
 			    	});
 			    	
 			    	$('#table_cart').html(html);		    			 

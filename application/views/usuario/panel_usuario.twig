@@ -1,0 +1,41 @@
+{% extends "_templates/base.twig" %} {% block contenido %}
+
+<div class="col-md-12">
+    <h1><small>Datos Personales</small></h1><label for=""><a href="">Modificar datos</a></label>
+
+    <p>Carlos Arteaga Virella</p>
+    <p>Avenida Huelva 6</p>
+    
+    
+	<h1><small>Pedidos en proceso</small></h1>	
+	<table class="table table-hover">
+		<tr>
+
+			<th>Código</th>
+			<th>Fecha creación</th>
+			<th>Fecha entrega</th>
+			<th>Factura</th>
+			<th>Estado Actual</th>
+			<th>Operaciones</th>
+		</tr>
+		{% for pedNoProce in pedsNoProce %}
+		<tr>
+			<td>{{ pedNoProce.idPedido }}</td>
+			<td>{{ pedNoProce.fecha_creacion }}</td>
+			<td>--</td>
+			<td><a href="{{ base_url() }}pedido/factura/{{ pedNoProce.idPedido  }}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a></td>
+			<td>En proceso</td>
+			<td><a href="">Ver</a> | <a href="">Cancelar</a></td>
+		</tr>
+
+		{% endfor %}
+		</table>
+
+
+		<h4>Mis pedidos</h4>
+		<hr />
+		{% for pedido in pedidos %} {% endfor %}
+
+</div>
+
+{% endblock %}

@@ -143,7 +143,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\t\t\$.get(\"";
         // line 67
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "home/ajaxAddCart/\"+cantidad+\"/";
+        echo "carro/ajaxAddCart/\"+cantidad+\"/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "idProducto", array()), "html", null, true);
         echo "\",\"\",function(data)
 \t\t\t\t{
@@ -158,7 +158,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
 \t\t\t    \t\$.each(json.items, function(key, value) {
 \t\t\t    \t    console.log(key,value);
-\t\t\t    \t    html += \"<tr><td></td><td>\"+value.nombre+\"</td><td>\"+value.precio+\" € x \" +value.cantidad+ \"</td></tr>\";\t\t\t    \t   \t\t    \t\t \t\t\t  \t    
+\t\t\t    \t    html += \"<tr><td>\"+value.nombre+\"</td><td>\"+value.precio+\" € x \" +value.cantidad+ \"</td></tr>\";\t\t\t\t\t    \t   \t   \t\t    \t\t \t\t\t  \t    
 \t\t\t    \t});
 \t\t\t    \t
 \t\t\t    \t\$('#table_cart').html(html);\t\t    \t\t\t 

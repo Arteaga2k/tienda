@@ -1,0 +1,115 @@
+{% extends "_templates/base.twig" %} {% block contenido %}
+
+<div class="col-md-12">
+
+	<div class="row">
+		{% if form.error|length %}
+
+		<div class="alert alert-danger" role="alert">{{ form.error|raw }}</div>
+
+		{% endif %}
+		
+		<h2>Contenido del Carrito de la Compra</h2>
+		<hr />
+
+		<table class="table table-bordered">
+			<tr>
+
+				<th>Código</th>
+				<th>Concepto</th>
+				<th>Precio</th>
+				<th>Unidades</th>
+				<th>Total</th>
+				<th>Opciones</th>
+
+			</tr>
+
+			{% for producto in carrito.items %}
+			<tr>
+				<td>1</td>
+				<td>{{ producto.nombre }}</td>
+				<td>{{ producto.precio }}€</td>
+				<td>
+					<form action="">
+						<input type="text" value="{{ producto.cantidad }}" />
+					</form>
+				</td>
+				<td>{{ producto.precio * producto.cantidad}}€</td>
+				<td><a href="">Actualizar</a> <a href="">Eliminar</a></td>
+			</tr>
+			{% endfor %}
+			<tr>
+				<td></td>
+				<td>Total</td>
+				<td></td>
+				<td>{{ carrito.articulos_total }}</td>
+				<td>{{ carrito.precio_total }}€</td>
+			</tr>
+		</table>
+		<p>
+			<a href="{{ base_url() }}carro/vaciaCarro" class="btn btn-default">Vaciar
+				Carrito</a> <a href="{{ base_url() }}pedido/preparaPedido"
+				class="btn btn-primary">Realizar pedido</a>
+		</p>
+	</div>
+</div>
+
+
+{% endblock %}{% block script %}
+
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		$('#actualizar').click(function(){
+						
+			var cantidad = parseInt($('#cantidad').val());  
+			
+			// filtramos valor
+			if ($.isNumeric(cantidad) && cantidad > 0){
+				$.get("{{ base_url() }}carro/ajaxAddCart/"+cantidad+"/{{ producto.idProducto }}","",function(data)
+				{
+				    var json = JSON.parse(data);
+				    console.log(json);
+				   
+			    	var html = "";
+
+			    	var articulos_total = json.articulos_total;
+			    	var precio_total = json.precio_total;	
+			    	
+
+			    	$.each(json.items, function(key, value) {
+			    	    console.log(key,value);
+			    	    html += "<tr><td></td><td>"+value.nombre+"</td><td>"+value.precio+" € x " +value.cantidad+ "</td></tr>";			    	   		    		 			  	    
+			    	});
+			    	
+			    	$('#table_cart').html(html);		    			 
+				});
+			}
+			else
+			{
+			    // mostrar error 			    
+			    $('#formAdd').addClass('has-error');
+			    $('#errorCantidad').text('Introduce un valor correcto');
+			}		
+			
+		});		
+
+		$('#cantidad').click(function(){
+			 if ($('#formAdd').hasClass('form-group has-error')){		    	
+		    	 $('#formAdd').removeClass('form-group has-error').addClass('form-group');
+		    	 $('#errorCantidad').text('');
+			}
+		});	
+		
+	});
+
+
+
+</script>
+{% endblock %}
+
+
+
+

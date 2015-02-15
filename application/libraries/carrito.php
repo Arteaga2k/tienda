@@ -114,8 +114,8 @@ class Carrito
     {
         unset($this->_cart);
         
-        $this->__cart['cart_total'] = 0;
-        $this->__cart['total_items'] = 0;
+        $this->_cart['precio_total'] = 0;
+        $this->_cart['articulos_total'] = 0;
         
         $this->CI->session->unset_userdata('carro');
     }

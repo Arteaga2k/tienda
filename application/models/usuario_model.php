@@ -19,17 +19,42 @@ class Usuario_model extends CI_Model
 
     /**
      * Obtiene datos de un usuario
-     *
+     * determinado por email y username
+     * 
      * @param string $email            
      * @param string $username            
      */
-    public function getUsuario($email, $username)
-    {
-        $this->db->where('username', $username);
+    public function getUsuario($email,$username)
+    {       
+        $this->db->where('username',$username);
         $this->db->or_where('email', $email);
         $query = $this->db->get('usuario');
         
-        return $query->result_array();
+        return $query->row_array();
+    }
+    
+    /**
+     * 
+     * @param unknown $email
+     */
+    public function getUsuarioByEmail($email){
+        $this->db->where('email',$email);
+        $query = $this->db->get('usuario');
+        
+        return $query->row_array();
+    }
+    
+    /**
+     * Obtiene datos de un usuario
+     * determinado por la primary key
+     * 
+     * @param unknown $id
+     */
+    public function getUsuarioById($id){
+        $this->db->where('idUsuario', $id);      
+        $query = $this->db->get('usuario');
+        
+        return $query->row_array();
     }
 
     /**
@@ -37,7 +62,7 @@ class Usuario_model extends CI_Model
      *
      * @param unknown $data            
      */
-    public function insertarUsuario($data)
+    public function creaUsuario($data)
     {
         // comprobamos si ya existe una cuenta con ese email o username
         $usuario = $this->getUsuario($data['email'], $data['username']);
@@ -51,6 +76,20 @@ class Usuario_model extends CI_Model
             $this->session->set_flashdata('usuario_incorrecto', 'Ya existe una cuenta con los datos introducidos');
             return false;
         }
+    }
+    
+    /**
+     * Actualiza los datos de un usuario
+     * 
+     * @param unknown $data
+     * @param unknown $id
+     */
+    public function actualizaUsuario($data,$id){
+        $this->db->where('idUsuario',$id);
+        $this->db->update('usuario', $data);     
+
+        return $this->db->affected_rows();
+        
     }
 
     /**

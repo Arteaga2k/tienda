@@ -9,10 +9,11 @@
 {% block stylesheets %}
 <link href="{{ base_url() }}assets/css/bootstrap.min.css"
 	type="text/css" rel="stylesheet" />
+<link href="{{ base_url() }}assets/css/shop-homepage.css"
+	type="text/css" rel="stylesheet" />
+	<link href="{{ base_url() }}assets/css/tienda.css"
+	type="text/css" rel="stylesheet" />
 
-
-<link rel="stylesheet" type="text/css"
-	href="{{ base_url() }}assets/css/shop-homepage.css" />
 {% endblock %}
 
 
@@ -57,7 +58,9 @@
 							class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
 							Cesta <span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
-							<table id="table_cart" class="table">
+						
+						<div class="col-md-12">
+							<table id="table_cart" class="table table-hover">
 								{% for producto in carrito.items %}
 								<tr>
 									<td>{{ producto.nombre }}</td>
@@ -65,8 +68,11 @@
 								</tr>
 								{% endfor %}
 							</table>
-							<a href="{{ base_url() }}carro/verCarro" class="btn btn-primary">Ver
-								Carrito</a>
+							<p>
+							<a href="{{ base_url() }}carro/verCarro" class="btn btn-success btn-sm pull-right"><i
+									class="glyphicon glyphicon-shopping-cart"></i> Checkout</a></p>
+						</div>
+					
 						</ul></li>
 
 					<li class="dropdown user-dropdown"><a href="#"
@@ -74,12 +80,11 @@
 							class="glyphicon glyphicon-user"></i> {{ usuario.username|length
 							? usuario.username : 'Identificate' }}<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-							<li><a
-								href="{{ base_url() }}usuario/loginUsuario/"><i
+							<li><a href="{{ base_url() }}usuario/loginUsuario/"><i
 									class="glyphicon glyphicon-log-in"></i> Iniciar sesión</a></li>
 							<li><a
-								href="{{ base_url() }}usuario/editaUsuario/{{ usuario.id_usuario }}"><i
-									class="glyphicon glyphicon-pencil"></i> Editar</a></li>
+								href="{{ base_url() }}usuario/panelUsuario/{{ usuario.id_usuario }}"><i
+									class="glyphicon glyphicon-th-large"></i> Panel control</a></li>
 							<li class="divider"></li>
 							<li><a href="{{ base_url() }}usuario/logout"><i
 									class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a></li>

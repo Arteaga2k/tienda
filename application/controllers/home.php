@@ -27,6 +27,7 @@ class Home extends CI_Controller
      */
     public function index()
     {
+        $this->session->set_userdata("url", 'home');
         
         // echo $this->categoria;
         $pagination = 5;
@@ -50,10 +51,6 @@ class Home extends CI_Controller
             'carrito' => $this->carrito->getCarrito(),
             'usuario' => $this->usuarioLogueado()
         ));
-        
-        // $this->carrito->destroy();
-        // todo prueba
-        // $this->ajaxAddCart(10,5);
     }
 
     /**
@@ -97,6 +94,8 @@ class Home extends CI_Controller
      */
     public function producto($idProducto)
     {
+        $this->session->set_userdata("url", 'home/producto/' . $idProducto . '');
+        
         $categorias = $this->home_model->getCategorias();
         $producto = $this->home_model->getProducto($idProducto);
         
@@ -121,51 +120,18 @@ class Home extends CI_Controller
             $this->addProducto();
         }
     }
-    
-    // probando ajax
-    public function ajaxAddCart($cantidad, $idproducto)
-    {
-        /*
-         * echo 'cantidad: '.$cantidad;
-         * echo 'idproducto: '.$idproducto;
-         */
-        
-        // echo "cantidad: [$cantidad]\n";
-        $producto = $this->home_model->getProducto($idproducto);
-        $carrito = $this->carrito->getCarrito();
-        
-        /*
-         * echo 'items cantidad: '.$carrito['items'][$idproducto]['cantidad'];
-         * echo 'producto stock: '.$producto->stock;
-         */
-        
-        // var_dump($producto);
-        
-        if (intval($carrito['items'][$idproducto]['cantidad']) <= intval($producto->stock)) {
-            $cantidadFinal = $producto->stock >= $cantidad ? $cantidad : $producto->stock;
-            
-            $this->carrito->InsertarItem(array(
-                'id' => $idproducto,
-                'cantidad' => $cantidadFinal,
-                'precio' => $producto->precio,
-                'nombre' => $producto->nombre
-            ));
-        }
-        
-        echo json_encode($this->carrito->getCarrito());
-    }
-    
+
     /**
      * Devuelve username del usuario logueado
      * O vacío si no existe
      *
      * @return string <string, unknown>
      */
-    public function usuarioLogueado(){
-        $usuario =  $this->session->userdata("login");
-    
+    public function usuarioLogueado()
+    {
+        $usuario = $this->session->userdata("login");
+        
         return $usuario;
-        //return  $usuario['username'] ? $usuario['username'] : '';
-    
+        // return $usuario['username'] ? $usuario['username'] : '';
     }
 }
