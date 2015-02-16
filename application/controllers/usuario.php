@@ -19,7 +19,7 @@ class Usuario extends CI_Controller
     public function panelUsuario()
     {
         $login = $this->session->userdata("login");
-        if ($login != false && $login['is_logued_in']) {
+        if ($this->login->usuario_logueado()) {
             
             $pedidosNoProce = $this->pedido_model->getPedsNoProcesados($login['id_usuario']);
             $historialPedidos = $this->pedido_model->getPedidos($login['id_usuario']);

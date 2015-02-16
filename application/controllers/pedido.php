@@ -76,7 +76,7 @@ class Pedido extends CI_Controller
         // add a page
         $pdf->AddPage();
         
-        $txt = "PC Componentes y Multimedia
+        $txt = "Shopping Cart Componentes
 SL CIF: B73347494
 Avda Europa, 2-3, Pol.Ind. Las Salinas.
 Alhama de Murcia
@@ -138,16 +138,7 @@ Alhama de Murcia
                 </tr>';
         }
         $html1 .= '</table>';
-        /*
-         * <tr>
-         * <td>sds</td>
-         * <td>sds</td>
-         * <td>sds</td>
-         * <td>sds</td>
-         * <td>sds</td>
-         * </tr>
-         * </table>';
-         */
+        
         $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html1, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
         // ---------------------------------------------------------
         

@@ -30,13 +30,18 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         // line 2
         echo "
 <div class=\"col-md-12\">
-    <h1><small>Datos Personales</small></h1><label for=\"\"><a href=\"\">Modificar datos</a></label>
+\t<h1>
+\t\t<small>Datos Personales</small>
+\t</h1>
+\t<label for=\"\"><a href=\"\">Modificar datos</a></label>
 
-    <p>Carlos Arteaga Virella</p>
-    <p>Avenida Huelva 6</p>
-    
-    
-\t<h1><small>Pedidos en proceso</small></h1>\t
+\t<p>Carlos Arteaga Virella</p>
+\t<p>Avenida Huelva 6</p>
+
+
+\t<h1>
+\t\t<small>Pedidos en proceso</small>
+\t</h1>
 \t<table class=\"table table-hover\">
 \t\t<tr>
 
@@ -48,27 +53,29 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 \t\t\t<th>Operaciones</th>
 \t\t</tr>
 \t\t";
-        // line 21
+        // line 26
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pedsNoProce"]) ? $context["pedsNoProce"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pedNoProce"]) {
-            // line 22
+            // line 27
             echo "\t\t<tr>
 \t\t\t<td>";
-            // line 23
+            // line 28
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 24
+            // line 29
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "fecha_creacion", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>--</td>
-\t\t\t<td><a href=\"";
-            // line 26
+\t\t\t<td><a
+\t\t\t\thref=\"";
+            // line 32
             echo twig_escape_filter($this->env, base_url(), "html", null, true);
             echo "pedido/factura/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
-            echo "\"><span class=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\"></span></a></td>
+            echo "\"><span
+\t\t\t\t\tclass=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\"></span></a></td>
 \t\t\t<td>En proceso</td>
 \t\t\t<td><a href=\"\">Ver</a> | <a href=\"\">Cancelar</a></td>
 \t\t</tr>
@@ -78,24 +85,60 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedNoProce'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 32
-        echo "\t\t</table>
+        // line 39
+        echo "\t</table>
 
 
-\t\t<h4>Mis pedidos</h4>
-\t\t<hr />
+\t<h1>
+\t\t<small>Historial pedidos</small>
+\t</h1>
+\t<hr />
+\t<table class=\"table table-hover\">
+\t\t<tr>
+\t\t\t<th>Código</th>
+\t\t\t<th>Fecha creación</th>
+\t\t\t<th>Fecha entrega</th>
+\t\t\t<th>Factura</th>
+\t\t\t<th>Estado Actual</th>
+\t\t\t<th>Operaciones</th>
+\t\t</tr>
 \t\t";
-        // line 37
+        // line 55
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pedidos"]) ? $context["pedidos"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pedido"]) {
-            echo " ";
+            // line 56
+            echo "\t\t<tr>
+\t\t\t<td>";
+            // line 57
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
+            echo "</td>
+\t\t\t<td>";
+            // line 58
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "fecha_creacion", array()), "html", null, true);
+            echo "</td>
+\t\t\t<td>--</td>
+\t\t\t<td><a
+\t\t\t\thref=\"";
+            // line 61
+            echo twig_escape_filter($this->env, base_url(), "html", null, true);
+            echo "pedido/factura/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
+            echo "\"><span
+\t\t\t\t\tclass=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\"></span></a></td>
+\t\t\t<td></td>
+\t\t\t<td><a href=\"\">Ver</a> | <a href=\"\">Cancelar</a></td>
+\t\t</tr>
+
+\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedido'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 38
-        echo "
+        // line 68
+        echo "\t</table>
+
+
 </div>
 
 ";
@@ -113,6 +156,6 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 
     public function getDebugInfo()
     {
-        return array (  98 => 38,  89 => 37,  82 => 32,  68 => 26,  63 => 24,  59 => 23,  56 => 22,  52 => 21,  31 => 2,  28 => 1,);
+        return array (  139 => 68,  124 => 61,  118 => 58,  114 => 57,  111 => 56,  107 => 55,  89 => 39,  74 => 32,  68 => 29,  64 => 28,  61 => 27,  57 => 26,  31 => 2,  28 => 1,);
     }
 }

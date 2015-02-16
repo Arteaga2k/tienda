@@ -49,7 +49,7 @@ class Home extends CI_Controller
             'productos' => $productosDest,
             'pagination' => $this->pagination->create_links(),
             'carrito' => $this->carrito->getCarrito(),
-            'usuario' => $this->usuarioLogueado()
+            'usuario' => $this->session->userdata("login")
         ));
     }
 
@@ -81,7 +81,7 @@ class Home extends CI_Controller
             'productos' => $productosDest,
             'pagination' => $this->pagination->create_links(),
             'carrito' => $this->carrito->getCarrito(),
-            'usuario' => $this->usuarioLogueado()
+            'usuario' => $this->session->userdata("login")
         ));
     }
 
@@ -113,25 +113,11 @@ class Home extends CI_Controller
                 'producto' => $producto,
                 'form' => $form,
                 'carrito' => $this->carrito->getCarrito(),
-                'usuario' => $this->usuarioLogueado()
+                'usuario' => $this->session->userdata("login")
             ));
         } else {
             // añadimos producto al carro
             $this->addProducto();
         }
-    }
-
-    /**
-     * Devuelve username del usuario logueado
-     * O vacío si no existe
-     *
-     * @return string <string, unknown>
-     */
-    public function usuarioLogueado()
-    {
-        $usuario = $this->session->userdata("login");
-        
-        return $usuario;
-        // return $usuario['username'] ? $usuario['username'] : '';
     }
 }

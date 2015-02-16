@@ -21,7 +21,7 @@ class Login
 
     public function usuario_logueado()
     {
-        $login = $this->session->userdata("login");
+        $login = $this->CI->session->userdata("login");
         
         if ($login != false && $login['is_logued_in']) {
             return TRUE;

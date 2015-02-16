@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('twig','carrito','pagination','session','form_validation','user_agent','email','Pdf');
+$autoload['libraries'] = array('twig','carrito','pagination','session','form_validation','user_agent','email','Pdf','Login');
 
 
 /*
