@@ -4,7 +4,7 @@
 	<h1>
 		<small>Datos Personales</small>
 	</h1>
-	<label for=""><a href="{{ base_url() }}usuario/editaUsuario">Modificar
+	<label for=""><a href="{{ base_url() }}usuario/editaUsuario/{{ usuario.idUsuario }}">Modificar
 			datos</a></label>
 	<div class="well">
 		<p>Nombre: {{ usuario.nombre|title}} {{ usuario.apellidos|title }}</p>

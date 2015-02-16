@@ -165,7 +165,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
 \t\t\t    \t
 \t\t\t    \t\$('#cesta').html('<span class=\"glyphicon glyphicon-shopping-cart\" aria-hidden=\"true\"></span>'+ 
-\t\t\t\t\t ' Cesta ('+articulos_total+')<span class=\"caret\"></span> </a>');
+\t\t\t\t\t ' Cesta '+articulos_total+'<span class=\"caret\"></span> </a>');
 \t\t\t    \t\$('#table_cart').html(html);\t\t    \t\t\t 
 \t\t\t\t});
 \t\t\t}

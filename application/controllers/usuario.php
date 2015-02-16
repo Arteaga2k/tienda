@@ -25,14 +25,13 @@ class Usuario extends CI_Controller
             $historialPedidos = $this->pedido_model->getPedidos($login['id_usuario']);
             $usuario = $this->usuario_model->getUsuarioById($login['id_usuario']);
             
-                     
             echo $this->twig->render('usuario/panel_usuario.twig', array(
                 'form' => $this->form,
                 'usuario' => $usuario,
                 'pedsNoProce' => $pedidosNoProce,
                 'pedidos' => $historialPedidos
             ));
-        }else{
+        } else {
             $this->session->set_userdata("url", 'usuario/panelUsuario');
             redirect(base_url() . 'usuario/loginUsuario');
         }
@@ -83,29 +82,34 @@ class Usuario extends CI_Controller
      */
     public function editaUsuario($id = 0)
     {
-        if (isset($id) && $id != 0) {
-            // obtenemos usuario
-            $usuario = $this->usuario_model->getUsuarioById($id);
-            // si existe usuario a editar
-            if (! empty($usuario)) {
-                $this->form['usuario'] = $usuario;
-                $this->form['id'] = $id;
-                
-                $this->form["form_alta"] = form_open("usuario/procesaFormUsuario", array(
-                    "class" => "form-horizontal",
-                    "name" => "procesaFormUsuario"
-                ));
-                
-                $this->form['token'] = $this->token();
-                $provincias = $this->home_model->getProvincias();
-                
-                echo $this->twig->render('usuario/alta_formulario.twig', array(
-                    'provincias' => $provincias,
-                    'form' => $this->form
-                ));
-            } else {
-                redirect(base_url() . $this->session->userdata('url'));
+        if ($this->login->usuario_logueado()) {
+            if (isset($id) && $id != 0) {
+                // obtenemos usuario
+                $usuario = $this->usuario_model->getUsuarioById($id);
+                // si existe usuario a editar
+                if (! empty($usuario)) {
+                    $this->form['usuario'] = $usuario;
+                    $this->form['id'] = $id;
+                    
+                    $this->form["form_alta"] = form_open("usuario/procesaFormUsuario", array(
+                        "class" => "form-horizontal",
+                        "name" => "procesaFormUsuario"
+                    ));
+                    
+                    $this->form['token'] = $this->token();
+                    $provincias = $this->home_model->getProvincias();
+                    
+                    echo $this->twig->render('usuario/alta_formulario.twig', array(
+                        'provincias' => $provincias,
+                        'form' => $this->form
+                    ));
+                } else {
+                    redirect(base_url() . 'home');
+                }
             }
+        } else {
+            $this->session->set_userdata("url", 'usuario/editaUsuario/' . $id . '');
+            redirect(base_url() . 'usuario/loginUsuario');
         }
     }
 
@@ -342,6 +346,7 @@ class Usuario extends CI_Controller
      */
     public function logout()
     {
+        $this->session->set_userdata('url', 'home');
         $this->session->unset_userdata('login');
         redirect(base_url() . 'home');
     }

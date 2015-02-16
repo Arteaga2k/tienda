@@ -56,7 +56,7 @@
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false" id="cesta"><span
 							class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-							Cesta ({{ carrito.articulos_total }})<span class="caret"></span> </a>
+							Cesta {{ carrito.articulos_total > 0 ? carrito.articulos_total : '' }}<span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
 							<!--{% if carrito.items|length > 0 %}-->
 							<div class="col-md-12">

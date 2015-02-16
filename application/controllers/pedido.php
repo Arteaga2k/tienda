@@ -21,103 +21,100 @@ class Pedido extends CI_Controller
 
     public function factura($id)
     {
-        $pedido = $this->pedido_model->getLineasById($id);   
-        $fechaCreacion = $pedido[0]['fecha_creacion'];     
-       
-        // create new PDF document
-        $pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-        
-        // set document information
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor('Carlos Arteaga Virella');
-        $pdf->SetTitle('Factura PDF PEDIDO' . $id);
-        $pdf->SetSubject('Factura PDF');
-        $pdf->SetKeywords('FACTURA, PDF');
-        
-        // set default header data
-        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
-        
-        // set header and footer fonts
-        $pdf->setHeaderFont(Array(
-            PDF_FONT_NAME_MAIN,
-            '',
-            PDF_FONT_SIZE_MAIN
-        ));
-        $pdf->setFooterFont(Array(
-            PDF_FONT_NAME_DATA,
-            '',
-            PDF_FONT_SIZE_DATA
-        ));
-        
-        // set default monospaced font
-        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-        
-        // set margins
-        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-        $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-        
-        // set auto page breaks
-        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-        
-        // set image scale factor
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-        
-        // set some language-dependent strings (optional)
-        if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
-            require_once (dirname(__FILE__) . '/lang/eng.php');
-            $pdf->setLanguageArray($l);
-        }
-        
-        // ---------------------------------------------------------
-        
-        
-        
-        // add a page
-        $pdf->AddPage();
-        
-        $txt = "Shopping Cart Componentes
+        if ($this->login->usuario_logueado()) {
+            $pedido = $this->pedido_model->getLineasById($id);
+            $fechaCreacion = $pedido[0]['fecha_creacion'];
+            
+            // create new PDF document
+            $pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+            
+            // set document information
+            $pdf->SetCreator(PDF_CREATOR);
+            $pdf->SetAuthor('Carlos Arteaga Virella');
+            $pdf->SetTitle('Factura PDF PEDIDO' . $id);
+            $pdf->SetSubject('Factura PDF');
+            $pdf->SetKeywords('FACTURA, PDF');
+            
+            // set default header data
+            $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, PDF_HEADER_TITLE, PDF_HEADER_STRING);
+            
+            // set header and footer fonts
+            $pdf->setHeaderFont(Array(
+                PDF_FONT_NAME_MAIN,
+                '',
+                PDF_FONT_SIZE_MAIN
+            ));
+            $pdf->setFooterFont(Array(
+                PDF_FONT_NAME_DATA,
+                '',
+                PDF_FONT_SIZE_DATA
+            ));
+            
+            // set default monospaced font
+            $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+            
+            // set margins
+            $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+            $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+            $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+            
+            // set auto page breaks
+            $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+            
+            // set image scale factor
+            $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+            
+            // set some language-dependent strings (optional)
+            if (@file_exists(dirname(__FILE__) . '/lang/eng.php')) {
+                require_once (dirname(__FILE__) . '/lang/eng.php');
+                $pdf->setLanguageArray($l);
+            }
+            
+            // ---------------------------------------------------------
+            
+            // add a page
+            $pdf->AddPage();
+            
+            $txt = "Shopping Cart Componentes
 SL CIF: B73347494
 Avda Europa, 2-3, Pol.Ind. Las Salinas.
 Alhama de Murcia
 30840.Murcia.";
-        
-        
-        
-        // set cell padding
-        $pdf->setCellPaddings(1, 1, 1, 1);
-        
-        // set cell margins
-        $pdf->setCellMargins(1, 1, 1, 1);
-        
-        // set color for background
-        $pdf->SetFillColor(255, 255, 227);
-        $pdf->SetFont('helvetica', 'B', 20);
-        $pdf->Cell($w = 0, $h = 0, 'FACTURA',$border = 0, $ln = 2, $align = 'C');
-       // $pdf->writeHTMLCell($w = 0, $h = 0, $x = '80', $y = '11', 'FACTURA DE LA COMPRA', $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'C', $autopadding = true);
-      
-        // set font
-        $pdf->SetFont('times', 'BI', 12);
-        
-        // Vertical alignment
-        $pdf->MultiCell(90, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
-       
-        $pdf->MultiCell(0, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
-        
-        $pdf->Ln(30);
-        
-        $html = '<table border="1">
+            
+            // set cell padding
+            $pdf->setCellPaddings(1, 1, 1, 1);
+            
+            // set cell margins
+            $pdf->setCellMargins(1, 1, 1, 1);
+            
+            // set color for background
+            $pdf->SetFillColor(255, 255, 227);
+            $pdf->SetFont('helvetica', 'B', 20);
+            $pdf->Cell($w = 0, $h = 0, 'FACTURA', $border = 0, $ln = 2, $align = 'C');
+            // $pdf->writeHTMLCell($w = 0, $h = 0, $x = '80', $y = '11', 'FACTURA DE LA COMPRA', $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'C', $autopadding = true);
+            
+            // set font
+            $pdf->SetFont('times', 'BI', 12);
+            
+            // Vertical alignment
+            $pdf->MultiCell(90, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
+            
+            $pdf->MultiCell(0, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
+            
+            $pdf->Ln(30);
+            
+            $html = '<table border="1">
              <tr>
-                <td>Nº de Factura: '.$id.'</td>
-                <td>Fecha: '.$fechaCreacion.'</td>
+                <td>Nº de Factura: ' . $id . '</td>
+                <td>Fecha: ' . $fechaCreacion . '</td>
                 <td>Forma de pago: --</td>        
             </tr>      
         </table>';
-        // Imprimimos el texto con writeHTMLCell()
-        // $pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
-        
-        $html1 = '<table border="1" style="width:100%">
+            // Imprimimos el texto con writeHTMLCell()
+            // $pdf->writeHTML($html, true, false, true, false, '');
+            $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+            
+            $html1 = '<table border="1" style="width:100%">
         <tr>
             <td width="10%" bgcolor="#A1A1A1">Cod.</td>
             <td width="53%" bgcolor="#A1A1A1">Artículo</td>
@@ -125,48 +122,52 @@ Alhama de Murcia
             <td width="7%" bgcolor="#A1A1A1">Und</td>
             <td width="15%" bgcolor="#A1A1A1">Total</td>
         </tr>';
-        
-        foreach ($pedido as $linea) {
-            $html1 .= '
+            
+            foreach ($pedido as $linea) {
+                $html1 .= '
                 <tr>
                     <td>' . $linea['codigo'] . '</td>
                     <td  align="left">' . $linea['nombre'] . '</td>
                     <td  align="right">' . $linea['precio'] . '</td>
                     <td  align="center">' . $linea['cantidad'] . '</td>
-                    <td  align="right">' . intval($linea['cantidad'])*intval($linea['precio'])  . '</td>
+                    <td  align="right">' . intval($linea['cantidad']) * intval($linea['precio']) . '</td>
                    
                 </tr>';
-        }
-        $html1 .= '</table>';
-        
-        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html1, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
-        // ---------------------------------------------------------
-        
-        $tabla3 = '<table border="1" style="width:100%">
+            }
+            $html1 .= '</table>';
+            
+            $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $html1, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = '', $autopadding = true);
+            // ---------------------------------------------------------
+            
+            $tabla3 = '<table border="1" style="width:100%">
             <tr>
                 <td width="50%" bgcolor="#A1A1A1">SUBTOTAL</td>
                 <td width="20%" bgcolor="#A1A1A1">IVA</td>
                 <td width="30%" bgcolor="#A1A1A1">TOTAL</td>                   
             </tr>
         </table>';
-        
-        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $tabla3, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'R', $autopadding = true);
-        
-        $tabla4 = '<table border="1" style="width:100%">
+            
+            $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $tabla3, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'R', $autopadding = true);
+            
+            $tabla4 = '<table border="1" style="width:100%">
             <tr>
                 <td width="50%" >12</td>
                 <td width="20%" >2121</td>
                 <td width="30%" >3232</td>                   
             </tr>
         </table>';
-        $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $tabla4, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'R', $autopadding = true);
-        
-        // Close and output PDF document
-        $pdf->Output('example_003.pdf', 'I');
-        
-        // ============================================================+
-        // END OF FILE
-        // ============================================================+
+            $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $tabla4, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'R', $autopadding = true);
+            
+            // Close and output PDF document
+            $pdf->Output('example_003.pdf', 'I');
+            
+            // ============================================================+
+            // END OF FILE
+            // ============================================================+
+        }else{
+            $this->session->set_userdata('url', 'pedido/factura/'.$id.'');
+            redirect(base_url() . 'usuario/loginUsuario');
+        }
     }
 
     /**
