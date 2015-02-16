@@ -32,7 +32,9 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
         echo "
 <div class=\"col-md-12\">
 \t<div class=\"row\">
-\t\t<h3>Contenido del carrito</h3>
+\t\t<h1>
+\t\t\t<small>Contenido del carrito</small>
+\t\t</h1>
 \t\t<hr />
 \t\t<table class=\"table table-bordered\">
 \t\t\t<tr>
@@ -47,27 +49,27 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\t</tr>
 
 \t\t\t";
-        // line 19
+        // line 21
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "items", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["producto"]) {
-            // line 20
+            // line 22
             echo "\t\t\t<tr>
 \t\t\t\t<td>1</td>
 \t\t\t\t<td>";
-            // line 22
+            // line 24
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
             echo "</td>
 \t\t\t\t<td>";
-            // line 23
+            // line 25
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
             echo "€</td>
 \t\t\t\t<td>";
-            // line 24
+            // line 26
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "cantidad", array()), "html", null, true);
             echo "</td>
 \t\t\t\t<td>";
-            // line 25
+            // line 27
             echo twig_escape_filter($this->env, ($this->getAttribute($context["producto"], "precio", array()) * $this->getAttribute($context["producto"], "cantidad", array())), "html", null, true);
             echo "€</td>
 
@@ -77,31 +79,33 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 29
+        // line 31
         echo "\t\t\t<tr>
 \t\t\t\t<td></td>
 \t\t\t\t<td>Total</td>
 \t\t\t\t<td></td>
 \t\t\t\t<td>";
-        // line 33
+        // line 35
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "articulos_total", array()), "html", null, true);
         echo "</td>
 \t\t\t\t<td>";
-        // line 34
+        // line 36
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "precio_total", array()), "html", null, true);
         echo "€</td>
 \t\t\t</tr>
 \t\t</table>
 
-\t\t<h3>Datos de envío</h3>
+\t\t<h1>
+\t\t\t<small>Datos de envío</small>
+\t\t</h1>
 \t\t<hr />
 \t\t";
-        // line 40
+        // line 44
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "form_direccion", array());
         echo "
 \t\t<div
 \t\t\tclass=\"form-group ";
-        // line 42
+        // line 46
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "nombre", array()))) {
             echo "has-error";
         }
@@ -110,7 +114,7 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\t<div class=\"col-sm-10\">
 \t\t\t\t<input type=\"text\" class=\"form-control\" name=\"nombre\" id=\"nombre\"
 \t\t\t\t\tvalue=\"";
-        // line 46
+        // line 50
         echo twig_escape_filter($this->env, set_value("nombre"), "html", null, true);
         echo "\"> <span>";
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "nombre", array());
@@ -119,7 +123,7 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t</div>
 \t\t<div
 \t\t\tclass=\"form-group ";
-        // line 50
+        // line 54
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "apellidos", array()))) {
             echo "has-error";
         }
@@ -128,18 +132,18 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\t<div class=\"col-sm-10\">
 \t\t\t\t<input type=\"text\" class=\"form-control\" name=\"apellidos\"
 \t\t\t\t\tid=\"apellidos\" value=\"";
-        // line 54
+        // line 58
         echo twig_escape_filter($this->env, set_value("apellidos"), "html", null, true);
         echo "\"> <span>";
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "apellidos", array());
-        // line 55
+        // line 59
         echo "</span>
 \t\t\t</div>
 \t\t</div>
 
 \t\t<div
 \t\t\tclass=\"form-group ";
-        // line 60
+        // line 64
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "dni", array()))) {
             echo "has-error";
         }
@@ -148,7 +152,7 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\t<div class=\"col-sm-10\">
 \t\t\t\t<input type=\"text\" class=\"form-control\" name=\"dni\" id=\"dni\"
 \t\t\t\t\tvalue=\"";
-        // line 64
+        // line 68
         echo twig_escape_filter($this->env, set_value("dni"), "html", null, true);
         echo "\"> <span>";
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "dni", array());
@@ -158,7 +162,7 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 
 \t\t<div
 \t\t\tclass=\"form-group ";
-        // line 69
+        // line 73
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "direccion", array()))) {
             echo "has-error";
         }
@@ -167,7 +171,7 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\t<div class=\"col-sm-10\">
 \t\t\t\t<input type=\"text\" class=\"form-control\" name=\"direccion\"
 \t\t\t\t\tid=\"direccion\" value=\"";
-        // line 73
+        // line 77
         echo twig_escape_filter($this->env, set_value("direccion"), "html", null, true);
         echo "\">
 \t\t\t</div>
@@ -177,11 +181,11 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\t<label for=\"provincia\" class=\"col-sm-2 control-label\">Provincia</label>
 \t\t\t<div class=\"col-sm-10\">
 \t\t\t\t<select class=\"form-control\" name=\"provincia\" id=\"provincia\"> ";
-        // line 80
+        // line 84
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["provincias"]) ? $context["provincias"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["provincia"]) {
-            // line 82
+            // line 86
             echo "\t\t\t\t\t<option value=\"";
             echo twig_escape_filter($this->env, $this->getAttribute($context["provincia"], "idProvincia", array()), "html", null, true);
             echo "\">";
@@ -192,14 +196,14 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['provincia'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 84
+        // line 88
         echo "\t\t\t\t</select>
 \t\t\t</div>
 \t\t</div>
 
 \t\t<div
 \t\t\tclass=\"form-group ";
-        // line 89
+        // line 93
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "cp", array()))) {
             echo "has-error";
         }
@@ -208,7 +212,7 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\t<div class=\"col-sm-10\">
 \t\t\t\t<input type=\"text\" class=\"form-control\" name=\"cp\" id=\"cp\"
 \t\t\t\t\tvalue=\"";
-        // line 93
+        // line 97
         echo twig_escape_filter($this->env, set_value("cp"), "html", null, true);
         echo "\"> <span>";
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "cp", array());
@@ -218,7 +222,7 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 
 \t\t<div
 \t\t\tclass=\"form-group ";
-        // line 98
+        // line 102
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "descripcion", array()))) {
             echo "has-error";
         }
@@ -227,11 +231,11 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\t<div class=\"col-sm-10\">
 \t\t\t\t<textarea class=\"form-control\" rows=\"5\" id=\"descripcion\"
 \t\t\t\t\tvalue=\"";
-        // line 102
+        // line 106
         echo twig_escape_filter($this->env, set_value("descripcion"), "html", null, true);
         echo "\"></textarea>
 \t\t\t\t<span>";
-        // line 103
+        // line 107
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "descripcion", array());
         echo "</span>
 \t\t\t</div>
@@ -248,7 +252,7 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t</div>
 
 \t\t<input type=\"hidden\" value=\"";
-        // line 117
+        // line 121
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "usuario", array()), "idUsuario", array()), "html", null, true);
         echo "\" name=\"id\" />
 
@@ -266,10 +270,10 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 ";
     }
 
-    // line 130
+    // line 134
     public function block_script($context, array $blocks = array())
     {
-        // line 131
+        // line 135
         echo "
 
 <script type=\"text/javascript\">
@@ -279,27 +283,27 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 \t\t\$('#copiaDatos').click(function(){\t
 \t\t\t if(\$(this).is(\":checked\")){
 \t\t\t\t    \$('#nombre').val('";
-        // line 139
+        // line 143
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "usuario", array()), "nombre", array()), "html", null, true);
         echo "');
 \t\t\t\t\t\$('#apellidos').val('";
-        // line 140
+        // line 144
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "usuario", array()), "apellidos", array()), "html", null, true);
         echo "');\t
 \t\t\t\t\t\$('#dni').val('";
-        // line 141
+        // line 145
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "usuario", array()), "dni", array()), "html", null, true);
         echo "');\t
 \t\t\t\t\t\$('#direccion').val('";
-        // line 142
+        // line 146
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "usuario", array()), "direccion", array()), "html", null, true);
         echo "');\t\t
 \t\t\t\t\t\$('#cp').val('";
-        // line 143
+        // line 147
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "usuario", array()), "cp", array()), "html", null, true);
         echo "');\t
 \t\t\t\t\t\$('#provincia').val('";
-        // line 144
+        // line 148
         echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute((isset($context["form"]) ? $context["form"] : null), "usuario", array()), "idProvincia", array()), "html", null, true);
         echo "');\t\t
 \t            }
@@ -343,6 +347,6 @@ class __TwigTemplate_6ab17b0aebd04b3a257646e74cd13e9e17e32162360da0e6b66b4af0b2a
 
     public function getDebugInfo()
     {
-        return array (  303 => 144,  299 => 143,  295 => 142,  291 => 141,  287 => 140,  283 => 139,  273 => 131,  270 => 130,  252 => 117,  235 => 103,  231 => 102,  222 => 98,  212 => 93,  203 => 89,  196 => 84,  185 => 82,  181 => 80,  171 => 73,  162 => 69,  152 => 64,  143 => 60,  136 => 55,  132 => 54,  123 => 50,  114 => 46,  105 => 42,  100 => 40,  91 => 34,  87 => 33,  81 => 29,  71 => 25,  67 => 24,  63 => 23,  59 => 22,  55 => 20,  51 => 19,  32 => 2,  29 => 1,);
+        return array (  307 => 148,  303 => 147,  299 => 146,  295 => 145,  291 => 144,  287 => 143,  277 => 135,  274 => 134,  256 => 121,  239 => 107,  235 => 106,  226 => 102,  216 => 97,  207 => 93,  200 => 88,  189 => 86,  185 => 84,  175 => 77,  166 => 73,  156 => 68,  147 => 64,  140 => 59,  136 => 58,  127 => 54,  118 => 50,  109 => 46,  104 => 44,  93 => 36,  89 => 35,  83 => 31,  73 => 27,  69 => 26,  65 => 25,  61 => 24,  57 => 22,  53 => 21,  32 => 2,  29 => 1,);
     }
 }

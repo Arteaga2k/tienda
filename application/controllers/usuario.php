@@ -28,6 +28,7 @@ class Usuario extends CI_Controller
                      
             echo $this->twig->render('usuario/panel_usuario.twig', array(
                 'form' => $this->form,
+                'usuario' => $usuario,
                 'pedsNoProce' => $pedidosNoProce,
                 'pedidos' => $historialPedidos
             ));

@@ -25,12 +25,12 @@ class Home extends CI_Controller
      *
      * http://tienda/home
      */
-    public function index()
+    public function index($segmento=0)
     {
         $this->session->set_userdata("url", 'home');
         
         // echo $this->categoria;
-        $pagination = 5;
+        $pagination = 2;
         $config['base_url'] = base_url() . 'home/index/';
         $config['total_rows'] = $this->home_model->getTotalProdDestacados();
         $config['per_page'] = $pagination;
@@ -38,8 +38,6 @@ class Home extends CI_Controller
         $config['num_links'] = 5;
         
         $this->pagination->initialize($config);
-        
-        $segmento = ! empty($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
         
         $categorias = $this->home_model->getCategorias();
         $productosDest = $this->home_model->getProductosDestacados($pagination, $segmento);
@@ -63,6 +61,7 @@ class Home extends CI_Controller
     public function categoria($idCategoria)
     {
         $pagination = 5;
+        
         $config['base_url'] = base_url() . 'home/categoria/' . $idCategoria . '';
         $config['total_rows'] = $this->home_model->getTotalProductos($idCategoria);
         $config['per_page'] = $pagination;

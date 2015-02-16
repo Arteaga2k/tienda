@@ -122,11 +122,12 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "idProducto", array()), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
-            echo "</a>\t\t\t\t\t\t
+            // line 61
+            echo "</a>
 \t\t\t\t\t</h4>
 
 \t\t\t\t\t<h4>";
-            // line 63
+            // line 64
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
             echo " €</h4>
 
@@ -136,15 +137,18 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t\t\t\t\t\t\thttp://bootsnipp.com</a>.
 \t\t\t\t\t</p>
 \t\t\t\t\t<p>
+\t\t\t\t\t
+\t\t\t\t\t
 \t\t\t\t\t<div class=\"progress\">
 \t\t\t\t\t\t<div class=\"progress-bar progress-bar-success\" role=\"progressbar\"
 \t\t\t\t\t\t\taria-valuenow=\"40\" aria-valuemin=\"0\" aria-valuemax=\"100\"
 \t\t\t\t\t\t\tstyle=\"width: 40%\">
-    <span class=\"sr-only\">40% Complete (success)</span>
-  </div>
-</div>\t\t\t\t\t</p>
-\t\t\t\t\t
-\t\t\t\t\t
+\t\t\t\t\t\t\t<span class=\"sr-only\">40% Complete (success)</span>
+\t\t\t\t\t\t</div>
+\t\t\t\t\t</div>
+\t\t\t\t\t</p>
+
+
 \t\t\t\t</div>
 \t\t\t\t<!-- <div class=\"ratings\">
 \t\t\t\t\t<p class=\"pull-right\">15 reviews</p>
@@ -157,13 +161,13 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t\t\t\t\t</p>
 \t\t\t\t</div> -->
 \t\t\t</div>
-\t\t</div>\t\t
+\t\t</div>
 \t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 94
+        // line 98
         echo "\t</div>
 </div>
 
@@ -183,6 +187,6 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
     public function getDebugInfo()
     {
-        return array (  167 => 94,  130 => 63,  120 => 60,  113 => 56,  109 => 54,  105 => 53,  65 => 16,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  171 => 98,  131 => 64,  126 => 61,  120 => 60,  113 => 56,  109 => 54,  105 => 53,  65 => 16,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }

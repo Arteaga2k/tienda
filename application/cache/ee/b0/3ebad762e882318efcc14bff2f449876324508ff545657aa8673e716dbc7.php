@@ -60,7 +60,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
 <div class=\"col-md-9\">
 \t<div class=\"row\">
-\t\t
+
 
 \t\t<h1>
 \t\t\t<a href=\"";
@@ -108,18 +108,18 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\t";
         // line 41
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "form_open", array());
-        echo "\t\t\t
+        echo "
 \t\t\t<div class=\"form-group\" id=\"formAdd\">
 \t\t\t\t<label for=\"cantidad\">Unidades</label> <input type=\"text\"
-\t\t\t\t\tclass=\"form-control\" id=\"cantidad\" name=\"cantidad\" placeholder=\"1\">\t\t\t\t\t\t\t
-\t\t\t</div>\t\t
+\t\t\t\t\tclass=\"form-control\" id=\"cantidad\" name=\"cantidad\" placeholder=\"\">
+\t\t\t</div>
 \t\t\t<!-- <button type=\"submit\" class=\"btn btn-primary\">Añadir al carro</button>-->
 \t\t\t<p class=\"btn btn-primary\" id=\"add\">Añadir al carro</p>
-\t\t\t<span id=\"errorCantidad\"></span>\t
+\t\t\t<span id=\"errorCantidad\"></span>
 \t\t\t</form>
 \t\t</div>
 \t</div>
-\t
+
 </div>
 ";
     }
@@ -148,9 +148,10 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
         echo "\",\"\",function(data)
 \t\t\t\t{
 \t\t\t\t    var json = JSON.parse(data);
-\t\t\t\t    console.log(json);
+\t\t\t\t    //console.log(json);
 \t\t\t\t   
 \t\t\t    \tvar html = \"\";
+\t\t\t    
 
 \t\t\t    \tvar articulos_total = json.articulos_total;
 \t\t\t    \tvar precio_total = json.precio_total;\t
@@ -158,9 +159,13 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
 \t\t\t    \t\$.each(json.items, function(key, value) {
 \t\t\t    \t    console.log(key,value);
-\t\t\t    \t    html += \"<tr><td>\"+value.nombre+\"</td><td>\"+value.precio+\" € x \" +value.cantidad+ \"</td></tr>\";\t\t\t\t\t    \t   \t   \t\t    \t\t \t\t\t  \t    
-\t\t\t    \t});
+\t\t\t    \t    html += \"<tr><td>\"+value.nombre+\"</td><td>\"+value.precio+\" € x \" +value.cantidad+ \"</td></tr>\";\t\t\t\t    \t   \t   \t\t    \t\t \t\t\t  \t    
+\t\t\t    \t    
+\t\t\t\t    });
+
 \t\t\t    \t
+\t\t\t    \t\$('#cesta').html('<span class=\"glyphicon glyphicon-shopping-cart\" aria-hidden=\"true\"></span>'+ 
+\t\t\t\t\t ' Cesta ('+articulos_total+')<span class=\"caret\"></span> </a>');
 \t\t\t    \t\$('#table_cart').html(html);\t\t    \t\t\t 
 \t\t\t\t});
 \t\t\t}
