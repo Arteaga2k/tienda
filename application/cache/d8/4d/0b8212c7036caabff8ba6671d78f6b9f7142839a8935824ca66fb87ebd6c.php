@@ -36,7 +36,9 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 \t<label for=\"\"><a href=\"";
         // line 7
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "usuario/editaUsuario\">Modificar
+        echo "usuario/editaUsuario/";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "idUsuario", array()), "html", null, true);
+        echo "\">Modificar
 \t\t\tdatos</a></label>
 \t<div class=\"well\">
 \t\t<p>Nombre: ";
@@ -68,35 +70,26 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 
 \t\t\t<th>Código</th>
 \t\t\t<th>Fecha creación</th>
-\t\t\t<th>Fecha entrega</th>
-\t\t\t<th>Factura</th>
+\t\t\t<th>Fecha entrega</th>\t\t\t
 \t\t\t<th>Estado Actual</th>
 \t\t\t<th>Operaciones</th>
 \t\t</tr>
 \t\t";
-        // line 30
+        // line 29
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pedsNoProce"]) ? $context["pedsNoProce"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pedNoProce"]) {
-            // line 31
+            // line 30
             echo "\t\t<tr>
 \t\t\t<td>";
-            // line 32
+            // line 31
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 33
+            // line 32
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "fecha_creacion", array()), "html", null, true);
             echo "</td>
-\t\t\t<td>--</td>
-\t\t\t<td><a
-\t\t\t\thref=\"";
-            // line 36
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "pedido/factura/";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
-            echo "\"><span
-\t\t\t\t\tclass=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\"></span></a></td>
+\t\t\t<td>--</td>\t\t\t
 \t\t\t<td>En proceso</td>
 \t\t\t<td><a href=\"\">Ver</a> | <a href=\"\">Cancelar</a></td>
 \t\t</tr>
@@ -106,7 +99,7 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedNoProce'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 43
+        // line 39
         echo "\t</table>
 
 
@@ -123,23 +116,23 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 \t\t\t<th>Operaciones</th>
 \t\t</tr>
 \t\t";
-        // line 58
+        // line 54
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pedidos"]) ? $context["pedidos"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pedido"]) {
-            // line 59
+            // line 55
             echo "\t\t<tr>
 \t\t\t<td>";
-            // line 60
+            // line 56
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 61
+            // line 57
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "fecha_creacion", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>--</td>
 \t\t\t<td><a href=\"";
-            // line 63
+            // line 59
             echo twig_escape_filter($this->env, base_url(), "html", null, true);
             echo "pedido/factura/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
@@ -154,7 +147,7 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedido'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 70
+        // line 66
         echo "\t</table>
 
 
@@ -175,6 +168,6 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 
     public function getDebugInfo()
     {
-        return array (  158 => 70,  143 => 63,  138 => 61,  134 => 60,  131 => 59,  127 => 58,  110 => 43,  95 => 36,  89 => 33,  85 => 32,  82 => 31,  78 => 30,  58 => 13,  54 => 12,  50 => 11,  44 => 10,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  151 => 66,  136 => 59,  131 => 57,  127 => 56,  124 => 55,  120 => 54,  103 => 39,  90 => 32,  86 => 31,  83 => 30,  79 => 29,  60 => 13,  56 => 12,  52 => 11,  46 => 10,  38 => 7,  31 => 2,  28 => 1,);
     }
 }

@@ -58,7 +58,7 @@
 							class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
 							Cesta {{ carrito.articulos_total > 0 ? carrito.articulos_total : '' }}<span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
-							<!--{% if carrito.items|length > 0 %}-->
+							
 							<div class="col-md-12">
 								<table id="table_cart" class="table table-hover">
 									{% for producto in carrito.items %}
@@ -74,7 +74,7 @@
 										class="glyphicon glyphicon-shopping-cart"></i> Checkout</a>
 								</p>
 							</div>
-						<!--{% endif %}-->
+						
 
 						</ul></li>
 

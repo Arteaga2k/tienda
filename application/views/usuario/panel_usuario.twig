@@ -22,8 +22,7 @@
 
 			<th>Código</th>
 			<th>Fecha creación</th>
-			<th>Fecha entrega</th>
-			<th>Factura</th>
+			<th>Fecha entrega</th>			
 			<th>Estado Actual</th>
 			<th>Operaciones</th>
 		</tr>
@@ -31,12 +30,9 @@
 		<tr>
 			<td>{{ pedNoProce.idPedido }}</td>
 			<td>{{ pedNoProce.fecha_creacion }}</td>
-			<td>--</td>
-			<td><a
-				href="{{ base_url() }}pedido/factura/{{ pedNoProce.idPedido  }}"><span
-					class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a></td>
+			<td>--</td>			
 			<td>En proceso</td>
-			<td><a href="">Ver</a> | <a href="">Cancelar</a></td>
+			<td><a href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/true">Ver</a> | <a href="">Cancelar</a></td>
 		</tr>
 
 		{% endfor %}
@@ -60,7 +56,7 @@
 			<td>{{ pedido.idPedido }}</td>
 			<td>{{ pedido.fecha_creacion }}</td>
 			<td>--</td>
-			<td><a href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}"><span
+			<td><a href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/false"><span
 					class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a></td>
 			<td></td>
 			<td><a href="">Ver</a> | <a href="">Cancelar</a></td>

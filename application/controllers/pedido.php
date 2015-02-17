@@ -19,7 +19,7 @@ class Pedido extends CI_Controller
         $this->load->model('pedido_model');
     }
 
-    public function factura($id)
+    public function factura($id,$proforma = FALSE)
     {
         if ($this->login->usuario_logueado()) {
             $pedido = $this->pedido_model->getLineasById($id);
@@ -164,8 +164,8 @@ Alhama de Murcia
             // ============================================================+
             // END OF FILE
             // ============================================================+
-        }else{
-            $this->session->set_userdata('url', 'pedido/factura/'.$id.'');
+        } else {
+            $this->session->set_userdata('url', 'pedido/factura/' . $id . '');
             redirect(base_url() . 'usuario/loginUsuario');
         }
     }
@@ -206,6 +206,8 @@ Alhama de Murcia
         }
     }
 
+    /**
+     */
     public function confirmaPedido()
     {
         $login = $this->session->userdata("login");
@@ -235,7 +237,7 @@ Alhama de Murcia
                 $id = $this->pedido_model->creaPedido($this->session->userdata('pedido'));
                 if (! empty($id)) {
                     $this->pedido_model->insertaLineas($this->carrito->getCarrito(), $id);
-                    $this->emailPedidoRealizado();
+                    $this->emailPedidoRealizado($id);
                     redirect(base_url() . 'carro/vaciaCarro');
                 } else {
                     // error
@@ -246,7 +248,7 @@ Alhama de Murcia
 
     /**
      */
-    public function emailPedidoRealizado()
+    public function emailPedidoRealizado($id)
     {
         
         // Utilizando sendmail
@@ -261,13 +263,15 @@ Alhama de Murcia
         $this->email->from('aula4@iessansebastian.com', 'Prueba Automática desde CI');
         $this->email->to('arteaga.dev@gmail.com');
         
-        $this->email->subject("hostia");
-        $this->email->message($this->cuerpoEmail());
+        $this->email->subject("Shopping Cart");
+        $this->email->message($this->cuerpoEmail($id));
         
         $this->email->send();
         // echo $this->email->print_debugger();
     }
 
+    /**
+     */
     public function procesaFormDatosEnvio()
     {
         // existe variable post token y es igual
@@ -362,112 +366,74 @@ Alhama de Murcia
             $this->session->set_flashdata('stock_error', $errores);
     }
 
-    private function cuerpoEmail()
+    /**
+     * Dibuja el cuerpo del email
+     * con la factura del pedido
+     *
+     * @return string
+     */
+    private function cuerpoEmail($id)
     {
-        return $html = '<!DOCTYPE html PUBLIC "/-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
- <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Demystifying Email Design</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
-<body style="margin: 0; padding: 0;">
- <table border="1" cellpadding="0" cellspacing="0" width="100%">
-  <tr>
-   <td>
-     <table align="center" border="1" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
-       <tr>
-         <td align="center" bgcolor="#70bbd9" style="padding: 40px 0 30px 0;">
-          <img src="https://pbs.twimg.com/profile_images/459258306184228864/BljX4PGd.jpeg" alt="Creating Email Magic" width="300" height="230" style="display: block;" />
-         </td>
-       </tr>
-       <tr>
-         <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
-           <table border="1" cellpadding="0" cellspacing="0" width="100%">
-            <tr>
-             <td>
-              Lorem ipsum dolor sit amet!
-             </td>
-            </tr>
-            <tr>
-             <td style="padding: 20px 0 30px 0;">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
-             </td>
-            </tr>
-            <tr>
-             <td>
-               <table border="1" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                 <td width="260" valign="top">
-                  <table border="1" cellpadding="0" cellspacing="0" width="100%">
-                   <tr>
-                    <td>
-                     <img src="images/left.gif" alt="" width="100%" height="140" style="display: block;" />
-                    </td>
-                   </tr>
-                   <tr>
-                    <td style="padding: 25px 0 0 0;">
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
-                    </td>
-                   </tr>
-                  </table>
-                 </td>
-                 <td style="font-size: 0; line-height: 0;" width="20">
-                  &nbsp;
-                 </td>
-                 <td width="260" valign="top">
-                  <table border="1" cellpadding="0" cellspacing="0" width="100%">
-                   <tr>
-                    <td>
-                     <img src="images/right.gif" alt="" width="100%" height="140" style="display: block;" />
-                    </td>
-                   </tr>
-                   <tr>
-                    <td style="padding: 25px 0 0 0;">
-                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tempus adipiscing felis, sit amet blandit ipsum volutpat sed. Morbi porttitor, eget accumsan dictum, nisi libero ultricies ipsum, in posuere mauris neque at erat.
-                    </td>
-                   </tr>
-                  </table>
-                 </td>
-                </tr>
-               </table>
-             </td>
-            </tr>
-           </table>
-         </td>
-       </tr>
-       <tr>
-         <td bgcolor="#ee4c50" style="padding: 30px 30px 30px 30px;">
-           <table border="1" cellpadding="0" cellspacing="0" width="100%">
-             <td width="75%">
-              &reg; Someone, somewhere 2013<br/>
-              Unsubscribe to this newsletter instantly
-             </td>
-             <td align="right">
-              <table border="0" cellpadding="0" cellspacing="0">
-               <tr>
-                <td>
-                 <a href="http://www.twitter.com/">
-                  <img src="images/tw.gif" alt="Twitter" width="38" height="38" style="display: block;" border="0" />
-                 </a>
-                </td>
-                <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
-                <td>
-                 <a href="http://www.twitter.com/">
-                  <img src="images/fb.gif" alt="Facebook" width="38" height="38" style="display: block;" border="0" />
-                 </a>
-                </td>
-               </tr>
-              </table>
-             </td>
-           </table>
-         </td>
-       </tr>
-     </table>
-   </td>
-  </tr>
- </table>
-</body>
-</html>';
+        $pedido = $this->pedido_model->getLineasById($id);
+        $fechaCreacion = $pedido[0]['fecha_creacion'];
+        
+        $html = '<html>
+            <head>
+                <title>Shopping Cart</title>
+            </head>
+            <body>
+                <img src="http://99designs.es/logo-design/store/16704/preview/6339080~3e7be7d060797973df4a43b5ba4994b4aac43d72-stocklarge" 
+                    alt="Shooping Cart" height="500" width="800" />
+                <p></p>
+                <h2>Factura</h2>
+                <hr />
+                <div>
+                <table border="1">
+                    <tr>
+                        <td>Nº de Factura: ' . $id . '</td>
+                        <td>Fecha: ' . $fechaCreacion . '</td>
+                        <td>Forma de pago: --</td>        
+                    </tr>      
+                </table>
+                </div>
+                <table border="1" style="width:100%">
+                    <tr>
+                        <td width="10%" bgcolor="#A1A1A1">Cod.</td>
+                        <td width="53%" bgcolor="#A1A1A1">Artículo</td>
+                        <td width="15%" bgcolor="#A1A1A1">Precio</td>
+                        <td width="7%" bgcolor="#A1A1A1">Und</td>
+                        <td width="15%" bgcolor="#A1A1A1">Total</td>
+                    </tr>';
+        foreach ($pedido as $linea) {
+            $html .= '<tr>
+                        <td>' . $linea['codigo'] . '</td>
+                        <td  align="left">' . $linea['nombre'] . '</td>
+                        <td  align="right">' . $linea['precio'] . '</td>
+                        <td  align="center">' . $linea['cantidad'] . '</td>
+                        <td  align="right">' . intval($linea['cantidad']) * intval($linea['precio']) . '</td>                   
+                    </tr>';
+        }
+        $html .= '</table><div>';
+        
+        $html .= '<table border="1" style="width:100%">
+                    <tr>
+                        <td width="50%" bgcolor="#A1A1A1">SUBTOTAL</td>
+                        <td width="20%" bgcolor="#A1A1A1">IVA</td>
+                        <td width="30%" bgcolor="#A1A1A1">TOTAL</td>                   
+                    </tr>
+                 </table>';
+        
+        $html .= '<table border="1" style="width:100%">
+                    <tr>
+                        <td width="50%" >12</td>
+                        <td width="20%" >2121</td>
+                        <td width="30%" >3232</td>                   
+                    </tr>
+                    </table></div>
+                    <p>********* NO RESPONDER A ESTE EMAIL *********</p> 
+        </body>
+      </html>';
+        
+        return $html;
     }
 }

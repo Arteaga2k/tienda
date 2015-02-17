@@ -82,50 +82,44 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
         echo twig_escape_filter($this->env, ((($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "articulos_total", array()) > 0)) ? ($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "articulos_total", array())) : ("")), "html", null, true);
         echo "<span class=\"caret\"></span> </a>
 \t\t\t\t\t\t<ul class=\"dropdown-menu\" role=\"menu\">
-\t\t\t\t\t\t\t<!--";
-        // line 61
-        if ((twig_length_filter($this->env, $this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "items", array())) > 0)) {
-            echo "-->
+\t\t\t\t\t\t\t
 \t\t\t\t\t\t\t<div class=\"col-md-12\">
 \t\t\t\t\t\t\t\t<table id=\"table_cart\" class=\"table table-hover\">
 \t\t\t\t\t\t\t\t\t";
-            // line 64
-            $context['_parent'] = (array) $context;
-            $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "items", array()));
-            foreach ($context['_seq'] as $context["_key"] => $context["producto"]) {
-                // line 65
-                echo "\t\t\t\t\t\t\t\t\t<tr>
+        // line 64
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "items", array()));
+        foreach ($context['_seq'] as $context["_key"] => $context["producto"]) {
+            // line 65
+            echo "\t\t\t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t\t\t<td>";
-                // line 66
-                echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
-                echo "</td>
+            // line 66
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
+            echo "</td>
 \t\t\t\t\t\t\t\t\t\t<td>";
-                // line 67
-                echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
-                echo "€ x ";
-                echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "cantidad", array()), "html", null, true);
-                echo "</td>
+            // line 67
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
+            echo "€ x ";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "cantidad", array()), "html", null, true);
+            echo "</td>
 \t\t\t\t\t\t\t\t\t</tr>
 \t\t\t\t\t\t\t\t\t";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 70
-            echo "\t\t\t\t\t\t\t\t</table>
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 70
+        echo "\t\t\t\t\t\t\t\t</table>
 \t\t\t\t\t\t\t\t<p>
 \t\t\t\t\t\t\t\t\t<a href=\"";
-            // line 72
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "carro/verCarro\"
+        // line 72
+        echo twig_escape_filter($this->env, base_url(), "html", null, true);
+        echo "carro/verCarro\"
 \t\t\t\t\t\t\t\t\t\tclass=\"btn btn-success btn-sm pull-right\"><i
 \t\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-shopping-cart\"></i> Checkout</a>
 \t\t\t\t\t\t\t\t</p>
 \t\t\t\t\t\t\t</div>
-\t\t\t\t\t\t<!--";
-        }
-        // line 77
-        echo "-->
+\t\t\t\t\t\t
 
 \t\t\t\t\t\t</ul></li>
 
@@ -281,6 +275,6 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 
     public function getDebugInfo()
     {
-        return array (  268 => 134,  265 => 133,  261 => 135,  259 => 133,  250 => 127,  245 => 125,  239 => 123,  236 => 122,  231 => 115,  226 => 105,  218 => 14,  213 => 12,  207 => 10,  204 => 9,  197 => 136,  195 => 122,  187 => 116,  185 => 115,  172 => 105,  156 => 92,  148 => 89,  142 => 86,  138 => 84,  136 => 83,  128 => 77,  119 => 72,  115 => 70,  104 => 67,  100 => 66,  97 => 65,  93 => 64,  87 => 61,  82 => 59,  64 => 44,  36 => 18,  34 => 9,  24 => 1,);
+        return array (  262 => 134,  259 => 133,  255 => 135,  253 => 133,  244 => 127,  239 => 125,  233 => 123,  230 => 122,  225 => 115,  220 => 105,  212 => 14,  207 => 12,  201 => 10,  198 => 9,  191 => 136,  189 => 122,  181 => 116,  179 => 115,  166 => 105,  150 => 92,  142 => 89,  136 => 86,  132 => 84,  130 => 83,  116 => 72,  112 => 70,  101 => 67,  97 => 66,  94 => 65,  90 => 64,  82 => 59,  64 => 44,  36 => 18,  34 => 9,  24 => 1,);
     }
 }
