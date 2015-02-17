@@ -19,11 +19,13 @@ class Pedido extends CI_Controller
         $this->load->model('pedido_model');
     }
 
-    public function factura($id,$proforma = FALSE)
+    public function factura($id,$proforma = 0)
     {
         if ($this->login->usuario_logueado()) {
             $pedido = $this->pedido_model->getLineasById($id);
             $fechaCreacion = $pedido[0]['fecha_creacion'];
+            
+            $nomfactura = $proforma == 0 ? 'FACTURA' : ' FACTURA PROFORMA';
             
             // create new PDF document
             $pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -75,11 +77,11 @@ class Pedido extends CI_Controller
             // add a page
             $pdf->AddPage();
             
-            $txt = "Shopping Cart Componentes
-SL CIF: B73347494
-Avda Europa, 2-3, Pol.Ind. Las Salinas.
-Alhama de Murcia
-30840.Murcia.";
+            $txt = "Shopping Cart Componentes\n".
+                    "SL CIF: B73347494\n".
+                    "Avda Europa, 2-3, Pol.Ind. Las Salinas".
+                    "Alhama de Huelva\n".
+                    "30840.Murcia.";
             
             // set cell padding
             $pdf->setCellPaddings(1, 1, 1, 1);
@@ -90,14 +92,14 @@ Alhama de Murcia
             // set color for background
             $pdf->SetFillColor(255, 255, 227);
             $pdf->SetFont('helvetica', 'B', 20);
-            $pdf->Cell($w = 0, $h = 0, 'FACTURA', $border = 0, $ln = 2, $align = 'C');
-            // $pdf->writeHTMLCell($w = 0, $h = 0, $x = '80', $y = '11', 'FACTURA DE LA COMPRA', $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'C', $autopadding = true);
+            $pdf->Cell($w = 0, $h = 0, $nomfactura, $border = 0, $ln = 2, $align = 'C');
+          
             
             // set font
             $pdf->SetFont('times', 'BI', 12);
             
             // Vertical alignment
-            $pdf->MultiCell(90, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
+            $pdf->MultiCell(90, 20,$txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
             
             $pdf->MultiCell(0, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
             
@@ -244,6 +246,15 @@ Alhama de Murcia
                 }
             } else {}
         }
+    }
+    
+    /**
+     * 
+     * @param unknown $id
+     */
+    public function cancelaPedido($id){
+        
+        
     }
 
     /**

@@ -4,7 +4,8 @@
 	<h1>
 		<small>Datos Personales</small>
 	</h1>
-	<label for=""><a href="{{ base_url() }}usuario/editaUsuario/{{ usuario.idUsuario }}">Modificar
+	<label for=""><a
+		href="{{ base_url() }}usuario/editaUsuario/{{ usuario.idUsuario }}">Modificar
 			datos</a></label>
 	<div class="well">
 		<p>Nombre: {{ usuario.nombre|title}} {{ usuario.apellidos|title }}</p>
@@ -22,7 +23,7 @@
 
 			<th>Código</th>
 			<th>Fecha creación</th>
-			<th>Fecha entrega</th>			
+			<th>Fecha entrega</th>
 			<th>Estado Actual</th>
 			<th>Operaciones</th>
 		</tr>
@@ -30,9 +31,37 @@
 		<tr>
 			<td>{{ pedNoProce.idPedido }}</td>
 			<td>{{ pedNoProce.fecha_creacion }}</td>
-			<td>--</td>			
+			<td>--</td>
 			<td>En proceso</td>
-			<td><a href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/true">Ver</a> | <a href="">Cancelar</a></td>
+			<td><a
+				href="{{ base_url() }}pedido/factura/{{ pedNoProce.idPedido  }}/true">Ver</a>
+				| <a
+				href="{{ base_url() }}pedido/cancelaPedido/{{ pedNoProce.idPedido  }}"
+				data-toggle="modal" data-target="#borrarModal" id="btnEliminar"
+				role="button"> Eliminar</a></td>
+
+			<!-- Modal -->
+			<div class="modal fade" id="borrarModal" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">
+								<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+							</button>
+							<h4 class="modal-title" id="myModalLabel">Confirmación</h4>
+						</div>
+						<div class="modal-body">Este contacto será eliminado de la agenda,
+							¿estás seguro?</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Cancelar</button>
+							<button type="button" class="btn btn-primary"
+								onclick="eliminaContacto()">Confirmar</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</tr>
 
 		{% endfor %}
@@ -55,11 +84,13 @@
 		<tr>
 			<td>{{ pedido.idPedido }}</td>
 			<td>{{ pedido.fecha_creacion }}</td>
-			<td>--</td>
-			<td><a href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/false"><span
+			<td>{{ pedido.fecha_entrega }}-</td>
+			<td><a
+				href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/0"><span
 					class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a></td>
-			<td></td>
-			<td><a href="">Ver</a> | <a href="">Cancelar</a></td>
+			<td>{{ pedido.estado }}</td>
+			<td><a
+				href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/1">Ver</a></td>
 		</tr>
 
 		{% endfor %}
@@ -68,4 +99,26 @@
 
 </div>
 
+{% endblock %} {% block script %}
+
+
+<script type="text/javascript">
+$(function() {
+	//twitter bootstrap script
+	 $("button#submit").click(function(){
+	         $.ajax({
+	        	      type: "POST",
+	        	      url: "process.php",
+	        	      data: $('form.contact').serialize(),
+	        	      success: function(msg){
+	        	    	  $("#thanks").html(msg)
+	                      $("#form-content").modal('hide'); 
+	        	    	  },
+	        	      error: function(){
+	        	    	  alert("failure");
+	        	      }
+	       });
+	 });
+});
+</script>
 {% endblock %}

@@ -83,14 +83,18 @@
 							class="glyphicon glyphicon-user"></i> {{ usuario.username|length
 							? usuario.username : 'Identificate' }}<b class="caret"></b></a>
 						<ul class="dropdown-menu">
+						{%  if usuario.username is null %}
 							<li><a href="{{ base_url() }}usuario/loginUsuario/"><i
 									class="glyphicon glyphicon-log-in"></i> Iniciar sesión</a></li>
+						{%  endif %}
 							<li><a
 								href="{{ base_url() }}usuario/panelUsuario/{{ usuario.id_usuario }}"><i
 									class="glyphicon glyphicon-th-large"></i> Panel control</a></li>
 							<li class="divider"></li>
+						{%  if usuario.username is not null %}
 							<li><a href="{{ base_url() }}usuario/logout"><i
 									class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a></li>
+						{%  endif %}
 						</ul></li>
 				</ul>
 			</div>
