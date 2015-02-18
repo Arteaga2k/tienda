@@ -36,6 +36,7 @@ class Carrito
     }
 
     /**
+     * Añade un item al carrito
      *
      * @param unknown $data            
      */
@@ -60,6 +61,47 @@ class Carrito
         // actualizamos el precio total y el número de artículos del carrito
         // una vez hemos añadido el producto
         $this->update_precio_cantidad();
+    }
+
+    /**
+     */
+    public function actualizaItem($data = array())
+    {
+        if (! is_array($data) or count($data) == 0) {
+            return;
+        }
+        
+        $itemid = $data['id'];
+        
+        if (isset($this->_cart['items'][$itemid])) {
+            $this->_cart['items'][$itemid]['cantidad'] = $data['cantidad'];
+        }
+        
+        $this->CI->session->set_userdata('carro', serialize($this->_cart));
+        
+        // actualizamos el precio total y el número de artículos del carrito
+        // una vez hemos añadido el producto
+        $this->update_precio_cantidad();
+    }
+
+    /**
+     * Elimina una linea del carrito
+     *
+     * @param unknown $id            
+     */
+    public function eliminaItem($id)
+    {
+        if (isset($id) && ! empty($id)) {
+            if (isset($this->_cart['items'][$id])) {
+                unset($this->_cart['items'][$id]);
+                
+                $this->CI->session->set_userdata('carro', serialize($this->_cart));
+                
+                // actualizamos el precio total y el número de artículos del carrito
+                // una vez hemos añadido el producto
+                $this->update_precio_cantidad();
+            }
+        }
     }
 
     /**
@@ -118,5 +160,22 @@ class Carrito
         $this->_cart['articulos_total'] = 0;
         
         $this->CI->session->unset_userdata('carro');
+    }
+    
+    
+    function existeItem($itemId){
+        if (isset($this->_cart['items'][$itemId])) {
+            return TRUE;
+        }else{
+            return FALSE;
+        }
+    }
+    
+    function cantidadItem($itemId){
+        if (isset($this->_cart['items'][$itemId])) {
+            return $this->_cart['items'][$itemId]['cantidad'];
+        }else{
+            return FALSE;
+        }
     }
 }
