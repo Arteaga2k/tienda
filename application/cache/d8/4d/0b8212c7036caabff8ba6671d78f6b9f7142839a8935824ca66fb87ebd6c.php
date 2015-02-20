@@ -83,32 +83,36 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         foreach ($context['_seq'] as $context["_key"] => $context["pedNoProce"]) {
             // line 31
             echo "\t\t<tr>
+\t\t\t<form
+\t\t\t\taction=\"";
+            // line 33
+            echo twig_escape_filter($this->env, base_url(), "html", null, true);
+            echo "pedido/cancelaPedido/";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
+            echo "\">
+\t\t\t
+\t\t\t
 \t\t\t<td>";
-            // line 32
+            // line 36
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 33
+            // line 37
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "fecha_creacion", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>--</td>
 \t\t\t<td>En proceso</td>
-\t\t\t<td><a
+\t\t\t<td><a class=\"btn btn-default\"
 \t\t\t\thref=\"";
-            // line 37
+            // line 41
             echo twig_escape_filter($this->env, base_url(), "html", null, true);
             echo "pedido/factura/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
             echo "/true\">Ver</a>
-\t\t\t\t| <a
-\t\t\t\thref=\"";
-            // line 39
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "pedido/cancelaPedido/";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
-            echo "\"
-\t\t\t\tdata-toggle=\"modal\" data-target=\"#borrarModal\" id=\"btnEliminar\"
-\t\t\t\trole=\"button\"> Eliminar</a></td>
+\t\t\t\t<!-- Button trigger modal -->
+\t\t\t\t<button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\"
+\t\t\t\t\tdata-target=\"#borrarModal\">Eliminar</button>
+\t\t\t</td>
 
 \t\t\t<!-- Modal -->
 \t\t\t<div class=\"modal fade\" id=\"borrarModal\" tabindex=\"-1\" role=\"dialog\"
@@ -126,12 +130,13 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 \t\t\t\t\t\t<div class=\"modal-footer\">
 \t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-default\"
 \t\t\t\t\t\t\t\tdata-dismiss=\"modal\">Cancelar</button>
-\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-primary\"
-\t\t\t\t\t\t\t\tonclick=\"eliminaContacto()\">Confirmar</button>
+\t\t\t\t\t\t\t<button type=\"submit\" class=\"btn btn-primary\" onclick=\"\"
+\t\t\t\t\t\t\t\tid=\"confirmacion\">Confirmar</button>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
 \t\t\t\t</div>
 \t\t\t</div>
+\t\t\t</form>
 \t\t</tr>
 
 \t\t";
@@ -139,7 +144,7 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedNoProce'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 68
+        // line 73
         echo "\t</table>
 
 
@@ -156,39 +161,37 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 \t\t\t<th>Operaciones</th>
 \t\t</tr>
 \t\t";
-        // line 83
+        // line 88
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pedidos"]) ? $context["pedidos"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pedido"]) {
-            // line 84
+            // line 89
             echo "\t\t<tr>
 \t\t\t<td>";
-            // line 85
+            // line 90
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 86
+            // line 91
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "fecha_creacion", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 87
+            // line 92
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "fecha_entrega", array()), "html", null, true);
             echo "-</td>
-\t\t\t<td><a
-\t\t\t\thref=\"";
-            // line 89
+\t\t\t<td><a href=\"";
+            // line 93
             echo twig_escape_filter($this->env, base_url(), "html", null, true);
             echo "pedido/factura/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
             echo "/0\"><span
 \t\t\t\t\tclass=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\"></span></a></td>
 \t\t\t<td>";
-            // line 91
+            // line 95
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "estado", array()), "html", null, true);
             echo "</td>
-\t\t\t<td><a
-\t\t\t\thref=\"";
-            // line 93
+\t\t\t<td><a href=\"";
+            // line 96
             echo twig_escape_filter($this->env, base_url(), "html", null, true);
             echo "pedido/factura/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
@@ -200,7 +203,7 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedido'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 97
+        // line 100
         echo "\t</table>
 
 
@@ -209,30 +212,14 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 ";
     }
 
-    // line 102
+    // line 105
     public function block_script($context, array $blocks = array())
     {
-        // line 103
+        // line 106
         echo "
 
 <script type=\"text/javascript\">
-\$(function() {
-\t//twitter bootstrap script
-\t \$(\"button#submit\").click(function(){
-\t         \$.ajax({
-\t        \t      type: \"POST\",
-\t        \t      url: \"process.php\",
-\t        \t      data: \$('form.contact').serialize(),
-\t        \t      success: function(msg){
-\t        \t    \t  \$(\"#thanks\").html(msg)
-\t                      \$(\"#form-content\").modal('hide'); 
-\t        \t    \t  },
-\t        \t      error: function(){
-\t        \t    \t  alert(\"failure\");
-\t        \t      }
-\t       });
-\t });
-});
+
 </script>
 ";
     }
@@ -249,6 +236,6 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 
     public function getDebugInfo()
     {
-        return array (  216 => 103,  213 => 102,  204 => 97,  192 => 93,  187 => 91,  180 => 89,  175 => 87,  171 => 86,  167 => 85,  164 => 84,  160 => 83,  143 => 68,  106 => 39,  99 => 37,  92 => 33,  88 => 32,  85 => 31,  81 => 30,  62 => 14,  58 => 13,  54 => 12,  48 => 11,  40 => 8,  32 => 2,  29 => 1,);
+        return array (  219 => 106,  216 => 105,  207 => 100,  195 => 96,  191 => 95,  184 => 93,  180 => 92,  176 => 91,  172 => 90,  169 => 89,  165 => 88,  148 => 73,  108 => 41,  101 => 37,  97 => 36,  89 => 33,  85 => 31,  81 => 30,  62 => 14,  58 => 13,  54 => 12,  48 => 11,  40 => 8,  32 => 2,  29 => 1,);
     }
 }

@@ -29,16 +29,20 @@
 		</tr>
 		{% for pedNoProce in pedsNoProce %}
 		<tr>
+			<form
+				action="{{ base_url() }}pedido/cancelaPedido/{{ pedNoProce.idPedido  }}">
+			
+			
 			<td>{{ pedNoProce.idPedido }}</td>
 			<td>{{ pedNoProce.fecha_creacion }}</td>
 			<td>--</td>
 			<td>En proceso</td>
-			<td><a
+			<td><a class="btn btn-default"
 				href="{{ base_url() }}pedido/factura/{{ pedNoProce.idPedido  }}/true">Ver</a>
-				| <a
-				href="{{ base_url() }}pedido/cancelaPedido/{{ pedNoProce.idPedido  }}"
-				data-toggle="modal" data-target="#borrarModal" id="btnEliminar"
-				role="button"> Eliminar</a></td>
+				<!-- Button trigger modal -->
+				<button type="button" class="btn btn-default" data-toggle="modal"
+					data-target="#borrarModal">Eliminar</button>
+			</td>
 
 			<!-- Modal -->
 			<div class="modal fade" id="borrarModal" tabindex="-1" role="dialog"
@@ -56,12 +60,13 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"
 								data-dismiss="modal">Cancelar</button>
-							<button type="button" class="btn btn-primary"
-								onclick="eliminaContacto()">Confirmar</button>
+							<button type="submit" class="btn btn-primary" onclick=""
+								id="confirmacion">Confirmar</button>
 						</div>
 					</div>
 				</div>
 			</div>
+			</form>
 		</tr>
 
 		{% endfor %}
@@ -85,12 +90,10 @@
 			<td>{{ pedido.idPedido }}</td>
 			<td>{{ pedido.fecha_creacion }}</td>
 			<td>{{ pedido.fecha_entrega }}-</td>
-			<td><a
-				href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/0"><span
+			<td><a href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/0"><span
 					class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></a></td>
 			<td>{{ pedido.estado }}</td>
-			<td><a
-				href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/1">Ver</a></td>
+			<td><a href="{{ base_url() }}pedido/factura/{{ pedido.idPedido  }}/1">Ver</a></td>
 		</tr>
 
 		{% endfor %}
@@ -103,22 +106,6 @@
 
 
 <script type="text/javascript">
-$(function() {
-	//twitter bootstrap script
-	 $("button#submit").click(function(){
-	         $.ajax({
-	        	      type: "POST",
-	        	      url: "process.php",
-	        	      data: $('form.contact').serialize(),
-	        	      success: function(msg){
-	        	    	  $("#thanks").html(msg)
-	                      $("#form-content").modal('hide'); 
-	        	    	  },
-	        	      error: function(){
-	        	    	  alert("failure");
-	        	      }
-	       });
-	 });
-});
+
 </script>
 {% endblock %}

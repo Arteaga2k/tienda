@@ -82,7 +82,7 @@ class Usuario extends CI_Controller
      */
     public function editaUsuario($id = 0)
     {
-        if ($this->login->usuario_logueado()) {
+        if ($this->login->usuario_logueado()) {           
             if (isset($id) && $id != 0) {
                 // obtenemos usuario
                 $usuario = $this->usuario_model->getUsuarioById($id);
@@ -91,7 +91,7 @@ class Usuario extends CI_Controller
                     $this->form['usuario'] = $usuario;
                     $this->form['id'] = $id;
                     
-                    $this->form["form_alta"] = form_open("usuario/procesaFormUsuario", array(
+                    $this->form["form_edicion"] = form_open("usuario/procesaFormUsuario", array(
                         "class" => "form-horizontal",
                         "name" => "procesaFormUsuario"
                     ));
@@ -99,9 +99,10 @@ class Usuario extends CI_Controller
                     $this->form['token'] = $this->token();
                     $provincias = $this->home_model->getProvincias();
                     
-                    echo $this->twig->render('usuario/alta_formulario.twig', array(
+                    echo $this->twig->render('usuario/usuario_edita_formulario.twig', array(
                         'provincias' => $provincias,
-                        'form' => $this->form
+                        'form' => $this->form,
+                        'usuario' => $this->session->userdata("login")
                     ));
                 } else {
                     redirect(base_url() . 'home');
@@ -139,7 +140,7 @@ class Usuario extends CI_Controller
                 $nueva_clave = substr(md5(rand()), 0, "10"); // generamos una nueva contraseña de forma aleatoria
                 $usuario_clave2 = md5($nueva_clave); // encriptamos la nueva contraseña para guardarla en la BD
                 
-                $result = $this->usuario_model->actualizaUsuario(array(
+                $result = $this->usuario_model->editaUsuario(array(
                     'password' => $usuario_clave2
                 ), $usuario['idUsuario']);
                 // filas afectadas == 1
@@ -153,23 +154,30 @@ class Usuario extends CI_Controller
     }
 
     /**
-     * Da de alta un nuevo usuario
+     * Procesado formularios de creación y modificación datos
+     * de usuario
      */
     public function procesaFormUsuario()
     {
         // existe variable post token y es igual
         // a la sesión llamada token que se ha creado
         $this->verificaToken('token');
+        // obtenemos id
+        $id = $this->input->post('id');
         
         $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
-        $this->form_validation->set_rules('passconf', 'Confirmación Password', 'trim|required');
+        if (!isset($id) && empty($id)){
+            $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
+            $this->form_validation->set_rules('passconf', 'Confirmación Password', 'trim|required');
+        }
+       
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('nombre', 'Nombre', 'required');
         $this->form_validation->set_rules('apellidos', 'Apellidos', 'required');
         $this->form_validation->set_rules('dni', 'Dni', 'required|callback_dni_check');
         $this->form_validation->set_rules('direccion', 'Direccion', 'required');
         $this->form_validation->set_rules('cp', 'Código Postal', 'required|numeric|min_length[5]|max_length[5]');
+        $this->form_validation->set_rules('provincia', 'Provincia', 'required');
         
         // Comprueba validación formulario
         if ($this->form_validation->run() == FALSE) {
@@ -183,11 +191,13 @@ class Usuario extends CI_Controller
             $this->form["dni"] = form_error('dni');
             $this->form["direccion"] = form_error('direccion');
             $this->form["cp"] = form_error('cp');
+            $this->form["provincia"] = form_error('provincia');
             
-            $this->creaUsuario();
+            if (isset($id) && !empty($id))
+                $this->editaUsuario($this->input->post('id'));
+            else
+                $this->creaUsuario();
         } else {
-            // damos de alta usuario
-            // TODO comprobar que exista otro usuario con mismos datos
             
             $usuario = array(
                 'username' => $this->input->post('username'),
@@ -200,21 +210,22 @@ class Usuario extends CI_Controller
                 'cp' => $this->input->post('cp'),
                 'idProvincia' => $this->input->post('provincia'),
                 'estado' => 0
-            );
-            // obtenemos id
-            $id = $this->input->post('id');
+            );           
             
+            // si existe post(id) estamos editando un usuario
             if (isset($id) && ! empty($id)) {
-                // si el usuario modificado sus datos es porque está activado y puede acceder
+                // si usuario puede modificar sus datos, su estado actual es 1
                 $usuario['estado'] = 1;
-                // modo edicion
-                $rows = $this->usuario_model->actualizaUsuario($usuario, $id);
+                // editamos usuario y recibimos filas afectadas
+                $rows = $this->usuario_model->editaUsuario($usuario, $id);
                 if ($rows == 1)
                     redirect(base_url() . 'home');
                 else
                     redirect(base_url() . $this->session->userdata("url"));
             } else {
+                // creamos usuario, guardamos resultado operación en $result
                 $result = $this->usuario_model->creaUsuario($usuario);
+                // si creamos con exito el usuario
                 if ($result) {
                     // seguimos con el pedido
                     redirect(base_url() . 'carro/verCarro');

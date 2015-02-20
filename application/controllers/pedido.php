@@ -19,7 +19,7 @@ class Pedido extends CI_Controller
         $this->load->model('pedido_model');
     }
 
-    public function factura($id,$proforma = 0)
+    public function factura($id, $proforma = 0)
     {
         if ($this->login->usuario_logueado()) {
             $pedido = $this->pedido_model->getLineasById($id);
@@ -77,11 +77,7 @@ class Pedido extends CI_Controller
             // add a page
             $pdf->AddPage();
             
-            $txt = "Shopping Cart Componentes\n".
-                    "SL CIF: B73347494\n".
-                    "Avda Europa, 2-3, Pol.Ind. Las Salinas".
-                    "Alhama de Huelva\n".
-                    "30840.Murcia.";
+            $txt = "Shopping Cart Componentes\n" . "SL CIF: B73347494\n" . "Avda Europa, 2-3, Pol.Ind. Las Salinas" . "Alhama de Huelva\n" . "30840.Murcia.";
             
             // set cell padding
             $pdf->setCellPaddings(1, 1, 1, 1);
@@ -93,13 +89,12 @@ class Pedido extends CI_Controller
             $pdf->SetFillColor(255, 255, 227);
             $pdf->SetFont('helvetica', 'B', 20);
             $pdf->Cell($w = 0, $h = 0, $nomfactura, $border = 0, $ln = 2, $align = 'C');
-          
             
             // set font
             $pdf->SetFont('times', 'BI', 12);
             
             // Vertical alignment
-            $pdf->MultiCell(90, 20,$txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
+            $pdf->MultiCell(90, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
             
             $pdf->MultiCell(0, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
             
@@ -247,14 +242,24 @@ class Pedido extends CI_Controller
             } else {}
         }
     }
-    
+
     /**
-     * 
-     * @param unknown $id
+     * Cancelalación pedidos no procesados
+     *
+     * @param unknown $id            
      */
-    public function cancelaPedido($id){
-        
-        
+    public function cancelaPedido($id)
+    {
+        if ($this->login->usuario_logueado()) {
+            if (isset($id) && ! empty($id)) {
+                
+                $result = $this->pedido_model->cancelaPedidoNoProcesado($id);
+                // TODO si result > 0 mostrar ok else error
+            }
+        } else {
+            $this->session->set_userdata("url", 'pedido/cancelaPedido/' . $id . '');
+            redirect(base_url() . 'usuario/loginUsuario');
+        }
     }
 
     /**

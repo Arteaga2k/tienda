@@ -84,7 +84,7 @@ class Usuario_model extends CI_Model
      * @param unknown $data
      * @param unknown $id
      */
-    public function actualizaUsuario($data,$id){
+    public function editaUsuario($data,$id){
         $this->db->where('idUsuario',$id);
         $this->db->update('usuario', $data);     
 

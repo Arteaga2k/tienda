@@ -75,36 +75,48 @@ class Pedido_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    public function eliminaPedido()
-    {}
+    public function cancelaPedidoNoProcesado($id)
+    {
+        $pedido = $this->getPedidoById($id);
+        // si no está procesado eliminamos
+        if (isset($pedido['estado'])&& $pedido['estado'] == 0) {
+            $this->db->where('idPedido', $id);
+            $this->db->delete('pedido');
+            
+            return $this->db->affected_rows();
+        }else{
+            $this->session->set_flashdata('pedido_incorrecto', 'El pedido ya está procesado');       
+            return 0;    
+        }
+    }
 
     public function editaPedido()
     {}
 
     /**
-     * 
-     * @param unknown $carrito
-     * @param unknown $idPedido
+     *
+     * @param unknown $carrito            
+     * @param unknown $idPedido            
      */
-    public function insertaLineas($carrito,$idPedido){
-     $data = array();
-     foreach ($carrito['items'] as $idProducto => $item) {            
+    public function insertaLineas($carrito, $idPedido)
+    {
+        $data = array();
+        foreach ($carrito['items'] as $idProducto => $item) {
             $data[] = array(
                 'idProducto' => $idProducto,
                 'idPedido' => $idPedido,
                 'cantidad' => $item['cantidad'],
                 'precio' => $item['precio']
-            );         
-        } 
-       $this->db->insert_batch('linea_pedido',$data);
-        
+            );
+        }
+        $this->db->insert_batch('linea_pedido', $data);
     }
-    
+
     /**
      * Devuelve las líneas de un pedido
      * determinado por su id
-     * 
-     * @param unknown $id
+     *
+     * @param unknown $id            
      */
     public function getLineasById($id)
     {
