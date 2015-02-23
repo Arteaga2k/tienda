@@ -117,17 +117,26 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\t<p class=\"btn btn-primary\" id=\"add\">Añadir al carro</p>
 \t\t\t<span id=\"errorCantidad\"></span>
 \t\t\t</form>
-\t\t</div>
+\t\t</div>\t\t
 \t</div>
+\t
+\t<div class=\"row\">
+\t\t\t<div class=\"col-sm-6 col-lg-6 col-md-6\">
+\t\t\t\t<p>";
+        // line 55
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "anuncio", array()), "html", null, true);
+        echo "</p>
+\t\t\t</div>
+\t\t</div>
 
 </div>
 ";
     }
 
-    // line 54
+    // line 60
     public function block_script($context, array $blocks = array())
     {
-        // line 55
+        // line 61
         echo "
 
 <script type=\"text/javascript\">
@@ -141,7 +150,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\t// filtramos valor
 \t\t\tif (\$.isNumeric(cantidad) && cantidad > 0){
 \t\t\t\t\$.get(\"";
-        // line 67
+        // line 73
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "carro/ajaxAddCart/\"+cantidad+\"/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "idProducto", array()), "html", null, true);
@@ -205,6 +214,6 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
     public function getDebugInfo()
     {
-        return array (  145 => 67,  131 => 55,  128 => 54,  110 => 41,  103 => 37,  99 => 36,  90 => 30,  83 => 26,  74 => 19,  68 => 18,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
+        return array (  154 => 73,  140 => 61,  137 => 60,  127 => 55,  110 => 41,  103 => 37,  99 => 36,  90 => 30,  83 => 26,  74 => 19,  68 => 18,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
     }
 }

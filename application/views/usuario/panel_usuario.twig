@@ -1,6 +1,9 @@
 {% extends "_templates/base.twig" %} {% block contenido %}
 
 <div class="col-md-12">
+    {% if form.error|length %}
+	   <div class="alert alert-danger" role="alert">{{ form.error|raw }}</div>
+	{% endif %}
 	<h1>
 		<small>Datos Personales</small>
 	</h1>
@@ -10,6 +13,7 @@
 	<div class="well">
 		<p>Nombre: {{ usuario.nombre|title}} {{ usuario.apellidos|title }}</p>
 		<p>DNI: {{ usuario.dni }}</p>
+		<p>Provincia: {{ usuario.provincia }}</p>
 		<p>Dirección: {{ usuario.direccion|title }}</p>
 		<p>Código postal: {{ usuario.cp|title }}</p>
 	</div>
@@ -36,9 +40,9 @@
 			<td>{{ pedNoProce.idPedido }}</td>
 			<td>{{ pedNoProce.fecha_creacion }}</td>
 			<td>--</td>
-			<td>En proceso</td>
+			<td>Pendiente de procesar</td>
 			<td><a class="btn btn-default"
-				href="{{ base_url() }}pedido/factura/{{ pedNoProce.idPedido  }}/true">Ver</a>
+				href="{{ base_url() }}pedido/factura/{{ pedNoProce.idPedido  }}">Ver</a>
 				<!-- Button trigger modal -->
 				<button type="button" class="btn btn-default" data-toggle="modal"
 					data-target="#borrarModal">Eliminar</button>
@@ -55,7 +59,7 @@
 							</button>
 							<h4 class="modal-title" id="myModalLabel">Confirmación</h4>
 						</div>
-						<div class="modal-body">Este contacto será eliminado de la agenda,
+						<div class="modal-body">Este pedido será eliminado,
 							¿estás seguro?</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-default"

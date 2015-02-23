@@ -83,10 +83,10 @@ class Pedido_model extends CI_Model
             $this->db->where('idPedido', $id);
             $this->db->delete('pedido');
             
-            return $this->db->affected_rows();
+            if ($this->db->affected_rows() == 0)
+                $this->session->set_flashdata('pedido_incorrecto', 'El pedido nº '.$id.' no se ha podido cancelar');
         }else{
-            $this->session->set_flashdata('pedido_incorrecto', 'El pedido ya está procesado');       
-            return 0;    
+            $this->session->set_flashdata('pedido_incorrecto', 'El pedido ya está procesado');   
         }
     }
 

@@ -31,4 +31,29 @@ class Pdf extends TCPDF
 		// Page number
 		$this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
+	
+	public function DatosFacturacion($nomfactura){
+	    $txt = "Shopping Cart Componentes\n" . "SL CIF: B73347494\n" . "Avda Europa, 2-3, Pol.Ind. Las Salinas" . "Alhama de Huelva\n" . "30840.Murcia.";
+	    
+	    // set cell padding
+	    $this->setCellPaddings(1, 1, 1, 1);
+	    
+	    // set cell margins
+	    $this->setCellMargins(1, 1, 1, 1);
+	    
+	    // set color for background
+	    $this->SetFillColor(255, 255, 227);
+	    $this->SetFont('helvetica', 'B', 20);
+	    $this->Cell($w = 0, $h = 0, $nomfactura, $border = 0, $ln = 2, $align = 'C');
+	    
+	    // set font
+	    $this->SetFont('times', 'BI', 12);
+	    
+	    // Vertical alignment
+	    $this->MultiCell(90, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
+	    
+	    $this->MultiCell(0, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
+	    
+	    $this->Ln(30);
+	}
 }

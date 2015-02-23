@@ -21,9 +21,12 @@ class Usuario extends CI_Controller
         $login = $this->session->userdata("login");
         if ($this->login->usuario_logueado()) {
             
+            $this->form['error'] = $this->session->flashdata('pedido_incorrecto');
+            
             $pedidosNoProce = $this->pedido_model->getPedsNoProcesados($login['id_usuario']);
             $historialPedidos = $this->pedido_model->getPedidos($login['id_usuario']);
-            $usuario = $this->usuario_model->getUsuarioById($login['id_usuario']);
+            $usuario = $this->usuario_model->getUsuarioById($login['id_usuario']);            
+            
             
             echo $this->twig->render('usuario/panel_usuario.twig', array(
                 'form' => $this->form,
@@ -211,15 +214,16 @@ class Usuario extends CI_Controller
                 'idProvincia' => $this->input->post('provincia'),
                 'estado' => 0
             );           
-            
+           
             // si existe post(id) estamos editando un usuario
             if (isset($id) && ! empty($id)) {
                 // si usuario puede modificar sus datos, su estado actual es 1
                 $usuario['estado'] = 1;
+               
                 // editamos usuario y recibimos filas afectadas
                 $rows = $this->usuario_model->editaUsuario($usuario, $id);
                 if ($rows == 1)
-                    redirect(base_url() . 'home');
+                    redirect(base_url() . 'home');                    
                 else
                     redirect(base_url() . $this->session->userdata("url"));
             } else {

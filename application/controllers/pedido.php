@@ -19,10 +19,20 @@ class Pedido extends CI_Controller
         $this->load->model('pedido_model');
     }
 
-    public function factura($id, $proforma = 0)
+    /**
+     *
+     * @param unknown $id            
+     * @param number $proforma            
+     * @param string $dest
+     *            'I' muestra factura en navegador, 'F' guarda factura en disco
+     */
+    public function factura($id, $proforma = 0, $dest = 'I')
     {
         if ($this->login->usuario_logueado()) {
             $pedido = $this->pedido_model->getLineasById($id);
+            if (empty($pedido))
+                redirect(base_url() . 'usuario/panelUsuario');
+            
             $fechaCreacion = $pedido[0]['fecha_creacion'];
             
             $nomfactura = $proforma == 0 ? 'FACTURA' : ' FACTURA PROFORMA';
@@ -77,28 +87,7 @@ class Pedido extends CI_Controller
             // add a page
             $pdf->AddPage();
             
-            $txt = "Shopping Cart Componentes\n" . "SL CIF: B73347494\n" . "Avda Europa, 2-3, Pol.Ind. Las Salinas" . "Alhama de Huelva\n" . "30840.Murcia.";
-            
-            // set cell padding
-            $pdf->setCellPaddings(1, 1, 1, 1);
-            
-            // set cell margins
-            $pdf->setCellMargins(1, 1, 1, 1);
-            
-            // set color for background
-            $pdf->SetFillColor(255, 255, 227);
-            $pdf->SetFont('helvetica', 'B', 20);
-            $pdf->Cell($w = 0, $h = 0, $nomfactura, $border = 0, $ln = 2, $align = 'C');
-            
-            // set font
-            $pdf->SetFont('times', 'BI', 12);
-            
-            // Vertical alignment
-            $pdf->MultiCell(90, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
-            
-            $pdf->MultiCell(0, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
-            
-            $pdf->Ln(30);
+            $pdf->DatosFacturacion($nomfactura);
             
             $html = '<table border="1">
              <tr>
@@ -119,8 +108,9 @@ class Pedido extends CI_Controller
             <td width="7%" bgcolor="#A1A1A1">Und</td>
             <td width="15%" bgcolor="#A1A1A1">Total</td>
         </tr>';
-            
+            $cont = 0;
             foreach ($pedido as $linea) {
+                $cont ++;
                 $html1 .= '
                 <tr>
                     <td>' . $linea['codigo'] . '</td>
@@ -129,6 +119,22 @@ class Pedido extends CI_Controller
                     <td  align="center">' . $linea['cantidad'] . '</td>
                     <td  align="right">' . intval($linea['cantidad']) * intval($linea['precio']) . '</td>
                    
+                </tr>';
+                if ($cont == 30 || $cont == 60) {
+                    $pdf->AddPage();
+                    $pdf->DatosFacturacion($nomfactura);
+                }
+            }
+            
+            while ($cont < 30) {
+                $cont ++;
+                $html1 .= '<tr>
+                <td></td>
+                <td  align="left"></td>
+                <td  align="right"></td>
+                <td  align="center"></td>
+                <td  align="right"></td>
+                 
                 </tr>';
             }
             $html1 .= '</table>';
@@ -155,8 +161,15 @@ class Pedido extends CI_Controller
         </table>';
             $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $tabla4, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'R', $autopadding = true);
             
-            // Close and output PDF document
-            $pdf->Output('example_003.pdf', 'I');
+            if ($dest == 'F') {
+                // guardamos factura
+               // $pdf->Output($_SERVER['DOCUMENT_ROOT'] . '/' . 'factura_' . $id . '.pdf', 'F');
+               // $pdf->Output(dirname(__FILE__) . '/' . 'factura_' . $id . '.pdf', 'F'); 
+                $pdf->Output(dirname(__DIR__) . '/pdf' . '/' . 'factura_' . $id . '.pdf', 'F');
+            } else {
+                // generamos factura navegador
+                $pdf->Output(base_url() . 'factura_' . $id . '.pdf', 'I');
+            }
             
             // ============================================================+
             // END OF FILE
@@ -252,9 +265,8 @@ class Pedido extends CI_Controller
     {
         if ($this->login->usuario_logueado()) {
             if (isset($id) && ! empty($id)) {
-                
-                $result = $this->pedido_model->cancelaPedidoNoProcesado($id);
-                // TODO si result > 0 mostrar ok else error
+                $this->pedido_model->cancelaPedidoNoProcesado($id);
+                redirect(base_url() . 'usuario/panelUsuario');
             }
         } else {
             $this->session->set_userdata("url", 'pedido/cancelaPedido/' . $id . '');
@@ -281,7 +293,8 @@ class Pedido extends CI_Controller
         
         $this->email->subject("Shopping Cart");
         $this->email->message($this->cuerpoEmail($id));
-        
+        $this->factura($id, 1, 'F');
+        $this->email->attach(dirname(__DIR__) . '/pdf' . '/' . 'factura_' . $id . '.pdf');
         $this->email->send();
         // echo $this->email->print_debugger();
     }

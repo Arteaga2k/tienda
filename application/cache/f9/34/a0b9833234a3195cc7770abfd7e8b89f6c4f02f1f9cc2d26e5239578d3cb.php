@@ -137,12 +137,49 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t\t\t\t\t\t\thttp://bootsnipp.com</a>.
 \t\t\t\t\t</p>
 \t\t\t\t\t<p>
-\t\t\t\t\t
-\t\t\t\t\t
+\t\t\t\t\t<!-- calculando porcentaje stock -->
+                    ";
+            // line 73
+            if (($this->getAttribute($context["producto"], "stock", array()) < 30)) {
+                // line 74
+                echo "                        ";
+                $context["porcentaje"] = 15;
+                // line 75
+                echo "                        ";
+                $context["estado"] = "danger";
+                // line 76
+                echo "                    ";
+            } elseif ((($this->getAttribute($context["producto"], "stock", array()) > 30) && ($this->getAttribute($context["producto"], "stock", array()) < 100))) {
+                // line 77
+                echo "                      ";
+                $context["porcentaje"] = 40;
+                // line 78
+                echo "                      ";
+                $context["estado"] = "warning";
+                echo "                   
+                    ";
+            } else {
+                // line 80
+                echo "                        ";
+                $context["porcentaje"] = 100;
+                // line 81
+                echo "                        ";
+                $context["estado"] = "success";
+                // line 82
+                echo "                    ";
+            }
+            // line 83
+            echo "\t\t\t\t\t
 \t\t\t\t\t<div class=\"progress\">
-\t\t\t\t\t\t<div class=\"progress-bar progress-bar-success\" role=\"progressbar\"
+\t\t\t\t\t\t<div class=\"progress-bar progress-bar-";
+            // line 85
+            echo twig_escape_filter($this->env, (isset($context["estado"]) ? $context["estado"] : null), "html", null, true);
+            echo "\" role=\"progressbar\"
 \t\t\t\t\t\t\taria-valuenow=\"40\" aria-valuemin=\"0\" aria-valuemax=\"100\"
-\t\t\t\t\t\t\tstyle=\"width: 40%\">
+\t\t\t\t\t\t\tstyle=\"width: ";
+            // line 87
+            echo twig_escape_filter($this->env, (isset($context["porcentaje"]) ? $context["porcentaje"] : null), "html", null, true);
+            echo "%\">
 \t\t\t\t\t\t\t<span class=\"sr-only\">40% Complete (success)</span>
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
@@ -167,7 +204,7 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 98
+        // line 108
         echo "\t</div>
 </div>
 
@@ -187,6 +224,6 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
     public function getDebugInfo()
     {
-        return array (  171 => 98,  131 => 64,  126 => 61,  120 => 60,  113 => 56,  109 => 54,  105 => 53,  65 => 16,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  208 => 108,  181 => 87,  176 => 85,  172 => 83,  169 => 82,  166 => 81,  163 => 80,  157 => 78,  154 => 77,  151 => 76,  148 => 75,  145 => 74,  143 => 73,  131 => 64,  126 => 61,  120 => 60,  113 => 56,  109 => 54,  105 => 53,  65 => 16,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }

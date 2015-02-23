@@ -51,8 +51,19 @@ class Usuario_model extends CI_Model
      * @param unknown $id
      */
     public function getUsuarioById($id){
-        $this->db->where('idUsuario', $id);      
-        $query = $this->db->get('usuario');
+       // $this->db->where('idUsuario', $id);      
+       // $query = $this->db->get('usuario');
+        
+        //For selecting one or more columns
+        $this->db->select('*');
+        //For determine one or more tables to select from
+        $this->db->from('usuario','provincia');
+        //For joining with another table, table name as first argument and condition string as second argument
+        $this->db->join('provincia', 'provincia.idProvincia = usuario.idProvincia');
+        //assign where condition
+        $this->db->where('idUsuario', $id);
+        //function without any argument. It actually runs the query that was built on last few statements.
+        $query = $this->db->get();
         
         return $query->row_array();
     }

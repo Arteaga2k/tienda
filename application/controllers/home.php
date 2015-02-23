@@ -27,6 +27,7 @@ class Home extends CI_Controller
      */
     public function index($segmento=0)
     {
+            
         $this->session->set_userdata("url", 'home');
         
         // echo $this->categoria;

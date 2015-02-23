@@ -179,27 +179,15 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
         echo "</div>
 \t</div>
 \t<!-- /.container -->
-
-
-
-
-
-
-
 \t";
-        // line 119
+        // line 112
         $this->displayBlock('footer', $context, $blocks);
-        // line 120
-        echo "
-
-
-
-
-\t</div>
+        // line 113
+        echo "\t</div>
 \t";
-        // line 126
+        // line 114
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 140
+        // line 128
         echo "</body>
 </html>
 
@@ -233,26 +221,26 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
     {
     }
 
-    // line 119
+    // line 112
     public function block_footer($context, array $blocks = array())
     {
     }
 
-    // line 126
+    // line 114
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 127
+        // line 115
         echo "\t<script src=\"";
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/jquery-1.11.1.min.js\"
 \t\ttype=\"text/javascript\"></script>
 \t<script src=\"";
-        // line 129
+        // line 117
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/bootstrap.min.js\"
 \t\ttype=\"text/javascript\"></script>
 \t<script src=\"";
-        // line 131
+        // line 119
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/jquery.cleditor.min.js\"
 \t\ttype=\"text/javascript\"></script>
@@ -261,16 +249,16 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>
 
 \t";
-        // line 137
+        // line 125
         $this->displayBlock('script', $context, $blocks);
-        // line 139
+        // line 127
         echo " ";
     }
 
-    // line 137
+    // line 125
     public function block_script($context, array $blocks = array())
     {
-        // line 138
+        // line 126
         echo "\t<!-- bloques scripts que heredarán cada pag -->
 \t";
     }
@@ -287,6 +275,6 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 
     public function getDebugInfo()
     {
-        return array (  274 => 138,  271 => 137,  267 => 139,  265 => 137,  256 => 131,  251 => 129,  245 => 127,  242 => 126,  237 => 119,  232 => 109,  224 => 14,  219 => 12,  213 => 10,  210 => 9,  203 => 140,  201 => 126,  193 => 120,  191 => 119,  178 => 109,  165 => 98,  158 => 95,  156 => 94,  148 => 91,  145 => 90,  138 => 87,  136 => 86,  132 => 84,  130 => 83,  116 => 72,  112 => 70,  101 => 67,  97 => 66,  94 => 65,  90 => 64,  82 => 59,  64 => 44,  36 => 18,  34 => 9,  24 => 1,);
+        return array (  262 => 126,  259 => 125,  255 => 127,  253 => 125,  244 => 119,  239 => 117,  233 => 115,  230 => 114,  225 => 112,  220 => 109,  212 => 14,  207 => 12,  201 => 10,  198 => 9,  191 => 128,  189 => 114,  186 => 113,  184 => 112,  178 => 109,  165 => 98,  158 => 95,  156 => 94,  148 => 91,  145 => 90,  138 => 87,  136 => 86,  132 => 84,  130 => 83,  116 => 72,  112 => 70,  101 => 67,  97 => 66,  94 => 65,  90 => 64,  82 => 59,  64 => 44,  36 => 18,  34 => 9,  24 => 1,);
     }
 }

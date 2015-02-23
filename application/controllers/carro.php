@@ -52,7 +52,7 @@ class Carro extends CI_Controller
     public function vaciaCarro()
     {
         $carrito = $this->carrito->destroy();
-        redirect(base_url() . 'home');
+        redirect(base_url() . 'carro/verCarro');
     }
     
     /**
