@@ -102,6 +102,22 @@ class Usuario_model extends CI_Model
         return $this->db->affected_rows();
         
     }
+    
+    /**
+     * Edita la contraseña de un usuario
+     * 
+     * @param string $id id usuario a editar
+     * @param string $nuevopwd nueva contraseña a guardar
+     */
+    public function editaPassword($id, $nuevopwd){
+        $data = array(
+            'password' => $nuevopwd          
+        );        
+        $this->db->where('idUsuario', $id);
+        $this->db->update('usuario',$data);
+        
+        return $this->db->affected_rows();
+    }
 
     /**
      *
@@ -114,8 +130,8 @@ class Usuario_model extends CI_Model
         $this->db->where('password', $password);
         $this->db->where('estado', 1); // usuarios revisados por administrador
         
-        $query = $this->db->get('usuario');
-        
+        $query = $this->db->get('usuario');        
+       
         if ($query->num_rows() == 1) {
             return $query->row();
         } else {

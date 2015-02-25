@@ -1,0 +1,53 @@
+{% extends "_templates/base.twig" %} {% block contenido %}
+
+
+<div class="row">
+	{% if form.error|length %}
+	<div class="alert alert-danger" role="alert">{{ form.error|raw }}</div>
+	{% endif %}
+	
+	<div class="col-md-8">
+		<h3>Cambio de contraseña</h3>
+		<hr />
+		{{ form.form_edicion_pwd|raw }}
+
+		<div
+			class="form-group {% if form.passvieja|length -%} has-error {%- endif -%}">
+			<label for="passvieja" class="col-sm-2 control-label">Actual contraseña</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="passvieja"
+					name="passvieja"  value="" placeholder=""> <span>{{ form.passvieja|raw }}</span>
+			</div>
+		</div>
+
+		<div
+			class="form-group {% if form.passnueva|length -%} has-error {%- endif -%}">
+			<label for="passnueva" class="col-sm-2 control-label">Nueva contraseña</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" id="passnueva"
+					name="passnueva" value="" placeholder=""> <span>{{ form.passnueva|raw }}</span>
+			</div>
+		</div>
+
+		<div
+			class="form-group {% if form.passconf|length -%} has-error {%- endif -%}">
+			<label for="passconf" class="col-sm-2 control-label">Confirmar
+				contraseña</label>
+			<div class="col-sm-10">
+				<input type="password" class="form-control" name="passconf"
+					id="passconf" placeholder=""> <span>{{ form.passconf|raw }}</span>
+			</div>
+		</div>
+
+		<input type="hidden" value="{{ form.token }}" name="token" /> <input
+			type="hidden" value="{{ form.id }}" name="id" />
+
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-primary">Guardar</button>
+			</div>
+		</div>
+		</form>
+	</div>
+
+	{% endblock %}

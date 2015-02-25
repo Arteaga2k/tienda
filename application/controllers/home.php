@@ -32,7 +32,7 @@ class Home extends CI_Controller
         
         // echo $this->categoria;
         $pagination = 2;
-        $config['base_url'] = base_url() . 'home/index/';
+        $config['base_url'] = site_url('home/index/') ;
         $config['total_rows'] = $this->home_model->getTotalProdDestacados();
         $config['per_page'] = $pagination;
         $config["uri_segment"] = 3; // el segmento de la paginación
@@ -63,7 +63,7 @@ class Home extends CI_Controller
     {
         $pagination = 5;
         
-        $config['base_url'] = base_url() . 'home/categoria/' . $idCategoria . '';
+        $config['base_url'] = site_url('home/categoria/' . $idCategoria . '')  ;
         $config['total_rows'] = $this->home_model->getTotalProductos($idCategoria);
         $config['per_page'] = $pagination;
         $config["uri_segment"] = 4; // el segmento de la paginación

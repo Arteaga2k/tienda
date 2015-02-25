@@ -36,7 +36,7 @@
 					<td>
 						<button type="submit" name="actualizar" class="btn btn-default">Actualizar</button>
 						<a class="btn btn-default"
-						href="{{ base_url() }}carro/eliminaItem/{{ key }}">Eliminar</a>
+						href="{{ site_url('carro/eliminaItem/') }}/{{ key }}">Eliminar</a>
 					</td>
 				</form>
 			</tr>
@@ -50,8 +50,8 @@
 			</tr>
 		</table>
 		<p>
-			<a href="{{ base_url() }}carro/vaciaCarro" class="btn btn-default">Vaciar
-				Carrito</a> <a href="{{ base_url() }}pedido/preparaPedido"
+			<a href="{{ site_url('carro/vaciaCarro') }}" class="btn btn-default">Vaciar
+				Carrito</a> <a href="{{ site_url('pedido/preparaPedido') }}"
 				class="btn btn-primary">Realizar pedido</a>
 		</p>
 	</div>
@@ -74,7 +74,7 @@
 
 				idProducto = $("[name='idProducto']").val();
 				 
-				$.get("{{ base_url() }}carro/ajaxUpdateCart/"+cantidad+"/"+idProducto+"","",function(data)
+				$.get("{{ site_url('carro/ajaxUpdateCart/') }}/"+cantidad+"/"+idProducto+"","",function(data)
 				{
 				    var json = JSON.parse(data);
 				    console.log(json);

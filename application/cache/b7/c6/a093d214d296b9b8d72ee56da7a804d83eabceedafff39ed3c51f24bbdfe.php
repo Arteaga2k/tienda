@@ -216,7 +216,7 @@ class __TwigTemplate_b7c6a093d214d296b9b8d72ee56da7a804d83eabceedafff39ed3c51f24
             echo "\t\t\t\t\t<option value=\"";
             echo twig_escape_filter($this->env, $this->getAttribute($context["provincia"], "idProvincia", array()), "html", null, true);
             echo "\">";
-            echo twig_escape_filter($this->env, $this->getAttribute($context["provincia"], "nombre", array()), "html", null, true);
+            echo twig_escape_filter($this->env, $this->getAttribute($context["provincia"], "provincia", array()), "html", null, true);
             echo "</option>
 \t\t\t\t\t";
         }

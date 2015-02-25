@@ -42,8 +42,8 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
             echo " <a
 \t\t\thref=\"";
             // line 8
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "home/categoria/";
+            echo twig_escape_filter($this->env, site_url("home/categoria/"), "html", null, true);
+            echo "/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "idCategoria", array()), "html", null, true);
             echo "\"
 \t\t\tclass=\"list-group-item\">";
@@ -65,8 +65,8 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t<h1>
 \t\t\t<a href=\"";
         // line 18
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "home/producto/";
+        echo twig_escape_filter($this->env, site_url("home/producto/"), "html", null, true);
+        echo "/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "idProducto", array()), "html", null, true);
         echo "\">";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "nombre", array()), "html", null, true);
@@ -151,8 +151,8 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\tif (\$.isNumeric(cantidad) && cantidad > 0){
 \t\t\t\t\$.get(\"";
         // line 73
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "carro/ajaxAddCart/\"+cantidad+\"/";
+        echo twig_escape_filter($this->env, site_url("carro/ajaxAddCart/"), "html", null, true);
+        echo "/\"+cantidad+\"/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "idProducto", array()), "html", null, true);
         echo "\",\"\",function(data)
 \t\t\t\t{

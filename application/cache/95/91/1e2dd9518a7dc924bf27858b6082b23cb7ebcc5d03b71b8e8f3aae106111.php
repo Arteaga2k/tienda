@@ -61,8 +61,8 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t</button>
 \t\t\t\t<a class=\"navbar-brand\" href=\"";
         // line 44
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "home\">Mi Tienda</a>
+        echo twig_escape_filter($this->env, site_url("home"), "html", null, true);
+        echo "\">Mi Tienda</a>
 \t\t\t</div>
 \t\t\t<!-- Collect the nav links, forms, and other content for toggling -->
 \t\t\t<div class=\"collapse navbar-collapse\"
@@ -113,8 +113,8 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t\t\t\t\t<p>
 \t\t\t\t\t\t\t\t\t<a href=\"";
         // line 72
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "carro/verCarro\"
+        echo twig_escape_filter($this->env, site_url("carro/verCarro/"), "html", null, true);
+        echo "\"
 \t\t\t\t\t\t\t\t\t\tclass=\"btn btn-success btn-sm pull-right\"><i
 \t\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-shopping-cart\"></i> Checkout</a>
 \t\t\t\t\t\t\t\t</p>
@@ -136,8 +136,8 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
         if ((null === $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "username", array()))) {
             // line 87
             echo "\t\t\t\t\t\t\t<li><a href=\"";
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "usuario/loginUsuario/\"><i
+            echo twig_escape_filter($this->env, site_url("usuario/loginUsuario/"), "html", null, true);
+            echo "\"><i
 \t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-log-in\"></i> Iniciar sesión</a></li>
 \t\t\t\t\t\t";
         }
@@ -145,8 +145,8 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
         echo "\t\t\t\t\t\t\t<li><a
 \t\t\t\t\t\t\t\thref=\"";
         // line 91
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "usuario/panelUsuario/";
+        echo twig_escape_filter($this->env, site_url("usuario/panelUsuario"), "html", null, true);
+        echo "/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "id_usuario", array()), "html", null, true);
         echo "\"><i
 \t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-th-large\"></i> Panel control</a></li>
@@ -156,8 +156,8 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
         if ((!(null === $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "username", array())))) {
             // line 95
             echo "\t\t\t\t\t\t\t<li><a href=\"";
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "usuario/logout\"><i
+            echo twig_escape_filter($this->env, site_url("usuario/logout/"), "html", null, true);
+            echo "\"><i
 \t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-log-out\"></i> Cerrar sesión</a></li>
 \t\t\t\t\t\t";
         }

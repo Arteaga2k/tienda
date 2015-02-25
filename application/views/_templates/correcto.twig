@@ -1,12 +1,11 @@
 {% extends "_templates/base.twig" %} {% block contenido %}
 <div class="page-header">
 	<h1>
-		{{ tabla }} <small>{{ cabecera }} #{{ id }}</small>
+		<small>Operación realizada con éxito</small>
 	</h1>
+	<div class="alert alert-success" role="alert">{{ mensaje }}</div>	  
 
 </div>
-<p>{{ mensaje }}</p>
 	<a class="btn btn-default btn-lg btn-block"
-		href="{{ constant('URL') }}{{ tabla }}">Aceptar</a>
-
+		href="{{ site_url('home/') }}">Aceptar</a>
 {% endblock %}

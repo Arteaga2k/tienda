@@ -25,8 +25,7 @@ class Usuario extends CI_Controller
             
             $pedidosNoProce = $this->pedido_model->getPedsNoProcesados($login['id_usuario']);
             $historialPedidos = $this->pedido_model->getPedidos($login['id_usuario']);
-            $usuario = $this->usuario_model->getUsuarioById($login['id_usuario']);            
-            
+            $usuario = $this->usuario_model->getUsuarioById($login['id_usuario']);
             
             echo $this->twig->render('usuario/panel_usuario.twig', array(
                 'form' => $this->form,
@@ -36,7 +35,7 @@ class Usuario extends CI_Controller
             ));
         } else {
             $this->session->set_userdata("url", 'usuario/panelUsuario');
-            redirect(base_url() . 'usuario/loginUsuario');
+            redirect(site_url('usuario/loginUsuario'));
         }
     }
 
@@ -85,7 +84,8 @@ class Usuario extends CI_Controller
      */
     public function editaUsuario($id = 0)
     {
-        if ($this->login->usuario_logueado()) {           
+        // comprobamos que usuario está logueado
+        if ($this->login->usuario_logueado()) {
             if (isset($id) && $id != 0) {
                 // obtenemos usuario
                 $usuario = $this->usuario_model->getUsuarioById($id);
@@ -108,12 +108,52 @@ class Usuario extends CI_Controller
                         'usuario' => $this->session->userdata("login")
                     ));
                 } else {
-                    redirect(base_url() . 'home');
+                    redirect(site_url('home'));
                 }
             }
         } else {
             $this->session->set_userdata("url", 'usuario/editaUsuario/' . $id . '');
-            redirect(base_url() . 'usuario/loginUsuario');
+            redirect(site_url('usuario/loginUsuario'));
+        }
+    }
+
+    /**
+     * Muestra formulario edición contraseña de usuario
+     * 
+     * @param string $id
+     *            identificador usuario
+     */
+    public function editaPassword($id = 0)
+    {
+        // comprobamos que usuario está logueado
+        if ($this->login->usuario_logueado()) {
+            if (isset($id) && $id != 0) {
+                // obtenemos usuario
+                $usuario = $this->usuario_model->getUsuarioById($id);
+                // si existe usuario a editar
+                if (! empty($usuario)) {
+
+                    $this->form['id'] = $id;
+                    $this->form['token'] = $this->token();
+                    // guardamos error
+                    $this->form['error'] = $this->session->flashdata('error_nuevo_pwd');
+                    
+                    $this->form["form_edicion_pwd"] = form_open("usuario/procesaFormEditaPwD", array(
+                        "class" => "form-horizontal",
+                        "name" => "procesaFormEditaPwD"
+                    ));
+                    
+                    echo $this->twig->render('usuario/usuario_editapwd_formulario.twig', array(
+                        'form' => $this->form,
+                        'usuario' => $this->session->userdata("login")
+                    ));
+                }
+            } else {
+                redirect(site_url('home'));
+            }
+        } else { // usuario no logueado, redireccionamos a formulario login
+            $this->session->set_userdata("url", 'usuario/editaUsuario/' . $id . '');
+            redirect(site_url('usuario/loginUsuario'));
         }
     }
 
@@ -123,9 +163,10 @@ class Usuario extends CI_Controller
     {
         $this->form['token'] = $this->token();
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form['error'] = $this->session->flashdata('error_email');
         
         // Comprueba validación formulario
-        if ($this->form_validation->run() == FALSE) {
+        if ($this->form_validation->run() == FALSE || $this->form['error']) {
             $this->form["email"] = form_error('email');
             
             $this->form["form_email"] = form_open("", array(
@@ -136,22 +177,39 @@ class Usuario extends CI_Controller
                 'form' => $this->form
             ));
         } else {
+            // obtenemos datos usuario
             $usuario = $this->usuario_model->getUsuarioByEmail($this->input->post('email'));
-            
+            // si existe usuario con ese email
             if (! empty($usuario)) {
                 
                 $nueva_clave = substr(md5(rand()), 0, "10"); // generamos una nueva contraseña de forma aleatoria
-                $usuario_clave2 = md5($nueva_clave); // encriptamos la nueva contraseña para guardarla en la BD
-                
-                $result = $this->usuario_model->editaUsuario(array(
+                $usuario_clave2 = md5($nueva_clave); // encriptamos la nueva contraseña para guardarla en la BBDD
+                                                     
+                // editamos contraseña en la bbdd
+                $filasEditadas = $this->usuario_model->editaUsuario(array(
                     'password' => $usuario_clave2
                 ), $usuario['idUsuario']);
-                // filas afectadas == 1
-                if ($result == 1) {
-                    
+                
+                if ($filasEditadas == 1) {
                     // envia email con la nueva contraseña
-                    $email = $this->emailContrasena($nueva_clave);
+                    $enviado = $this->sendNuevoPwD($nueva_clave);
+                    
+                    if ($enviado == TRUE) {
+                        echo $this->twig->render('_templates/correcto.twig', array(
+                            'mensaje' => 'Nueva contraseña enviada, revise su cuenta de correo'
+                        ));
+                    } else {
+                        $this->session->set_flashdata('error_email', 'No se ha podido enviar nueva contraseña a ' . $this->input->post('email'));
+                        redirect(site_url('usuario/restablecePassword'));
+                    }
+                } else {
+                    $this->session->set_flashdata('error_email', 'No se ha podido generar una nueva contraseña');
+                    redirect(site_url('usuario/restablecePassword'));
                 }
+            } else {
+                // no existe email en bbdd
+                $this->session->set_flashdata('error_email', 'La cuenta de correo ' . $this->input->post('email') . ' no está registrada en nuestra base de datos');
+                redirect(site_url('usuario/restablecePassword'));
             }
         }
     }
@@ -162,18 +220,17 @@ class Usuario extends CI_Controller
      */
     public function procesaFormUsuario()
     {
-        // existe variable post token y es igual
-        // a la sesión llamada token que se ha creado
+        // verificamos token formulario
         $this->verificaToken('token');
         // obtenemos id
         $id = $this->input->post('id');
         
         $this->form_validation->set_rules('username', 'Username', 'required');
-        if (!isset($id) && empty($id)){
+        if (! isset($id) && empty($id)) {
             $this->form_validation->set_rules('password', 'Password', 'trim|required|matches[passconf]|md5');
             $this->form_validation->set_rules('passconf', 'Confirmación Password', 'trim|required');
         }
-       
+        
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('nombre', 'Nombre', 'required');
         $this->form_validation->set_rules('apellidos', 'Apellidos', 'required');
@@ -196,7 +253,7 @@ class Usuario extends CI_Controller
             $this->form["cp"] = form_error('cp');
             $this->form["provincia"] = form_error('provincia');
             
-            if (isset($id) && !empty($id))
+            if (isset($id) && ! empty($id))
                 $this->editaUsuario($this->input->post('id'));
             else
                 $this->creaUsuario();
@@ -213,30 +270,30 @@ class Usuario extends CI_Controller
                 'cp' => $this->input->post('cp'),
                 'idProvincia' => $this->input->post('provincia'),
                 'estado' => 0
-            );           
-           
+            );
+            
             // si existe post(id) estamos editando un usuario
             if (isset($id) && ! empty($id)) {
                 // si usuario puede modificar sus datos, su estado actual es 1
                 $usuario['estado'] = 1;
-               
+                
                 // editamos usuario y recibimos filas afectadas
                 $rows = $this->usuario_model->editaUsuario($usuario, $id);
                 if ($rows == 1)
-                    redirect(base_url() . 'home');                    
+                    redirect(site_url('home'));
                 else
-                    redirect(base_url() . $this->session->userdata("url"));
+                    redirect(site_url($this->session->userdata("url")));
             } else {
                 // creamos usuario, guardamos resultado operación en $result
                 $result = $this->usuario_model->creaUsuario($usuario);
                 // si creamos con exito el usuario
                 if ($result) {
                     // seguimos con el pedido
-                    redirect(base_url() . 'carro/verCarro');
+                    redirect(site_url('carro/verCarro'));
                 } else {
                     // guardamos mensaje de error producido
                     $this->form['error'] = $this->session->flashdata('usuario_incorrecto');
-                    redirect(base_url() . $this->session->userdata("url") ? $this->session->userdata("url") : 'home');
+                    redirect(site_url($this->session->userdata("url") ? $this->session->userdata("url") : 'home'));
                 }
             }
         }
@@ -247,9 +304,8 @@ class Usuario extends CI_Controller
      */
     public function procesaFormLogin()
     {
+        // verificamos token formulario
         $this->verificaToken('tokenLogin');
-        // existe variable post token y es igual
-        // a la sesión llamada token que se ha creado
         
         $this->form_validation->set_rules('usernameLogin', 'Username', 'required');
         $this->form_validation->set_rules('passwordLogin', 'Password', 'trim|required|md5');
@@ -264,8 +320,7 @@ class Usuario extends CI_Controller
         
         // Comprueba validación formulario
         if ($this->form_validation->run() == FALSE) {
-            echo 'error';
-            // $this->loginUsuario();
+            $this->loginUsuario();
         } else {
             
             $username = $this->input->post('usernameLogin');
@@ -283,9 +338,54 @@ class Usuario extends CI_Controller
                 // redireccionamos al paso realizar pedido
                 // estando logueado
                 
-                redirect(base_url() . $this->session->userdata("url"));
+                redirect(site_url($this->session->userdata("url")));
             } else {
                 $this->loginUsuario();
+            }
+        }
+    }
+
+    /**
+     * Valida el formulario edición contraseña de un usuario
+     */
+    public function procesaFormEditaPwD()
+    {
+        $this->verificaToken('tokenLogin');
+        // obtenemos id
+        $id = $this->input->post('id');
+        $this->form_validation->set_rules('passvieja', 'Password', 'trim|required|md5');
+        $this->form_validation->set_rules('passnueva', 'Password', 'trim|required|matches[passconf]|md5');
+        $this->form_validation->set_rules('passconf', 'Confirmación Password', 'trim|required');        
+       
+        
+        // Comprueba validación formulario
+        if ($this->form_validation->run() == FALSE) {
+            $this->form['passvieja'] = form_error('passvieja');
+            $this->form['passnueva'] = form_error('passnueva');
+            $this->form['passconf'] = form_error('passconf');
+            
+            $this->editaPassword($id);
+        } else {
+            $passvieja = $this->input->post('passvieja');
+            $id = $this->input->post('id');
+            
+            $usuario = $this->usuario_model->getUsuarioById($id);
+           
+            // si contraseña vieja coincide            
+            if ($usuario['password'] == $passvieja) {
+                $passnueva = $this->input->post('passnueva');
+                $result = $this->usuario_model->editaPassword($id, $passnueva);
+                
+                if ($result) {
+                    echo $this->twig->render('_templates/correcto.twig', array(
+                        'mensaje' => 'Contraseña editada satisfactoriamente'
+                    ));
+                } else {
+                    // TODO
+                }
+            }else{
+                $this->session->set_flashdata('error_nuevo_pwd','Contraseña actual incorrecta');                
+                $this->editaPassword($id);              
             }
         }
     }
@@ -299,7 +399,7 @@ class Usuario extends CI_Controller
     private function verificaToken($cadena)
     {
         if (! $this->input->post($cadena) && $this->input->post($cadena) == $this->session->userdata('token')) {
-            redirect(base_url() . 'usuario');
+            redirect(site_url('usuario'));
         }
     }
 
@@ -318,7 +418,7 @@ class Usuario extends CI_Controller
         }
     }
 
-    private function emailContrasena($clave)
+    private function sendNuevoPwD($clave)
     {
         // Utilizando sendmail
         $config['protocol'] = 'smtp';
@@ -333,7 +433,7 @@ class Usuario extends CI_Controller
         // $this->email->bcc('them@their-example.com');
         
         $this->email->subject('Restablecimiento de contraseña');
-        $this->email->message("<pre>\n\nSu nueva contraseña es $clave \n</pre>");
+        $this->email->message("\n\nSu nueva contraseña es $clave \n");
         
         if ($this->email->send()) {
             return TRUE;
@@ -363,6 +463,6 @@ class Usuario extends CI_Controller
     {
         $this->session->set_userdata('url', 'home');
         $this->session->unset_userdata('login');
-        redirect(base_url() . 'home');
+        redirect(site_url('home'));
     }
 }

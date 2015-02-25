@@ -99,8 +99,8 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
 \t\t\t\t\t\t<a class=\"btn btn-default\"
 \t\t\t\t\t\thref=\"";
             // line 39
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "carro/eliminaItem/";
+            echo twig_escape_filter($this->env, site_url("carro/eliminaItem/"), "html", null, true);
+            echo "/";
             echo twig_escape_filter($this->env, $context["key"], "html", null, true);
             echo "\">Eliminar</a>
 \t\t\t\t\t</td>
@@ -129,12 +129,12 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
 \t\t<p>
 \t\t\t<a href=\"";
         // line 53
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "carro/vaciaCarro\" class=\"btn btn-default\">Vaciar
+        echo twig_escape_filter($this->env, site_url("carro/vaciaCarro"), "html", null, true);
+        echo "\" class=\"btn btn-default\">Vaciar
 \t\t\t\tCarrito</a> <a href=\"";
         // line 54
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "pedido/preparaPedido\"
+        echo twig_escape_filter($this->env, site_url("pedido/preparaPedido"), "html", null, true);
+        echo "\"
 \t\t\t\tclass=\"btn btn-primary\">Realizar pedido</a>
 \t\t</p>
 \t</div>
@@ -165,8 +165,8 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
 \t\t\t\t 
 \t\t\t\t\$.get(\"";
         // line 77
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "carro/ajaxUpdateCart/\"+cantidad+\"/\"+idProducto+\"\",\"\",function(data)
+        echo twig_escape_filter($this->env, site_url("carro/ajaxUpdateCart/"), "html", null, true);
+        echo "/\"+cantidad+\"/\"+idProducto+\"\",\"\",function(data)
 \t\t\t\t{
 \t\t\t\t    var json = JSON.parse(data);
 \t\t\t\t    console.log(json);

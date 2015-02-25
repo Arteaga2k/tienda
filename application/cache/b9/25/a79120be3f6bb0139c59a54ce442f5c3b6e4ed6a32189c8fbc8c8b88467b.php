@@ -78,13 +78,13 @@ class __TwigTemplate_b925a79120be3f6bb0139c59a54ce442f5c3b6e4ed6a32189c8fbc8c8b8
 \t\t\t\t<button type=\"submit\" class=\"btn btn-primary\">Acceder</button>
 \t\t\t\t<a href=\"";
         // line 36
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "usuario/restablecePassword\" class=\"pull-right\">Recuperar contraseña</a>
+        echo twig_escape_filter($this->env, site_url("usuario/restablecePassword"), "html", null, true);
+        echo "\" class=\"pull-right\">Recuperar contraseña</a>
 \t\t\t\t<p>
 \t\t\t\t<a href=\"";
         // line 38
-        echo twig_escape_filter($this->env, base_url(), "html", null, true);
-        echo "usuario/creaUsuario\" class=\"pull-right\">Registrar cuenta</a>
+        echo twig_escape_filter($this->env, site_url("usuario/creaUsuario"), "html", null, true);
+        echo "\" class=\"pull-right\">Registrar cuenta</a>
 \t\t\t\t</p>
 \t\t\t</div>
 \t\t</div>

@@ -19,15 +19,14 @@ class Carro extends CI_Controller
         $this->load->model('home_model');
         $this->load->model('usuario_model');
         $this->load->model('pedido_model');
-    }   
+    }
 
     /**
      * muestra contenido del carro
      */
     public function verCarro()
     {
-        $form['error'] = $this->session->flashdata('carro_incorrecto');        
-        
+        $form['error'] = $this->session->flashdata('carro_incorrecto');
         
         echo $this->twig->render('carro/detalle_carro.twig', array(
             'carrito' => $this->carrito->getCarrito(),
@@ -35,15 +34,15 @@ class Carro extends CI_Controller
             'form' => $form
         ));
     }
-    
+
     /**
-     * 
-     * @param unknown $id
+     *
+     * @param unknown $id            
      */
-    public function eliminaItem($id){
+    public function eliminaItem($id)
+    {
         $this->carrito->eliminaItem($id);
-       redirect(base_url() . 'carro/verCarro');
-        
+        redirect(site_url('carro/verCarro'));
     }
 
     /**
@@ -52,31 +51,31 @@ class Carro extends CI_Controller
     public function vaciaCarro()
     {
         $carrito = $this->carrito->destroy();
-        redirect(base_url() . 'carro/verCarro');
+        redirect(site_url('carro/verCarro'));
     }
-    
+
     /**
-     * inserta item al carrito 
+     * inserta item al carrito
      * llamada vía ajax
-     * 
-     * @param unknown $cantidad
-     * @param unknown $idproducto
+     *
+     * @param unknown $cantidad            
+     * @param unknown $idproducto            
      */
     public function ajaxAddCart($cantidad, $idproducto)
     {
         $cantidadFinal = $cantidad;
         $producto = $this->home_model->getProducto($idproducto);
         $carrito = $this->carrito->getCarrito();
-    
+        
         // comprobamos que hay stock
         if (intval($producto->stock) > 0) {
-    
+            
             if (! empty($carrito) && isset($carrito['items'][$idproducto])) {
                 $cantidad1 = intval($carrito['items'][$idproducto]['cantidad']);
                 $suma = $cantidad1 + intval($cantidad);
                 $cantidadFinal = $producto->stock >= $suma ? $cantidad : $producto->stock;
             }
-    
+            
             $this->carrito->InsertarItem(array(
                 'id' => $idproducto,
                 'cantidad' => $cantidadFinal,
@@ -84,44 +83,39 @@ class Carro extends CI_Controller
                 'nombre' => $producto->nombre
             ));
         }
-    
+        
         echo json_encode($this->carrito->getCarrito());
     }
-    
-   /**
-    * Actualiza la cantidad de un item 
-    * del carrito
-    * llamada vía ajax
-    * 
-    * @param unknown $cantidad
-    * @param unknown $idproducto
-    */
+
+    /**
+     * Actualiza la cantidad de un item
+     * del carrito
+     * llamada vía ajax
+     *
+     * @param unknown $cantidad            
+     * @param unknown $idproducto            
+     */
     public function ajaxUpdateCart($cantidad, $idproducto)
     {
         $cantidadFinal = $cantidad;
         $producto = $this->home_model->getProducto($idproducto);
         $carrito = $this->carrito->getCarrito();
-    
+        
         // comprobamos que hay stock
         if (intval($producto->stock) > 0) {
-    
+            
             if (! empty($carrito) && isset($carrito['items'][$idproducto])) {
                 $cantidad1 = intval($carrito['items'][$idproducto]['cantidad']);
                 $suma = $cantidad1 + intval($cantidad);
                 $cantidadFinal = $producto->stock >= $suma ? $cantidad : $producto->stock;
             }
-    
+            
             $this->carrito->actualizaItem(array(
                 'id' => $idproducto,
-                'cantidad' => $cantidadFinal               
+                'cantidad' => $cantidadFinal
             ));
         }
-    
+        
         echo json_encode($this->carrito->getCarrito());
     }
-
-    
-    
-
-  
 }

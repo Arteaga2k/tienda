@@ -31,29 +31,26 @@ class __TwigTemplate_8a6668e6a12896dc58e507b1dc563b2e25f1d0888b9f4ed4506f4d98709
         echo "
 
 <div class=\"row\">
-\t";
+";
         // line 5
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "error", array()))) {
             // line 6
-            echo "
-\t<div class=\"alert alert-danger\" role=\"alert\">";
-            // line 7
+            echo "\t   <div class=\"alert alert-danger\" role=\"alert\">";
             echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "error", array());
-            echo "</div>
-
+            echo "</div>\t  
 \t";
         }
-        // line 10
+        // line 8
         echo "
 \t<div class=\"col-md-5\">
 \t\t<h3>Restablecer Contraseña</h3>
 \t\t<hr />
 \t\t";
-        // line 14
+        // line 12
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "form_email", array());
         echo "
 \t\t<div class=\"form-group ";
-        // line 15
+        // line 13
         if (twig_length_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array()))) {
             echo "has-error";
         }
@@ -63,14 +60,14 @@ class __TwigTemplate_8a6668e6a12896dc58e507b1dc563b2e25f1d0888b9f4ed4506f4d98709
 \t\t\t\t<input type=\"text\" class=\"form-control\" id=\"email\" name=\"email\"
 \t\t\t\t\tplaceholder=\"\">
 \t\t\t\t\t <span>";
-        // line 20
+        // line 18
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "email", array());
         echo "</span>
 \t\t\t</div>
 \t\t</div>
 
 \t\t<input type=\"hidden\" value=\"";
-        // line 24
+        // line 22
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "token", array()), "html", null, true);
         echo "\" name=\"tokenLogin\" />
 
@@ -102,6 +99,6 @@ class __TwigTemplate_8a6668e6a12896dc58e507b1dc563b2e25f1d0888b9f4ed4506f4d98709
 
     public function getDebugInfo()
     {
-        return array (  74 => 24,  67 => 20,  57 => 15,  53 => 14,  47 => 10,  41 => 7,  38 => 6,  36 => 5,  31 => 2,  28 => 1,);
+        return array (  71 => 22,  64 => 18,  54 => 13,  50 => 12,  44 => 8,  38 => 6,  36 => 5,  31 => 2,  28 => 1,);
     }
 }

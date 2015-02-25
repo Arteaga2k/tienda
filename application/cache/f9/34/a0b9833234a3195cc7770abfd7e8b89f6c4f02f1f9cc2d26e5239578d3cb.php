@@ -41,8 +41,8 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
             echo " <a
 \t\t\thref=\"";
             // line 8
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "home/categoria/";
+            echo twig_escape_filter($this->env, site_url("home/categoria/"), "html", null, true);
+            echo "/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["categoria"], "idCategoria", array()), "html", null, true);
             echo "\"
 \t\t\tclass=\"list-group-item\">";
@@ -117,8 +117,8 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t\t\t\t\t<h4>
 \t\t\t\t\t\t<a href=\"";
             // line 60
-            echo twig_escape_filter($this->env, base_url(), "html", null, true);
-            echo "home/producto/";
+            echo twig_escape_filter($this->env, site_url("home/producto/"), "html", null, true);
+            echo "/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "idProducto", array()), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);

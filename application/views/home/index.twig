@@ -5,7 +5,7 @@
 	<p class="lead">Tienda Virtual</p>
 	<div class="list-group">
 		{% for categoria in categorias %} <a
-			href="{{ base_url() }}home/categoria/{{ categoria.idCategoria}}"
+			href="{{ site_url('home/categoria/') }}/{{ categoria.idCategoria}}"
 			class="list-group-item">{{ categoria.nombre }}</a> {% endfor %}
 	</div>
 </div>
@@ -57,7 +57,7 @@
 				<div class="caption">
 
 					<h4>
-						<a href="{{ base_url() }}home/producto/{{ producto.idProducto}}">{{
+						<a href="{{ site_url('home/producto/') }}/{{ producto.idProducto}}">{{
 							producto.nombre }}</a>
 					</h4>
 

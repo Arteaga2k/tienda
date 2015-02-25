@@ -31,7 +31,7 @@ class Pedido extends CI_Controller
         if ($this->login->usuario_logueado()) {
             $pedido = $this->pedido_model->getLineasById($id);
             if (empty($pedido))
-                redirect(base_url() . 'usuario/panelUsuario');
+                redirect(site_url('usuario/panelUsuario') );
             
             $fechaCreacion = $pedido[0]['fecha_creacion'];
             
@@ -165,10 +165,10 @@ class Pedido extends CI_Controller
                 // guardamos factura
                // $pdf->Output($_SERVER['DOCUMENT_ROOT'] . '/' . 'factura_' . $id . '.pdf', 'F');
                // $pdf->Output(dirname(__FILE__) . '/' . 'factura_' . $id . '.pdf', 'F'); 
-                $pdf->Output(dirname(__DIR__) . '/pdf' . '/' . 'factura_' . $id . '.pdf', 'F');
+                $pdf->Output('/upload' . '/' . 'factura_' . $id . '.pdf', 'F');
             } else {
                 // generamos factura navegador
-                $pdf->Output(base_url() . 'factura_' . $id . '.pdf', 'I');
+                $pdf->Output(site_url('factura_' . $id . '.pdf', 'I') );
             }
             
             // ============================================================+
@@ -176,7 +176,7 @@ class Pedido extends CI_Controller
             // ============================================================+
         } else {
             $this->session->set_userdata('url', 'pedido/factura/' . $id . '');
-            redirect(base_url() . 'usuario/loginUsuario');
+            redirect(site_url('usuario/loginUsuario'));
         }
     }
 
@@ -208,11 +208,11 @@ class Pedido extends CI_Controller
                 ));
             } else {
                 $this->session->set_userdata("url", 'pedido/preparaPedido');
-                redirect(base_url() . 'usuario/loginUsuario');
+                redirect(site_url('usuario/loginUsuario'));
             }
         } else {
             $this->session->set_flashdata('carro_incorrecto', 'El carrito de la compra está vacío');
-            redirect(base_url() . 'carro/verCarro');
+            redirect(site_url('carro/verCarro'));
         }
     }
 
@@ -248,7 +248,7 @@ class Pedido extends CI_Controller
                 if (! empty($id)) {
                     $this->pedido_model->insertaLineas($this->carrito->getCarrito(), $id);
                     $this->emailPedidoRealizado($id);
-                    redirect(base_url() . 'carro/vaciaCarro');
+                    redirect(site_url('carro/vaciaCarro'));
                 } else {
                     // error
                 }
@@ -266,11 +266,11 @@ class Pedido extends CI_Controller
         if ($this->login->usuario_logueado()) {
             if (isset($id) && ! empty($id)) {
                 $this->pedido_model->cancelaPedidoNoProcesado($id);
-                redirect(base_url() . 'usuario/panelUsuario');
+                redirect(site_url('usuario/panelUsuario'));
             }
         } else {
             $this->session->set_userdata("url", 'pedido/cancelaPedido/' . $id . '');
-            redirect(base_url() . 'usuario/loginUsuario');
+            redirect(site_url('usuario/loginUsuario'));
         }
     }
 
@@ -278,6 +278,7 @@ class Pedido extends CI_Controller
      */
     public function emailPedidoRealizado($id)
     {
+        //TODO capturar email del usuario y reemplazar por el mío de pruebas
         
         // Utilizando sendmail
         $config['protocol'] = 'smtp';
@@ -294,7 +295,7 @@ class Pedido extends CI_Controller
         $this->email->subject("Shopping Cart");
         $this->email->message($this->cuerpoEmail($id));
         $this->factura($id, 1, 'F');
-        $this->email->attach(dirname(__DIR__) . '/pdf' . '/' . 'factura_' . $id . '.pdf');
+        $this->email->attach('/upload' . '/' . 'factura_' . $id . '.pdf');
         $this->email->send();
         // echo $this->email->print_debugger();
     }
@@ -341,7 +342,7 @@ class Pedido extends CI_Controller
             // guardamos en sesion el pedido preparado
             $this->session->set_userdata('pedido', $pedido);
             // y pedimos confirmación
-            redirect(base_url() . 'pedido/confirmaPedido');
+            redirect(site_url('pedido/confirmaPedido'));
         }
     }
 
@@ -368,7 +369,7 @@ class Pedido extends CI_Controller
     private function verificaToken($cadena)
     {
         if (! $this->input->post($cadena) && $this->input->post($cadena) == $this->session->userdata('token')) {
-            redirect(base_url() . 'usuario');
+            redirect(site_url('usuario'));
         }
     }
 

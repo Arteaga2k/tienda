@@ -41,7 +41,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="{{ base_url() }}home">Mi Tienda</a>
+				<a class="navbar-brand" href="{{ site_url('home') }}">Mi Tienda</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
@@ -69,7 +69,7 @@
 									{% endfor %}
 								</table>
 								<p>
-									<a href="{{ base_url() }}carro/verCarro"
+									<a href="{{ site_url('carro/verCarro/') }}"
 										class="btn btn-success btn-sm pull-right"><i
 										class="glyphicon glyphicon-shopping-cart"></i> Checkout</a>
 								</p>
@@ -84,15 +84,15 @@
 							? usuario.username : 'Identificate' }}<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 						{%  if usuario.username is null %}
-							<li><a href="{{ base_url() }}usuario/loginUsuario/"><i
+							<li><a href="{{ site_url('usuario/loginUsuario/') }}"><i
 									class="glyphicon glyphicon-log-in"></i> Iniciar sesión</a></li>
 						{%  endif %}
 							<li><a
-								href="{{ base_url() }}usuario/panelUsuario/{{ usuario.id_usuario }}"><i
+								href="{{ site_url('usuario/panelUsuario') }}/{{ usuario.id_usuario }}"><i
 									class="glyphicon glyphicon-th-large"></i> Panel control</a></li>
 							<li class="divider"></li>
 						{%  if usuario.username is not null %}
-							<li><a href="{{ base_url() }}usuario/logout"><i
+							<li><a href="{{ site_url('usuario/logout/') }}"><i
 									class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a></li>
 						{%  endif %}
 						</ul></li>
