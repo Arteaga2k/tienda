@@ -40,7 +40,7 @@ class Tienda_model extends CI_Model
             $lista[$key]['img'] = $item['imagen'];
             $lista[$key]['descripcion'] = $item['descripcion'];
             $lista[$key]['precio'] = $item['precio'];
-            $lista[$key]['url'] = site_url('home/producto/')/$item['idProducto'] . '';
+            $lista[$key]['url'] = site_url('home/producto/').'/'.$item['idProducto'] . '';
         }
         return $lista;
     }
