@@ -94,19 +94,35 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t</div>
 \t\t<div class=\"col-sm-6 col-lg-6 col-md-6\">
 \t\t\t<h2>
-\t\t\t\t<strong>Precio: €";
+                ";
         // line 36
-        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "precio", array()), "html", null, true);
+        if (($this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "nombre", array()) == "EUR")) {
+            // line 37
+            echo "                    ";
+            $context["icono"] = "€";
+            // line 38
+            echo "                ";
+        } else {
+            // line 39
+            echo "                    ";
+            $context["icono"] = "\$";
+            // line 40
+            echo "                ";
+        }
+        // line 41
+        echo "\t\t\t\t<strong>Precio: ";
+        echo twig_escape_filter($this->env, (isset($context["icono"]) ? $context["icono"] : null), "html", null, true);
+        echo twig_escape_filter($this->env, ($this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "precio", array()) * twig_round($this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "valor", array()), 1, "ceil")), "html", null, true);
         echo "</strong> <small>Iva incluído:
 \t\t\t\t\t";
-        // line 37
+        // line 42
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "iva", array()), "html", null, true);
         echo "%</small><br /> <br />
 \t\t\t</h2>
 \t\t</div>
 \t\t<div class=\"col-sm-6 col-lg-6 col-md-6\">
 \t\t\t";
-        // line 41
+        // line 46
         echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "form_open", array());
         echo "
 \t\t\t<div class=\"form-group\" id=\"formAdd\">
@@ -123,7 +139,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t<div class=\"row\">
 \t\t\t<div class=\"col-sm-6 col-lg-6 col-md-6\">
 \t\t\t\t<p>";
-        // line 55
+        // line 60
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "anuncio", array()), "html", null, true);
         echo "</p>
 \t\t\t</div>
@@ -133,10 +149,10 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 ";
     }
 
-    // line 60
+    // line 65
     public function block_script($context, array $blocks = array())
     {
-        // line 61
+        // line 66
         echo "
 
 <script type=\"text/javascript\">
@@ -150,7 +166,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\t// filtramos valor
 \t\t\tif (\$.isNumeric(cantidad) && cantidad > 0){
 \t\t\t\t\$.get(\"";
-        // line 73
+        // line 78
         echo twig_escape_filter($this->env, site_url("carro/ajaxAddCart/"), "html", null, true);
         echo "/\"+cantidad+\"/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "idProducto", array()), "html", null, true);
@@ -214,6 +230,6 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
     public function getDebugInfo()
     {
-        return array (  154 => 73,  140 => 61,  137 => 60,  127 => 55,  110 => 41,  103 => 37,  99 => 36,  90 => 30,  83 => 26,  74 => 19,  68 => 18,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
+        return array (  170 => 78,  156 => 66,  153 => 65,  143 => 60,  126 => 46,  119 => 42,  113 => 41,  110 => 40,  107 => 39,  104 => 38,  101 => 37,  99 => 36,  90 => 30,  83 => 26,  74 => 19,  68 => 18,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
     }
 }

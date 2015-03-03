@@ -39,11 +39,16 @@ class Home extends CI_Controller
         $config['num_links'] = 5;
         
         $this->pagination->initialize($config);
-        
+        $monedas = $this->moneda->get_monedas();
+        //$this->moneda_de_uso('EUR');
+       
         $categorias = $this->home_model->getCategorias();
         $productosDest = $this->home_model->getProductosDestacados($pagination, $segmento);
+        $this->session->set_userdata("url", 'home/index/'.$segmento);
         
         echo $this->twig->render('home/index.twig', array(
+            'monedas' => $monedas['monedas'],
+            'moneda' => $this->session->userdata('moneda'),
             'categorias' => $categorias,
             'productos' => $productosDest,
             'pagination' => $this->pagination->create_links(),
@@ -75,8 +80,12 @@ class Home extends CI_Controller
         
         $categorias = $this->home_model->getCategorias();
         $productosDest = $this->home_model->getProductos($idCategoria, $pagination, $segmento);
+        $monedas = $this->moneda->get_monedas();
+        $this->session->set_userdata("url", 'home/categoria/'.$idCategoria);
         
         echo $this->twig->render('home/index.twig', array(
+            'monedas' => $monedas['monedas'],
+            'moneda' => $this->session->userdata('moneda'),
             'categorias' => $categorias,
             'productos' => $productosDest,
             'pagination' => $this->pagination->create_links(),
@@ -98,6 +107,8 @@ class Home extends CI_Controller
         
         $categorias = $this->home_model->getCategorias();
         $producto = $this->home_model->getProducto($idProducto);
+        $monedas = $this->moneda->get_monedas();
+        $this->session->set_userdata("url", 'home/producto/'.$idProducto);
         
         $this->form_validation->set_rules('cantidad', 'Cantidad', 'trim|required|min_length[1]|numeric|xss_clean');
         $form["form_open"] = form_open("", array(
@@ -109,6 +120,8 @@ class Home extends CI_Controller
         // Comprueba validación formulario
         if ($this->form_validation->run() == FALSE) {
             echo $this->twig->render('home/producto.twig', array(
+                'monedas' => $monedas['monedas'],
+                'moneda' => $this->session->userdata('moneda'),
                 'categorias' => $categorias,
                 'producto' => $producto,
                 'form' => $form,
@@ -117,7 +130,28 @@ class Home extends CI_Controller
             ));
         } else {
             // añadimos producto al carro
-            $this->addProducto();
+            $this->addProducto();            
         }
+    }
+    
+    /**
+     * Establece la moneada que el usuario desea usar
+     * 
+     * @param unknown $moneda
+     */
+    public function moneda_de_uso($nombremoneda){
+        if ($nombremoneda == 'EUR')
+            $valor = 1;
+        else
+            $valor = $this->moneda->get_valor_moneda($nombremoneda);
+        
+        $moneda = array(
+            'nombre' => $nombremoneda,
+            'valor' => $valor
+        );
+        
+        $this->session->set_userdata('moneda',$moneda);
+        
+        redirect(site_url($this->session->userdata("url") ? $this->session->userdata("url") : 'home'));
     }
 }

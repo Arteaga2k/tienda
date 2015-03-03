@@ -60,8 +60,12 @@
 						<a href="{{ site_url('home/producto/') }}/{{ producto.idProducto}}">{{
 							producto.nombre }}</a>
 					</h4>
-
-					<h4>{{ producto.precio }} €</h4>
+                    {% if moneda.nombre == 'EUR' %}
+                        {% set icono = '€' %}
+                    {% else %}
+                        {% set icono = '$' %}
+                    {% endif %}
+					<h4>{{ producto.precio *  moneda.valor|round(1, 'ceil')}} {{ icono }}</h4>
 
 					<p>
 						See more snippets like this online store item at <a

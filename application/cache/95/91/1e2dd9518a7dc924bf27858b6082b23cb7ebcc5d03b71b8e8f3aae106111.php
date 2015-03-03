@@ -70,7 +70,40 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t<ul class=\"nav navbar-nav\">
 \t\t\t\t\t<li><a href=\"#\">About</a></li>
 \t\t\t\t\t<li><a href=\"#\">Services</a></li>
-\t\t\t\t\t<li><a href=\"#\">Contact</a></li>
+\t\t\t\t\t<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\"
+\t\t\t\t\t\tdata-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i
+\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-flag\"></i> ";
+        // line 54
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "nombre", array()), "html", null, true);
+        echo "<span
+\t\t\t\t\t\t\tclass=\"caret\"></span> </a>
+\t\t\t\t\t\t<ul class=\"dropdown-menu\" role=\"menu\">\t
+\t\t\t\t\t\t<li><a href=\"";
+        // line 57
+        echo twig_escape_filter($this->env, site_url("home/moneda_de_uso/EUR"), "html", null, true);
+        echo "\">EUR</a></li> 
+\t\t\t\t\t\t";
+        // line 58
+        $context['_parent'] = (array) $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["monedas"]) ? $context["monedas"] : null));
+        foreach ($context['_seq'] as $context["moneda"] => $context["value"]) {
+            echo "\t\t\t\t\t\t
+\t\t\t\t\t\t\t<li><a href=\"";
+            // line 59
+            echo twig_escape_filter($this->env, site_url("home/moneda_de_uso"), "html", null, true);
+            echo "/";
+            echo twig_escape_filter($this->env, $context["moneda"], "html", null, true);
+            echo "\">";
+            echo twig_escape_filter($this->env, $context["moneda"], "html", null, true);
+            echo "</a></li> 
+\t\t\t\t\t\t";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['moneda'], $context['value'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 61
+        echo "\t\t\t\t\t\t\t
+\t\t\t\t\t\t</ul></li>
 \t\t\t\t</ul>
 \t\t\t\t<ul class=\"nav navbar-nav navbar-right\">
 
@@ -78,7 +111,7 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t\t\tdata-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\" id=\"cesta\"><span
 \t\t\t\t\t\t\tclass=\"glyphicon glyphicon-shopping-cart\" aria-hidden=\"true\"></span>
 \t\t\t\t\t\t\tCesta ";
-        // line 59
+        // line 69
         echo twig_escape_filter($this->env, ((($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "articulos_total", array()) > 0)) ? ($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "articulos_total", array())) : ("")), "html", null, true);
         echo "<span class=\"caret\"></span> </a>
 \t\t\t\t\t\t<ul class=\"dropdown-menu\" role=\"menu\">
@@ -86,18 +119,18 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t\t\t\t<div class=\"col-md-12\">
 \t\t\t\t\t\t\t\t<table id=\"table_cart\" class=\"table table-hover\">
 \t\t\t\t\t\t\t\t\t";
-        // line 64
+        // line 74
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "items", array()));
         foreach ($context['_seq'] as $context["_key"] => $context["producto"]) {
-            // line 65
+            // line 75
             echo "\t\t\t\t\t\t\t\t\t<tr>
 \t\t\t\t\t\t\t\t\t\t<td>";
-            // line 66
+            // line 76
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
             echo "</td>
 \t\t\t\t\t\t\t\t\t\t<td>";
-            // line 67
+            // line 77
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
             echo "€ x ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "cantidad", array()), "html", null, true);
@@ -108,11 +141,11 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 70
+        // line 80
         echo "\t\t\t\t\t\t\t\t</table>
 \t\t\t\t\t\t\t\t<p>
 \t\t\t\t\t\t\t\t\t<a href=\"";
-        // line 72
+        // line 82
         echo twig_escape_filter($this->env, site_url("carro/verCarro/"), "html", null, true);
         echo "\"
 \t\t\t\t\t\t\t\t\t\tclass=\"btn btn-success btn-sm pull-right\"><i
@@ -126,25 +159,25 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t\t<li class=\"dropdown user-dropdown\"><a href=\"#\"
 \t\t\t\t\t\tclass=\"dropdown-toggle\" data-toggle=\"dropdown\"><i
 \t\t\t\t\t\t\tclass=\"glyphicon glyphicon-user\"></i> ";
-        // line 83
+        // line 93
         echo twig_escape_filter($this->env, ((twig_length_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "username", array()))) ? ($this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "username", array())) : ("Identificate")), "html", null, true);
-        // line 84
+        // line 94
         echo "<b class=\"caret\"></b></a>
 \t\t\t\t\t\t<ul class=\"dropdown-menu\">
 \t\t\t\t\t\t";
-        // line 86
+        // line 96
         if ((null === $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "username", array()))) {
-            // line 87
+            // line 97
             echo "\t\t\t\t\t\t\t<li><a href=\"";
             echo twig_escape_filter($this->env, site_url("usuario/loginUsuario/"), "html", null, true);
             echo "\"><i
 \t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-log-in\"></i> Iniciar sesión</a></li>
 \t\t\t\t\t\t";
         }
-        // line 90
+        // line 100
         echo "\t\t\t\t\t\t\t<li><a
 \t\t\t\t\t\t\t\thref=\"";
-        // line 91
+        // line 101
         echo twig_escape_filter($this->env, site_url("usuario/panelUsuario"), "html", null, true);
         echo "/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "id_usuario", array()), "html", null, true);
@@ -152,19 +185,19 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-th-large\"></i> Panel control</a></li>
 \t\t\t\t\t\t\t<li class=\"divider\"></li>
 \t\t\t\t\t\t";
-        // line 94
+        // line 104
         if ((!(null === $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "username", array())))) {
-            // line 95
+            // line 105
             echo "\t\t\t\t\t\t\t<li><a href=\"";
             echo twig_escape_filter($this->env, site_url("usuario/logout/"), "html", null, true);
             echo "\"><i
 \t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-log-out\"></i> Cerrar sesión</a></li>
 \t\t\t\t\t\t";
         }
-        // line 98
+        // line 108
         echo "\t\t\t\t\t\t</ul></li>
 \t\t\t\t</ul>
-\t\t\t</div>
+\t\t\t</div>\t\t\t
 
 \t\t\t<!-- /.navbar-collapse -->
 \t\t</div>
@@ -174,20 +207,20 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t<!-- Page Content -->
 \t<div class=\"container\">
 \t\t<div class=\"row\">";
-        // line 109
+        // line 119
         $this->displayBlock('contenido', $context, $blocks);
         echo "</div>
 \t</div>
 \t<!-- /.container -->
 \t";
-        // line 112
+        // line 122
         $this->displayBlock('footer', $context, $blocks);
-        // line 113
+        // line 123
         echo "\t</div>
 \t";
-        // line 114
+        // line 124
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 128
+        // line 138
         echo "</body>
 </html>
 
@@ -216,31 +249,31 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 ";
     }
 
-    // line 109
+    // line 119
     public function block_contenido($context, array $blocks = array())
     {
     }
 
-    // line 112
+    // line 122
     public function block_footer($context, array $blocks = array())
     {
     }
 
-    // line 114
+    // line 124
     public function block_javascripts($context, array $blocks = array())
     {
-        // line 115
+        // line 125
         echo "\t<script src=\"";
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/jquery-1.11.1.min.js\"
 \t\ttype=\"text/javascript\"></script>
 \t<script src=\"";
-        // line 117
+        // line 127
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/bootstrap.min.js\"
 \t\ttype=\"text/javascript\"></script>
 \t<script src=\"";
-        // line 119
+        // line 129
         echo twig_escape_filter($this->env, base_url(), "html", null, true);
         echo "assets/js/jquery.cleditor.min.js\"
 \t\ttype=\"text/javascript\"></script>
@@ -249,16 +282,16 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 \t<script type=\"text/javascript\" src=\"https://www.google.com/jsapi\"></script>
 
 \t";
-        // line 125
+        // line 135
         $this->displayBlock('script', $context, $blocks);
-        // line 127
+        // line 137
         echo " ";
     }
 
-    // line 125
+    // line 135
     public function block_script($context, array $blocks = array())
     {
-        // line 126
+        // line 136
         echo "\t<!-- bloques scripts que heredarán cada pag -->
 \t";
     }
@@ -275,6 +308,6 @@ class __TwigTemplate_95911e2dd9518a7dc924bf27858b6082b23cb7ebcc5d03b71b8e8f3aae1
 
     public function getDebugInfo()
     {
-        return array (  262 => 126,  259 => 125,  255 => 127,  253 => 125,  244 => 119,  239 => 117,  233 => 115,  230 => 114,  225 => 112,  220 => 109,  212 => 14,  207 => 12,  201 => 10,  198 => 9,  191 => 128,  189 => 114,  186 => 113,  184 => 112,  178 => 109,  165 => 98,  158 => 95,  156 => 94,  148 => 91,  145 => 90,  138 => 87,  136 => 86,  132 => 84,  130 => 83,  116 => 72,  112 => 70,  101 => 67,  97 => 66,  94 => 65,  90 => 64,  82 => 59,  64 => 44,  36 => 18,  34 => 9,  24 => 1,);
+        return array (  295 => 136,  292 => 135,  288 => 137,  286 => 135,  277 => 129,  272 => 127,  266 => 125,  263 => 124,  258 => 122,  253 => 119,  245 => 14,  240 => 12,  234 => 10,  231 => 9,  224 => 138,  222 => 124,  219 => 123,  217 => 122,  211 => 119,  198 => 108,  191 => 105,  189 => 104,  181 => 101,  178 => 100,  171 => 97,  169 => 96,  165 => 94,  163 => 93,  149 => 82,  145 => 80,  134 => 77,  130 => 76,  127 => 75,  123 => 74,  115 => 69,  105 => 61,  93 => 59,  87 => 58,  83 => 57,  77 => 54,  64 => 44,  36 => 18,  34 => 9,  24 => 1,);
     }
 }

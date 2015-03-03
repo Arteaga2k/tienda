@@ -33,7 +33,12 @@
 		</div>
 		<div class="col-sm-6 col-lg-6 col-md-6">
 			<h2>
-				<strong>Precio: €{{ producto.precio }}</strong> <small>Iva incluído:
+                {% if moneda.nombre == 'EUR' %}
+                    {% set icono = '€' %}
+                {% else %}
+                    {% set icono = '$' %}
+                {% endif %}
+				<strong>Precio: {{ icono }}{{ producto.precio * moneda.valor|round(1, 'ceil')}}</strong> <small>Iva incluído:
 					{{ producto.iva }}%</small><br /> <br />
 			</h2>
 		</div>

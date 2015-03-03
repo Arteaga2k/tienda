@@ -269,7 +269,8 @@ class Usuario extends CI_Controller
                 'direccion' => $this->input->post('direccion'),
                 'cp' => $this->input->post('cp'),
                 'idProvincia' => $this->input->post('provincia'),
-                'estado' => 0
+                'estado' => 0,
+                'moneda' => 'EUR'
             );
             
             // si existe post(id) estamos editando un usuario
