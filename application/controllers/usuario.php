@@ -26,8 +26,11 @@ class Usuario extends CI_Controller
             $pedidosNoProce = $this->pedido_model->getPedsNoProcesados($login['id_usuario']);
             $historialPedidos = $this->pedido_model->getPedidos($login['id_usuario']);
             $usuario = $this->usuario_model->getUsuarioById($login['id_usuario']);
+            $monedas = $this->moneda->get_monedas();
             
             echo $this->twig->render('usuario/panel_usuario.twig', array(
+                'monedas' => $monedas['monedas'],
+                'moneda' => $this->session->userdata('moneda'),
                 'form' => $this->form,
                 'usuario' => $usuario,
                 'pedsNoProce' => $pedidosNoProce,
@@ -51,8 +54,11 @@ class Usuario extends CI_Controller
         
         $this->form['token'] = $this->token();
         $provincias = $this->home_model->getProvincias();
+        $monedas = $this->moneda->get_monedas();
         
         echo $this->twig->render('usuario/login_formulario.twig', array(
+            'monedas' => $monedas['monedas'],
+            'moneda' => $this->session->userdata('moneda'),
             'provincias' => $provincias,
             'form' => $this->form
         ));
@@ -72,8 +78,11 @@ class Usuario extends CI_Controller
         
         $this->form['token'] = $this->token();
         $provincias = $this->home_model->getProvincias();
+        $monedas = $this->moneda->get_monedas();
         
         echo $this->twig->render('usuario/alta_formulario.twig', array(
+            'monedas' => $monedas['monedas'],
+            'moneda' => $this->session->userdata('moneda'),
             'provincias' => $provincias,
             'form' => $this->form
         ));
@@ -101,8 +110,11 @@ class Usuario extends CI_Controller
                     
                     $this->form['token'] = $this->token();
                     $provincias = $this->home_model->getProvincias();
+                    $monedas = $this->moneda->get_monedas();
                     
                     echo $this->twig->render('usuario/usuario_edita_formulario.twig', array(
+                        'monedas' => $monedas['monedas'],
+                        'moneda' => $this->session->userdata('moneda'),
                         'provincias' => $provincias,
                         'form' => $this->form,
                         'usuario' => $this->session->userdata("login")
@@ -137,6 +149,7 @@ class Usuario extends CI_Controller
                     $this->form['token'] = $this->token();
                     // guardamos error
                     $this->form['error'] = $this->session->flashdata('error_nuevo_pwd');
+                    $monedas = $this->moneda->get_monedas();
                     
                     $this->form["form_edicion_pwd"] = form_open("usuario/procesaFormEditaPwD", array(
                         "class" => "form-horizontal",
@@ -144,6 +157,8 @@ class Usuario extends CI_Controller
                     ));
                     
                     echo $this->twig->render('usuario/usuario_editapwd_formulario.twig', array(
+                        'monedas' => $monedas['monedas'],
+                        'moneda' => $this->session->userdata('moneda'),
                         'form' => $this->form,
                         'usuario' => $this->session->userdata("login")
                     ));

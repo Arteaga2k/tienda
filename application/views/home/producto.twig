@@ -38,7 +38,7 @@
                 {% else %}
                     {% set icono = '$' %}
                 {% endif %}
-				<strong>Precio: {{ icono }}{{ producto.precio * moneda.valor|round(1, 'ceil')}}</strong> <small>Iva incluído:
+				<strong>Precio: {{ icono }}{{ (producto.precio * moneda.valor)|round(1)}}</strong> <small>Iva incluído:
 					{{ producto.iva }}%</small><br /> <br />
 			</h2>
 		</div>

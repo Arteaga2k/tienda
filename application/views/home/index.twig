@@ -65,7 +65,7 @@
                     {% else %}
                         {% set icono = '$' %}
                     {% endif %}
-					<h4>{{ producto.precio *  moneda.valor|round(1, 'ceil')}} {{ icono }}</h4>
+					<h4>{{ (producto.precio *  moneda.valor)|round(1)}} {{ icono }}</h4>
 
 					<p>
 						See more snippets like this online store item at <a

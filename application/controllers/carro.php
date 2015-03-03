@@ -27,8 +27,11 @@ class Carro extends CI_Controller
     public function verCarro()
     {
         $form['error'] = $this->session->flashdata('carro_incorrecto');
+        $monedas = $this->moneda->get_monedas();
         
         echo $this->twig->render('carro/detalle_carro.twig', array(
+            'monedas' => $monedas['monedas'],
+            'moneda' => $this->session->userdata('moneda'),
             'carrito' => $this->carrito->getCarrito(),
             'usuario' => $this->session->userdata('login'),
             'form' => $form
@@ -75,11 +78,14 @@ class Carro extends CI_Controller
                 $suma = $cantidad1 + intval($cantidad);
                 $cantidadFinal = $producto->stock >= $suma ? $cantidad : $producto->stock;
             }
+            $moneda =  $this->session->userdata('moneda');
+            $precio = (float)$moneda['valor'] * (float)$producto->precio;            
+          
             
             $this->carrito->InsertarItem(array(
                 'id' => $idproducto,
                 'cantidad' => $cantidadFinal,
-                'precio' => $producto->precio,
+                'precio' => round($precio,1),
                 'nombre' => $producto->nombre
             ));
         }

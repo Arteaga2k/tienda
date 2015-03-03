@@ -32,7 +32,7 @@
 					<td>{{ producto.precio }}€</td>
 					<td><input type="text" name="cantidad"
 						value="{{ producto.cantidad }}" /></td>
-					<td>{{ producto.precio * producto.cantidad}}€</td>
+					<td>{{ producto.precio * producto.cantidad}} {{ moneda.nombre }}</td>
 					<td>
 						<button type="submit" name="actualizar" class="btn btn-default">Actualizar</button>
 						<a class="btn btn-default"
