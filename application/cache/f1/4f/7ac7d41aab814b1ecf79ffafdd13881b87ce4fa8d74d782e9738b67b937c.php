@@ -93,7 +93,9 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
 \t\t\t\t\t<td>";
             // line 35
             echo twig_escape_filter($this->env, ($this->getAttribute($context["producto"], "precio", array()) * $this->getAttribute($context["producto"], "cantidad", array())), "html", null, true);
-            echo "€</td>
+            echo " ";
+            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "nombre", array()), "html", null, true);
+            echo "</td>
 \t\t\t\t\t<td>
 \t\t\t\t\t\t<button type=\"submit\" name=\"actualizar\" class=\"btn btn-default\">Actualizar</button>
 \t\t\t\t\t\t<a class=\"btn btn-default\"
@@ -221,6 +223,6 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
 
     public function getDebugInfo()
     {
-        return array (  168 => 77,  151 => 62,  148 => 61,  136 => 54,  132 => 53,  125 => 49,  121 => 48,  115 => 44,  102 => 39,  95 => 35,  91 => 34,  86 => 32,  82 => 31,  78 => 30,  74 => 29,  69 => 26,  65 => 25,  49 => 11,  43 => 8,  40 => 7,  38 => 6,  32 => 2,  29 => 1,);
+        return array (  170 => 77,  153 => 62,  150 => 61,  138 => 54,  134 => 53,  127 => 49,  123 => 48,  117 => 44,  104 => 39,  95 => 35,  91 => 34,  86 => 32,  82 => 31,  78 => 30,  74 => 29,  69 => 26,  65 => 25,  49 => 11,  43 => 8,  40 => 7,  38 => 6,  32 => 2,  29 => 1,);
     }
 }

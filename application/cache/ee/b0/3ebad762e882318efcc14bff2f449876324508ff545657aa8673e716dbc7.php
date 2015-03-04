@@ -112,7 +112,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
         // line 41
         echo "\t\t\t\t<strong>Precio: ";
         echo twig_escape_filter($this->env, (isset($context["icono"]) ? $context["icono"] : null), "html", null, true);
-        echo twig_escape_filter($this->env, ($this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "precio", array()) * twig_round($this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "valor", array()), 1, "ceil")), "html", null, true);
+        echo twig_escape_filter($this->env, twig_round(($this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "precio", array()) * $this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "valor", array())), 1), "html", null, true);
         echo "</strong> <small>Iva incluído:
 \t\t\t\t\t";
         // line 42

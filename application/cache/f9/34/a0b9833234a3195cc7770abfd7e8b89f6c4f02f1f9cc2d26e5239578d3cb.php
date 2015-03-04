@@ -142,7 +142,7 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
             }
             // line 68
             echo "\t\t\t\t\t<h4>";
-            echo twig_escape_filter($this->env, ($this->getAttribute($context["producto"], "precio", array()) * twig_round($this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "valor", array()), 1, "ceil")), "html", null, true);
+            echo twig_escape_filter($this->env, twig_round(($this->getAttribute($context["producto"], "precio", array()) * $this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "valor", array())), 1), "html", null, true);
             echo " ";
             echo twig_escape_filter($this->env, (isset($context["icono"]) ? $context["icono"] : null), "html", null, true);
             echo "</h4>
