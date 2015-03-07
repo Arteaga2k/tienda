@@ -12,7 +12,10 @@
 			datos</a></label> |
 	<label><a
 		href="{{ site_url('usuario/editaPassword') }}/{{ usuario.idUsuario }}">Modificar
-			contraseña</a></label>
+			contraseña</a></label> |
+			<label><a
+		href="{{ site_url('usuario/confirmar_baja_usuario') }}/{{ usuario.idUsuario }}">Darme de baja
+			</a></label>
 	<div class="well">
 		<p>Nombre: {{ usuario.nombre|title}} {{ usuario.apellidos|title }}</p>
 		<p>DNI: {{ usuario.dni }}</p>
@@ -72,6 +75,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- end modal -->
 			</form>
 		</tr>
 

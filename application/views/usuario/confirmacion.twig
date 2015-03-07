@@ -1,0 +1,22 @@
+{% extends "_templates/base.twig" %} {% block contenido %}
+<div class="page-header">
+	<h1>
+		{{ tabla }} <small>{{ cabecera }}</small>
+	</h1>
+
+</div>
+<div class="col-md-12">
+    <div class="well">
+		<p>Nombre: {{ usuario.nombre|title}} {{ usuario.apellidos|title }}</p>
+		<p>DNI: {{ usuario.dni }}</p>
+		<p>Provincia: {{ usuario.provincia }}</p>
+		<p>Dirección: {{ usuario.direccion|title }}</p>
+		<p>Código postal: {{ usuario.cp|title }}</p>
+	</div>	
+	<a class="btn btn-primary" href="{{ site_url('usuario/procesa_baja_usuario')}}/{{ usuario.idUsuario}}">Darme de baja</a>
+	<a class="btn btn-default" href="{{ site_url('home') }}">Cancelar</a>
+		
+	
+</div>
+{% endblock %}
+

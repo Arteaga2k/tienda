@@ -48,27 +48,42 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="#">About</a></li>
-					<li><a href="#">Services</a></li>
+					<li class="dropdown"><a href="#" class="dropdown-toggle"
+						data-toggle="dropdown" role="button" aria-expanded="false">Operaciones<span
+							class="caret"></span>
+					</a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ site_url('utileria/importa_datos') }}">Importar
+									datos</a></li>
+							<li><a href="{{ site_url('utileria/exporta_xml') }}">Exportar
+									datos</a></li>
+							<li><a
+								href="http://iessansebastian.com/~santiago_d/dwes/agregador/">Agregador
+									de Tiendas</a></li>
+
+						</ul></li>
+
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-expanded="false"><i
 							class="glyphicon glyphicon-flag"></i> {{ moneda.nombre }}<span
 							class="caret"></span> </a>
-						<ul class="dropdown-menu" role="menu">	
-						<li><a href="{{ site_url('home/moneda_de_uso/EUR') }}">EUR</a></li> 
-						{% for moneda,value in monedas %}						
-							<li><a href="{{ site_url('home/moneda_de_uso') }}/{{ moneda }}">{{ moneda }}</a></li> 
-						{% endfor %}
-							
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="{{ site_url('home/moneda_de_uso/EUR') }}">EUR</a></li>
+							{% for moneda,value in monedas %}
+							<li><a href="{{ site_url('home/moneda_de_uso') }}/{{ moneda }}">{{
+									moneda }}</a></li> {% endfor %}
+
 						</ul></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
-						data-toggle="dropdown" role="button" aria-expanded="false" id="cesta"><span
-							class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-							Cesta {{ carrito.articulos_total > 0 ? carrito.articulos_total : '' }}<span class="caret"></span> </a>
+						data-toggle="dropdown" role="button" aria-expanded="false"
+						id="cesta"><span class="glyphicon glyphicon-shopping-cart"
+							aria-hidden="true"></span> Cesta {{ carrito.articulos_total > 0 ?
+							carrito.articulos_total : '' }}<span class="caret"></span> </a>
 						<ul class="dropdown-menu" role="menu">
-							
+
 							<div class="col-md-12">
 								<table id="table_cart" class="table table-hover">
 									{% for producto in carrito.items %}
@@ -84,7 +99,7 @@
 										class="glyphicon glyphicon-shopping-cart"></i> Checkout</a>
 								</p>
 							</div>
-						
+
 
 						</ul></li>
 
@@ -93,21 +108,20 @@
 							class="glyphicon glyphicon-user"></i> {{ usuario.username|length
 							? usuario.username : 'Identificate' }}<b class="caret"></b></a>
 						<ul class="dropdown-menu">
-						{%  if usuario.username is null %}
+							{% if usuario.username is null %}
 							<li><a href="{{ site_url('usuario/loginUsuario/') }}"><i
 									class="glyphicon glyphicon-log-in"></i> Iniciar sesión</a></li>
-						{%  endif %}
+							{% endif %}
 							<li><a
 								href="{{ site_url('usuario/panelUsuario') }}/{{ usuario.id_usuario }}"><i
 									class="glyphicon glyphicon-th-large"></i> Panel control</a></li>
-							<li class="divider"></li>
-						{%  if usuario.username is not null %}
+							<li class="divider"></li> {% if usuario.username is not null %}
 							<li><a href="{{ site_url('usuario/logout/') }}"><i
 									class="glyphicon glyphicon-log-out"></i> Cerrar sesión</a></li>
-						{%  endif %}
+							{% endif %}
 						</ul></li>
 				</ul>
-			</div>			
+			</div>
 
 			<!-- /.navbar-collapse -->
 		</div>

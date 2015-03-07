@@ -219,9 +219,9 @@ class __TwigTemplate_891768df667d7c4e75b4ee4ef671564a33990156943b409c8b41f65eaff
         // line 84
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "id", array()), "html", null, true);
         echo "\" name=\"id\" />
-         
-          <div class=\"form-group\">
-            <div class=\"col-sm-offset-2 col-sm-10\">
+         <hr />
+          <div class=\"form-group \">
+            <div class=\"col-sm-offset-2 col-sm-10 \">
               <button type=\"submit\" class=\"btn btn-primary\">Guardar datos</button>
             </div>
           </div>

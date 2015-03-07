@@ -60,87 +60,55 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 <div class=\"col-md-9\">
 
 
-\t";
-        // line 16
-        echo (isset($context["pagination"]) ? $context["pagination"] : null);
-        echo "
-
-\t<!-- <div class=\"row carousel-holder\">
-
-\t\t <div class=\"col-md-12\">
-\t\t\t<div id=\"carousel-example-generic\" class=\"carousel slide\"
-\t\t\t\tdata-ride=\"carousel\">
-\t\t\t\t<ol class=\"carousel-indicators\">
-\t\t\t\t\t<li data-target=\"#carousel-example-generic\" data-slide-to=\"0\"
-\t\t\t\t\t\tclass=\"active\"></li>
-\t\t\t\t\t<li data-target=\"#carousel-example-generic\" data-slide-to=\"1\"></li>
-\t\t\t\t\t<li data-target=\"#carousel-example-generic\" data-slide-to=\"2\"></li>
-\t\t\t\t</ol>
-\t\t\t\t<div class=\"carousel-inner\">
-\t\t\t\t\t<div class=\"item active\">
-\t\t\t\t\t\t<img class=\"slide-image\" src=\"http://placehold.it/800x300\" alt=\"\">
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class=\"item\">
-\t\t\t\t\t\t<img class=\"slide-image\" src=\"http://placehold.it/800x300\" alt=\"\">
-\t\t\t\t\t</div>
-\t\t\t\t\t<div class=\"item\">
-\t\t\t\t\t\t<img class=\"slide-image\" src=\"http://placehold.it/800x300\" alt=\"\">
-\t\t\t\t\t</div>
-\t\t\t\t</div>
-\t\t\t\t<a class=\"left carousel-control\" href=\"#carousel-example-generic\"
-\t\t\t\t\tdata-slide=\"prev\"> <span class=\"glyphicon glyphicon-chevron-left\"></span>
-\t\t\t\t</a> <a class=\"right carousel-control\"
-\t\t\t\t\thref=\"#carousel-example-generic\" data-slide=\"next\"> <span
-\t\t\t\t\tclass=\"glyphicon glyphicon-chevron-right\"></span>
-\t\t\t\t</a>
-\t\t\t</div>
-\t\t</div>
-
-\t</div>-->
+\t
+\t <h2>";
+        // line 17
+        echo twig_escape_filter($this->env, (isset($context["cabecera"]) ? $context["cabecera"] : null), "html", null, true);
+        echo "</h2>
 
 \t<div class=\"row\">
-
+   
 \t\t";
-        // line 53
+        // line 21
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["productos"]) ? $context["productos"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["producto"]) {
-            // line 54
+            // line 22
             echo "\t\t<div class=\"col-sm-4 col-lg-4 col-md-4\">
 \t\t\t<div class=\"thumbnail\">
 \t\t\t\t<img src=\"";
-            // line 56
+            // line 24
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "imagen", array()), "html", null, true);
             echo "\" alt=\"\">
 \t\t\t\t<div class=\"caption\">
 
 \t\t\t\t\t<h4>
 \t\t\t\t\t\t<a href=\"";
-            // line 60
+            // line 28
             echo twig_escape_filter($this->env, site_url("home/producto/"), "html", null, true);
             echo "/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "idProducto", array()), "html", null, true);
             echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
-            // line 61
+            // line 29
             echo "</a>
 \t\t\t\t\t</h4>
                     ";
-            // line 63
+            // line 31
             if (($this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "nombre", array()) == "EUR")) {
-                // line 64
+                // line 32
                 echo "                        ";
                 $context["icono"] = "€";
-                // line 65
+                // line 33
                 echo "                    ";
             } else {
-                // line 66
+                // line 34
                 echo "                        ";
                 $context["icono"] = "\$";
-                // line 67
+                // line 35
                 echo "                    ";
             }
-            // line 68
+            // line 36
             echo "\t\t\t\t\t<h4>";
             echo twig_escape_filter($this->env, twig_round(($this->getAttribute($context["producto"], "precio", array()) * $this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "valor", array())), 1), "html", null, true);
             echo " ";
@@ -155,45 +123,45 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 \t\t\t\t\t<p>
 \t\t\t\t\t<!-- calculando porcentaje stock -->
                     ";
-            // line 77
+            // line 45
             if (($this->getAttribute($context["producto"], "stock", array()) < 30)) {
-                // line 78
+                // line 46
                 echo "                        ";
                 $context["porcentaje"] = 15;
-                // line 79
+                // line 47
                 echo "                        ";
                 $context["estado"] = "danger";
-                // line 80
+                // line 48
                 echo "                    ";
             } elseif ((($this->getAttribute($context["producto"], "stock", array()) > 30) && ($this->getAttribute($context["producto"], "stock", array()) < 100))) {
-                // line 81
+                // line 49
                 echo "                      ";
                 $context["porcentaje"] = 40;
-                // line 82
+                // line 50
                 echo "                      ";
                 $context["estado"] = "warning";
                 echo "                   
                     ";
             } else {
-                // line 84
+                // line 52
                 echo "                        ";
                 $context["porcentaje"] = 100;
-                // line 85
+                // line 53
                 echo "                        ";
                 $context["estado"] = "success";
-                // line 86
+                // line 54
                 echo "                    ";
             }
-            // line 87
+            // line 55
             echo "\t\t\t\t\t
 \t\t\t\t\t<div class=\"progress\">
 \t\t\t\t\t\t<div class=\"progress-bar progress-bar-";
-            // line 89
+            // line 57
             echo twig_escape_filter($this->env, (isset($context["estado"]) ? $context["estado"] : null), "html", null, true);
             echo "\" role=\"progressbar\"
 \t\t\t\t\t\t\taria-valuenow=\"40\" aria-valuemin=\"0\" aria-valuemax=\"100\"
 \t\t\t\t\t\t\tstyle=\"width: ";
-            // line 91
+            // line 59
             echo twig_escape_filter($this->env, (isset($context["porcentaje"]) ? $context["porcentaje"] : null), "html", null, true);
             echo "%\">
 \t\t\t\t\t\t\t<span class=\"sr-only\">40% Complete (success)</span>
@@ -220,8 +188,11 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 112
-        echo "\t</div>
+        // line 80
+        echo "\t\t";
+        echo (isset($context["pagination"]) ? $context["pagination"] : null);
+        echo "
+\t</div>
 </div>
 
 
@@ -240,6 +211,6 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
     public function getDebugInfo()
     {
-        return array (  224 => 112,  197 => 91,  192 => 89,  188 => 87,  185 => 86,  182 => 85,  179 => 84,  173 => 82,  170 => 81,  167 => 80,  164 => 79,  161 => 78,  159 => 77,  144 => 68,  141 => 67,  138 => 66,  135 => 65,  132 => 64,  130 => 63,  126 => 61,  120 => 60,  113 => 56,  109 => 54,  105 => 53,  65 => 16,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  192 => 80,  165 => 59,  160 => 57,  156 => 55,  153 => 54,  150 => 53,  147 => 52,  141 => 50,  138 => 49,  135 => 48,  132 => 47,  129 => 46,  127 => 45,  112 => 36,  109 => 35,  106 => 34,  103 => 33,  100 => 32,  98 => 31,  94 => 29,  88 => 28,  81 => 24,  77 => 22,  73 => 21,  66 => 17,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }

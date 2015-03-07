@@ -35,5 +35,12 @@ class Producto_model extends CI_Model
         
         return $productos->result_array();
     }
+    
+    public function get_producto_by_id($idProducto)
+    {
+        $producto = $this->db->where('idProducto', $idProducto)->get('producto');
+    
+        return $producto->row();
+    }
 
 }

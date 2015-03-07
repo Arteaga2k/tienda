@@ -128,6 +128,43 @@ class Usuario extends CI_Controller
             redirect(site_url('usuario/loginUsuario'));
         }
     }
+    
+    /**
+     * Muestra formulario confirmación baja de usuario
+     * @param int $id identificador de usuario
+     */
+    public function confirmar_baja_usuario($id){
+        // comprobamos que usuario está logueado
+        if ($this->login->usuario_logueado()) {
+            if (isset($id) && $id != 0) {
+                // obtenemos usuario
+                $usuario = $this->usuario_model->getUsuarioById($id);
+                $monedas = $this->moneda->get_monedas();
+                             
+                echo $this->twig->render('usuario/confirmacion.twig', array(
+                    'cabecera' => 'Confirmación baja de usuario',
+                    'monedas' => $monedas['monedas'],
+                    'moneda' => $this->session->userdata('moneda'),                           
+                    'usuario' =>$usuario
+                ));
+            }
+        }
+    }
+    
+    /**
+     * Realiza la baja de un usario
+     * @param int $id identificador de usuario
+     */
+    public function procesa_baja_usuario($id){
+        // comprobamos que usuario está logueado
+        if ($this->login->usuario_logueado()) {
+            if (isset($id) && $id != 0) {
+                // obtenemos usuario
+                $usuario = $this->usuario_model->procesa_baja_usuario($id);                
+                $this->logout();                
+            }
+        }
+    }
 
     /**
      * Muestra formulario edición contraseña de usuario
@@ -284,8 +321,8 @@ class Usuario extends CI_Controller
                 'direccion' => $this->input->post('direccion'),
                 'cp' => $this->input->post('cp'),
                 'idProvincia' => $this->input->post('provincia'),
-                'estado' => 0,
-                'moneda' => 'EUR'
+                'estado' => 0
+               
             );
             
             // si existe post(id) estamos editando un usuario

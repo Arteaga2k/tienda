@@ -83,6 +83,30 @@ class Carrito
         // una vez hemos añadido el producto
         $this->update_precio_cantidad();
     }
+    
+    
+    /**
+     * Cambia el valor del precio, porque el usuario ha elegido otra moneda
+     * @param unknown $data
+     */
+    public function cambio_precio($data = array()){
+        if (! is_array($data) or count($data) == 0) {
+            return;
+        }
+        
+        $itemid = $data['id'];
+        
+        if (isset($this->_cart['items'][$itemid])) {
+            $this->_cart['items'][$itemid]['precio'] = $data['precio'];
+        }
+        
+        $this->CI->session->set_userdata('carro', serialize($this->_cart));
+        
+        // actualizamos el precio total y el número de artículos del carrito
+        // una vez hemos añadido el producto
+        $this->update_precio_cantidad();
+    }
+    
 
     /**
      * Elimina una linea del carrito

@@ -90,6 +90,20 @@ class Usuario_model extends CI_Model
     }
     
     /**
+     * Cambiamos el estado de usuario a inactivo
+     * @param int $id
+     */
+    public function procesa_baja_usuario($id){
+        $data = array(
+            'estado' => '0'
+        );
+        $this->db->where('idUsuario',$id);
+        $this->db->update('usuario', $data);
+        
+        return $this->db->affected_rows();
+    }
+    
+    /**
      * Actualiza los datos de un usuario
      * 
      * @param unknown $data

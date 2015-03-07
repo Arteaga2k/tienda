@@ -29,13 +29,42 @@ class Carro extends CI_Controller
         $form['error'] = $this->session->flashdata('carro_incorrecto');
         $monedas = $this->moneda->get_monedas();
         
+        $this->session->set_userdata("url", 'carro/verCarro/');
+        
+        $this->form['token'] = $this->token();
+        $this->form["form_carro"] = form_open("carro/form_detalle_carro", array(
+            "class" => "form-horizontal",
+            "name" => "procesaFormUsuario"
+        ));
+        
         echo $this->twig->render('carro/detalle_carro.twig', array(
             'monedas' => $monedas['monedas'],
             'moneda' => $this->session->userdata('moneda'),
             'carrito' => $this->carrito->getCarrito(),
             'usuario' => $this->session->userdata('login'),
-            'form' => $form
+            'form' => $this->form
         ));
+    }
+    
+    public function form_detalle_carro(){
+        // verificamos token formulario
+        $this->verificaToken('token');
+        // obtenemos id
+        $id = $this->input->post('id');
+        
+        $this->form_validation->set_rules('cantidad', 'Cantidad', 'required|numeric|min_length[1]|greater_than[0]');
+        
+        // Comprueba validación formulario
+        if ($this->form_validation->run() == FALSE) {        
+            $this->form["cantidad"] = form_error('cantidad');            
+            $this->verCarro();
+        }else {
+            $cantidad = $this->input->post('cantidad');
+            if ($cantidad>0)
+            $this->ajaxUpdateCart($this->input->post('cantidad'), $this->input->post('idProducto'));
+            redirect(site_url('carro/verCarro'));
+        }
+       
     }
 
     /**
@@ -123,5 +152,32 @@ class Carro extends CI_Controller
         }
         
         echo json_encode($this->carrito->getCarrito());
+    }
+    
+    /**
+     * clave aleatoria que será la que contendrá el formulario
+     * de esta forma evitaremos el Cross-Site Request Forgery.
+     *
+     *
+     * @return string
+     */
+    private function token()
+    {
+        $token = md5(uniqid(rand(), true));
+        $this->session->set_userdata('token', $token);
+        return $token;
+    }
+    
+    /**
+     * Verifica token formulario
+     *
+     * @param unknown $cadena
+     * @return boolean
+     */
+    private function verificaToken($cadena)
+    {
+        if (! $this->input->post($cadena) && $this->input->post($cadena) == $this->session->userdata('token')) {
+            redirect(site_url('carro'));
+        }
     }
 }

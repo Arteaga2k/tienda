@@ -18,6 +18,7 @@ class Home extends CI_Controller
     {
         parent::__construct();
         $this->load->model('home_model');
+        $this->load->model('producto_model');
     }
 
     /**
@@ -47,6 +48,7 @@ class Home extends CI_Controller
         $this->session->set_userdata("url", 'home/index/'.$segmento);
         
         echo $this->twig->render('home/index.twig', array(
+            'cabecera' => 'Productos Destacados',
             'monedas' => $monedas['monedas'],
             'moneda' => $this->session->userdata('moneda'),
             'categorias' => $categorias,
@@ -83,7 +85,7 @@ class Home extends CI_Controller
         $monedas = $this->moneda->get_monedas();
         $this->session->set_userdata("url", 'home/categoria/'.$idCategoria);
         
-        echo $this->twig->render('home/index.twig', array(
+        echo $this->twig->render('home/index.twig', array(            
             'monedas' => $monedas['monedas'],
             'moneda' => $this->session->userdata('moneda'),
             'categorias' => $categorias,
@@ -151,7 +153,28 @@ class Home extends CI_Controller
         );
         
         $this->session->set_userdata('moneda',$moneda);
+        $this->actualiza_precio_items_carro();
         
         redirect(site_url($this->session->userdata("url") ? $this->session->userdata("url") : 'home'));
+    }
+    
+    /**
+     * Actualiza carrito después de un cambio de moneda
+     */
+    public function actualiza_precio_items_carro(){
+        $carrito = $this->carrito->getCarrito();   
+        $moneda =  $this->session->userdata('moneda');
+     
+        foreach ($carrito['items'] as $key => $value){      
+           
+            $data = array(
+                'id' => $key,
+                'precio' => round($this->producto_model->get_producto_by_id($key)->precio * $moneda['valor'],1)
+            );
+            
+            $this->carrito->cambio_precio($data);            
+        }
+       
+       
     }
 }

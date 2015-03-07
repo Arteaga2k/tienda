@@ -56,10 +56,11 @@
 	</div>
 	
 	<div class="row">
+	<hr />
 			<div class="col-sm-6 col-lg-6 col-md-6">
 				<p>{{ producto.anuncio }}</p>
 			</div>
-		</div>
+	</div>
 
 </div>
 {% endblock %} {% block script %}
@@ -89,7 +90,7 @@
 
 			    	$.each(json.items, function(key, value) {
 			    	    console.log(key,value);
-			    	    html += "<tr><td>"+value.nombre+"</td><td>"+value.precio+" € x " +value.cantidad+ "</td></tr>";				    	   	   		    		 			  	    
+			    	    html += "<tr><td>"+value.nombre+"</td><td>"+value.precio+"  x " +value.cantidad+  " unds</td></tr>";				    	   	   		    		 			  	    
 			    	    
 				    });
 

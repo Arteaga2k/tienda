@@ -49,7 +49,23 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
         echo "
 \t\t<h2>Contenido del Carrito de la Compra</h2>
 \t\t<hr />
-
+\t\t ";
+        // line 14
+        if (($this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "nombre", array()) == "EUR")) {
+            // line 15
+            echo "                    ";
+            $context["icono"] = "€";
+            // line 16
+            echo "                ";
+        } else {
+            // line 17
+            echo "                    ";
+            $context["icono"] = "\$";
+            // line 18
+            echo "                ";
+        }
+        // line 19
+        echo "
 \t\t<table class=\"table table-bordered\">
 \t\t\t<tr>
 \t\t\t\t<th>Código</th>
@@ -61,46 +77,56 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
 \t\t\t</tr>
 
 \t\t\t";
-        // line 25
+        // line 30
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable($this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "items", array()));
         foreach ($context['_seq'] as $context["key"] => $context["producto"]) {
-            // line 26
+            // line 31
             echo "\t\t\t<tr>
-\t\t\t\t<form id=\"formActualiza\" action=\"operacion\">
+\t\t\t\t";
+            // line 32
+            echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "form_carro", array());
+            echo "
 
 \t\t\t\t\t<input type=\"hidden\" name=\"idProducto\" value=\"";
-            // line 29
+            // line 34
             echo twig_escape_filter($this->env, $context["key"], "html", null, true);
             echo "\" />
 \t\t\t\t\t<td>";
-            // line 30
+            // line 35
             echo twig_escape_filter($this->env, $context["key"], "html", null, true);
             echo "</td>
 \t\t\t\t\t<td>";
-            // line 31
+            // line 36
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "nombre", array()), "html", null, true);
             echo "</td>
 \t\t\t\t\t<td>";
-            // line 32
+            // line 37
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "precio", array()), "html", null, true);
-            echo "€</td>
+            echo twig_escape_filter($this->env, (isset($context["icono"]) ? $context["icono"] : null), "html", null, true);
+            echo "</td>
 \t\t\t\t\t<td><input type=\"text\" name=\"cantidad\"
 \t\t\t\t\t\tvalue=\"";
-            // line 34
+            // line 39
             echo twig_escape_filter($this->env, $this->getAttribute($context["producto"], "cantidad", array()), "html", null, true);
-            echo "\" /></td>
+            echo "\" /><span>";
+            echo $this->getAttribute((isset($context["form"]) ? $context["form"] : null), "cantidad", array());
+            // line 40
+            echo "</span></td>
 \t\t\t\t\t<td>";
-            // line 35
+            // line 41
             echo twig_escape_filter($this->env, ($this->getAttribute($context["producto"], "precio", array()) * $this->getAttribute($context["producto"], "cantidad", array())), "html", null, true);
-            echo " ";
-            echo twig_escape_filter($this->env, $this->getAttribute((isset($context["moneda"]) ? $context["moneda"] : null), "nombre", array()), "html", null, true);
+            echo twig_escape_filter($this->env, (isset($context["icono"]) ? $context["icono"] : null), "html", null, true);
             echo "</td>
+\t\t\t\t\t<td><input type=\"hidden\" name=\"idProducto\" value=\"";
+            // line 42
+            echo twig_escape_filter($this->env, $context["key"], "html", null, true);
+            echo "\" /></td>
 \t\t\t\t\t<td>
 \t\t\t\t\t\t<button type=\"submit\" name=\"actualizar\" class=\"btn btn-default\">Actualizar</button>
 \t\t\t\t\t\t<a class=\"btn btn-default\"
 \t\t\t\t\t\thref=\"";
-            // line 39
+            // line 46
             echo twig_escape_filter($this->env, site_url("carro/eliminaItem/"), "html", null, true);
             echo "/";
             echo twig_escape_filter($this->env, $context["key"], "html", null, true);
@@ -113,31 +139,37 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 44
+        // line 51
         echo "\t\t\t<tr>
 \t\t\t\t<td></td>
 \t\t\t\t<td>Total</td>
 \t\t\t\t<td></td>
 \t\t\t\t<td>";
-        // line 48
+        // line 55
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "articulos_total", array()), "html", null, true);
         echo "</td>
 \t\t\t\t<td>";
-        // line 49
+        // line 56
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["carrito"]) ? $context["carrito"] : null), "precio_total", array()), "html", null, true);
-        echo "€</td>
+        echo twig_escape_filter($this->env, (isset($context["icono"]) ? $context["icono"] : null), "html", null, true);
+        echo "</td>
 \t\t\t</tr>
 \t\t</table>
 \t\t<p>
 \t\t\t<a href=\"";
-        // line 53
+        // line 60
         echo twig_escape_filter($this->env, site_url("carro/vaciaCarro"), "html", null, true);
         echo "\" class=\"btn btn-default\">Vaciar
 \t\t\t\tCarrito</a> <a href=\"";
-        // line 54
+        // line 61
         echo twig_escape_filter($this->env, site_url("pedido/preparaPedido"), "html", null, true);
         echo "\"
 \t\t\t\tclass=\"btn btn-primary\">Realizar pedido</a>
+\t\t\t<a href=\"";
+        // line 63
+        echo twig_escape_filter($this->env, site_url("home"), "html", null, true);
+        echo "\"
+\t\t\t\tclass=\"btn btn-success pull-right\">Seguir comprando</a>
 \t\t</p>
 \t</div>
 </div>
@@ -146,64 +178,15 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
 ";
     }
 
-    // line 61
+    // line 70
     public function block_script($context, array $blocks = array())
     {
-        // line 62
+        // line 71
         echo "
 
 <script type=\"text/javascript\">
 
-\t\$(document).ready(function(){    
-
-\t\t\$( \"#formActualiza\" ).submit(function( event ) {
-\t\t\t event.preventDefault();
-\t\t\t var cantidad = \$(\"[name='cantidad']\").val();
-\t\t\t var idProducto;
-\t\t\t// filtramos valor
-\t\t\tif (\$.isNumeric(cantidad) && cantidad > 0){
-
-\t\t\t\tidProducto = \$(\"[name='idProducto']\").val();
-\t\t\t\t 
-\t\t\t\t\$.get(\"";
-        // line 77
-        echo twig_escape_filter($this->env, site_url("carro/ajaxUpdateCart/"), "html", null, true);
-        echo "/\"+cantidad+\"/\"+idProducto+\"\",\"\",function(data)
-\t\t\t\t{
-\t\t\t\t    var json = JSON.parse(data);
-\t\t\t\t    console.log(json);
-\t\t\t\t   
-\t\t\t    \tvar html = \"\";
-\t\t\t    \tvar articulos_total = json.articulos_total;
-\t\t\t    \tvar precio_total = json.precio_total;\t
-\t\t\t\t    \t
-
-\t\t\t    \t\$.each(json.items, function(key, value) {
-\t\t\t    \t    console.log(key,value);
-\t\t\t    \t    html += \"<tr><td></td><td>\"+value.nombre+\"</td><td>\"+value.precio+\" € x \" +value.cantidad+ \"</td></tr>\";\t\t\t    \t   \t\t    \t\t \t\t\t  \t    
-\t\t\t    \t});\t\t\t    \t
-\t\t\t    \t\$('#cesta').html('<span class=\"glyphicon glyphicon-shopping-cart\" aria-hidden=\"true\"></span>'+ 
-\t\t\t\t\t\t\t ' Cesta '+articulos_total+'<span class=\"caret\"></span> </a>');
-\t\t\t\t\t\$('#table_cart').html(html);\t    \t\t\t 
-\t\t\t\t});
-\t\t\t}
-\t\t\telse
-\t\t\t{
-\t\t\t    // mostrar error \t\t\t    
-\t\t\t    \$('#formAdd').addClass('has-error');
-\t\t\t    \$('#errorCantidad').text('Introduce un valor correcto');
-\t\t\t}\t\t
-\t\t\t 
-\t\t});\t\t
-
-\t\t/*\$('#cantidad').click(function(){
-\t\t\t if (\$('#formAdd').hasClass('form-group has-error')){\t\t    \t
-\t\t    \t \$('#formAdd').removeClass('form-group has-error').addClass('form-group');
-\t\t    \t \$('#errorCantidad').text('');
-\t\t\t}
-\t\t});\t*/
-\t\t
-\t});
+\t
 
 
 
@@ -223,6 +206,6 @@ class __TwigTemplate_f14f7ac7d41aab814b1ecf79ffafdd13881b87ce4fa8d74d782e9738b67
 
     public function getDebugInfo()
     {
-        return array (  170 => 77,  153 => 62,  150 => 61,  138 => 54,  134 => 53,  127 => 49,  123 => 48,  117 => 44,  104 => 39,  95 => 35,  91 => 34,  86 => 32,  82 => 31,  78 => 30,  74 => 29,  69 => 26,  65 => 25,  49 => 11,  43 => 8,  40 => 7,  38 => 6,  32 => 2,  29 => 1,);
+        return array (  185 => 71,  182 => 70,  170 => 63,  165 => 61,  161 => 60,  153 => 56,  149 => 55,  143 => 51,  130 => 46,  123 => 42,  118 => 41,  115 => 40,  111 => 39,  105 => 37,  101 => 36,  97 => 35,  93 => 34,  88 => 32,  85 => 31,  81 => 30,  68 => 19,  65 => 18,  62 => 17,  59 => 16,  56 => 15,  54 => 14,  49 => 11,  43 => 8,  40 => 7,  38 => 6,  32 => 2,  29 => 1,);
     }
 }

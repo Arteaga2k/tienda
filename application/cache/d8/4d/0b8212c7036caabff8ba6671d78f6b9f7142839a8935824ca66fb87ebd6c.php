@@ -59,28 +59,36 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         echo "/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "idUsuario", array()), "html", null, true);
         echo "\">Modificar
-\t\t\tcontraseña</a></label>
+\t\t\tcontraseña</a></label> |
+\t\t\t<label><a
+\t\thref=\"";
+        // line 17
+        echo twig_escape_filter($this->env, site_url("usuario/confirmar_baja_usuario"), "html", null, true);
+        echo "/";
+        echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "idUsuario", array()), "html", null, true);
+        echo "\">Darme de baja
+\t\t\t</a></label>
 \t<div class=\"well\">
 \t\t<p>Nombre: ";
-        // line 17
+        // line 20
         echo twig_escape_filter($this->env, twig_title_string_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "nombre", array())), "html", null, true);
         echo " ";
         echo twig_escape_filter($this->env, twig_title_string_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "apellidos", array())), "html", null, true);
         echo "</p>
 \t\t<p>DNI: ";
-        // line 18
+        // line 21
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "dni", array()), "html", null, true);
         echo "</p>
 \t\t<p>Provincia: ";
-        // line 19
+        // line 22
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "provincia", array()), "html", null, true);
         echo "</p>
 \t\t<p>Dirección: ";
-        // line 20
+        // line 23
         echo twig_escape_filter($this->env, twig_title_string_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "direccion", array())), "html", null, true);
         echo "</p>
 \t\t<p>Código postal: ";
-        // line 21
+        // line 24
         echo twig_escape_filter($this->env, twig_title_string_filter($this->env, $this->getAttribute((isset($context["usuario"]) ? $context["usuario"] : null), "cp", array())), "html", null, true);
         echo "</p>
 \t</div>
@@ -99,15 +107,15 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 \t\t\t<th>Operaciones</th>
 \t\t</tr>
 \t\t";
-        // line 37
+        // line 40
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pedsNoProce"]) ? $context["pedsNoProce"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pedNoProce"]) {
-            // line 38
+            // line 41
             echo "\t\t<tr>
 \t\t\t<form
 \t\t\t\taction=\"";
-            // line 40
+            // line 43
             echo twig_escape_filter($this->env, site_url("pedido/cancelaPedido"), "html", null, true);
             echo "/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
@@ -115,18 +123,18 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 
 
 \t\t\t\t<td>";
-            // line 43
+            // line 46
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
             echo "</td>
 \t\t\t\t<td>";
-            // line 44
+            // line 47
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "fecha_creacion", array()), "html", null, true);
             echo "</td>
 \t\t\t\t<td>--</td>
 \t\t\t\t<td>Pendiente de procesar</td>
 \t\t\t\t<td><a class=\"btn btn-default\"
 \t\t\t\t\thref=\"";
-            // line 48
+            // line 51
             echo twig_escape_filter($this->env, site_url("pedido/factura"), "html", null, true);
             echo "/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedNoProce"], "idPedido", array()), "html", null, true);
@@ -157,6 +165,7 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 \t\t\t\t\t\t</div>
 \t\t\t\t\t</div>
 \t\t\t\t</div>
+\t\t\t\t<!-- end modal -->
 \t\t\t</form>
 \t\t</tr>
 
@@ -165,7 +174,7 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedNoProce'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 79
+        // line 83
         echo "\t</table>
 
 
@@ -182,39 +191,39 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 \t\t\t<th>Operaciones</th>
 \t\t</tr>
 \t\t";
-        // line 94
+        // line 98
         $context['_parent'] = (array) $context;
         $context['_seq'] = twig_ensure_traversable((isset($context["pedidos"]) ? $context["pedidos"] : null));
         foreach ($context['_seq'] as $context["_key"] => $context["pedido"]) {
-            // line 95
+            // line 99
             echo "\t\t<tr>
 \t\t\t<td>";
-            // line 96
+            // line 100
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 97
+            // line 101
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "fecha_creacion", array()), "html", null, true);
             echo "</td>
 \t\t\t<td>";
-            // line 98
+            // line 102
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "fecha_entrega", array()), "html", null, true);
             echo "-</td>
 \t\t\t<td><a
 \t\t\t\thref=\"";
-            // line 100
+            // line 104
             echo twig_escape_filter($this->env, site_url("pedido/factura"), "html", null, true);
             echo "/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
             echo "/0\"><span
 \t\t\t\t\tclass=\"glyphicon glyphicon-list-alt\" aria-hidden=\"true\"></span></a></td>
 \t\t\t<td>";
-            // line 102
+            // line 106
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "estado", array()), "html", null, true);
             echo "</td>
 \t\t\t<td><a
 \t\t\t\thref=\"";
-            // line 104
+            // line 108
             echo twig_escape_filter($this->env, site_url("pedido/factura"), "html", null, true);
             echo "/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["pedido"], "idPedido", array()), "html", null, true);
@@ -226,7 +235,7 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['pedido'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 108
+        // line 112
         echo "\t</table>
 
 
@@ -235,10 +244,10 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 ";
     }
 
-    // line 113
+    // line 117
     public function block_script($context, array $blocks = array())
     {
-        // line 114
+        // line 118
         echo "
 
 <script type=\"text/javascript\">
@@ -259,6 +268,6 @@ class __TwigTemplate_d84d0b8212c7036caabff8ba6671d78f6b9f7142839a8935824ca66fb87
 
     public function getDebugInfo()
     {
-        return array (  242 => 114,  239 => 113,  230 => 108,  218 => 104,  213 => 102,  206 => 100,  201 => 98,  197 => 97,  193 => 96,  190 => 95,  186 => 94,  169 => 79,  130 => 48,  123 => 44,  119 => 43,  111 => 40,  107 => 38,  103 => 37,  84 => 21,  80 => 20,  76 => 19,  72 => 18,  66 => 17,  58 => 14,  50 => 11,  44 => 7,  38 => 5,  36 => 4,  32 => 2,  29 => 1,);
+        return array (  251 => 118,  248 => 117,  239 => 112,  227 => 108,  222 => 106,  215 => 104,  210 => 102,  206 => 101,  202 => 100,  199 => 99,  195 => 98,  178 => 83,  138 => 51,  131 => 47,  127 => 46,  119 => 43,  115 => 41,  111 => 40,  92 => 24,  88 => 23,  84 => 22,  80 => 21,  74 => 20,  66 => 17,  58 => 14,  50 => 11,  44 => 7,  38 => 5,  36 => 4,  32 => 2,  29 => 1,);
     }
 }

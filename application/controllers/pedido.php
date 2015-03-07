@@ -198,11 +198,14 @@ class Pedido extends CI_Controller
                     "class" => "form-horizontal",
                     "name" => "procesaFormDatosEnvio"
                 ));
-                $provincias = $this->home_model->getProvincias();
+                $provincias = $this->home_model->getProvincias();               
+                $monedas = $this->moneda->get_monedas();
                 
                 echo $this->twig->render('pedido/datos_pedido.twig', array(
+                    'monedas' => $monedas['monedas'],
+                    'moneda' => $this->session->userdata('moneda'),
                     'provincias' => $provincias,
-                    'form' => $this->form,
+                    'form' => $this->form,                
                     'usuario' => $this->session->userdata('login'),
                     'carrito' => $this->carrito->getCarrito()
                 ));
@@ -236,6 +239,7 @@ class Pedido extends CI_Controller
             $this->form['condicion'] = form_error('condicion');
             
             echo $this->twig->render('pedido/form_confirma_pedido.twig', array(
+                
                 'carrito' => $this->carrito->getCarrito(),
                 'form' => $this->form,
                 'usuario' => $this->session->userdata('login')
