@@ -99,6 +99,7 @@ class Carro extends CI_Controller
         $producto = $this->home_model->getProducto($idproducto);
         $carrito = $this->carrito->getCarrito();
         
+               
         // comprobamos que hay stock
         if (intval($producto->stock) > 0) {
             

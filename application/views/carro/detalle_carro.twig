@@ -11,11 +11,8 @@
 
 		<h2>Contenido del Carrito de la Compra</h2>
 		<hr />
-		 {% if moneda.nombre == 'EUR' %}
-                    {% set icono = '€' %}
-                {% else %}
-                    {% set icono = '$' %}
-                {% endif %}
+		{% if moneda.nombre == 'EUR' %} {% set icono = '€' %} {% else %} {%
+		set icono = '$' %} {% endif %}
 
 		<table class="table table-bordered">
 			<tr>
@@ -31,20 +28,19 @@
 			<tr>
 				{{ form.form_carro|raw }}
 
-					<input type="hidden" name="idProducto" value="{{ key }}" />
-					<td>{{ key }}</td>
-					<td>{{ producto.nombre }}</td>
-					<td>{{ producto.precio }}{{ icono }}</td>
-					<td><input type="text" name="cantidad"
-						value="{{ producto.cantidad }}" /><span>{{
-					form.cantidad|raw }}</span></td>
-					<td>{{ producto.precio * producto.cantidad}}{{ icono }}</td>
-					<td><input type="hidden" name="idProducto" value="{{ key }}" /></td>
-					<td>
-						<button type="submit" name="actualizar" class="btn btn-default">Actualizar</button>
-						<a class="btn btn-default"
-						href="{{ site_url('carro/eliminaItem/') }}/{{ key }}">Eliminar</a>
-					</td>
+				<input type="hidden" name="idProducto" value="{{ key }}" />
+				<td>{{ key }}</td>
+				<td>{{ producto.nombre }}</td>
+				<td>{{ producto.precio }}{{ icono }}</td>
+				<td><input type="text" name="cantidad"
+					value="{{ producto.cantidad }}" /><span>{{ form.cantidad|raw }}</span></td>
+				<td>{{ producto.precio * producto.cantidad}}{{ icono }}</td>
+				<input type="hidden" name="idProducto" value="{{ key }}" />
+				<td>
+					<button type="submit" name="actualizar" class="btn btn-default">Actualizar</button>
+					<a class="btn btn-default"
+					href="{{ site_url('carro/eliminaItem/') }}/{{ key }}">Eliminar</a>
+				</td>
 				</form>
 			</tr>
 			{% endfor %}
@@ -57,11 +53,12 @@
 			</tr>
 		</table>
 		<p>
-			<a href="{{ site_url('carro/vaciaCarro') }}" class="btn btn-default">Vaciar
-				Carrito</a> <a href="{{ site_url('pedido/preparaPedido') }}"
-				class="btn btn-primary">Realizar pedido</a>
-			<a href="{{ site_url('home') }}"
-				class="btn btn-success pull-right">Seguir comprando</a>
+			<a href="{{ site_url('pedido/preparaPedido') }}"
+				class="btn btn-primary">Realizar pedido</a> <a
+				href="{{ site_url('home') }}" class="btn btn-success">Seguir
+				comprando</a> <a href="{{ site_url('carro/vaciaCarro') }}"
+				class="btn btn-danger pull-right">Vaciar Carrito</a>
+
 		</p>
 	</div>
 </div>

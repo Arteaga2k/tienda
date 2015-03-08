@@ -68,7 +68,7 @@ class Home extends CI_Controller
      */
     public function categoria($idCategoria)
     {
-        $pagination = 5;
+        $pagination = 3;
         
         $config['base_url'] = site_url('home/categoria/' . $idCategoria . '')  ;
         $config['total_rows'] = $this->home_model->getTotalProductos($idCategoria);

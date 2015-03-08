@@ -32,9 +32,9 @@ class Pdf extends TCPDF
 		$this->Cell(0, 10, 'Page '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
 	}
 	
-	public function DatosFacturacion($nomfactura){
-	    $txt = "Shopping Cart Componentes\n" . "SL CIF: B73347494\n" . "Avda Europa, 2-3, Pol.Ind. Las Salinas" . "Alhama de Huelva\n" . "30840.Murcia.";
-	    
+	public function DatosFacturacion($nomfactura,$usuario){
+	    $datosVendedor = "Shopping Cart Componentes\n" . "SL CIF: B73347494\n" . "Avda Europa, 2-3, Pol.Ind. Las Salinas\n". "30840.Murcia.";
+	    $datosComprador = $usuario['nombre']." ".$usuario['apellidos']."\n".$usuario['dni']." ".$usuario['email']."\n".$usuario['direccion']." ".$usuario['cp']."\n".$usuario['provincia'];
 	    // set cell padding
 	    $this->setCellPaddings(1, 1, 1, 1);
 	    
@@ -50,9 +50,9 @@ class Pdf extends TCPDF
 	    $this->SetFont('times', 'BI', 12);
 	    
 	    // Vertical alignment
-	    $this->MultiCell(90, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
+	    $this->MultiCell(90, 20, $datosVendedor, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
 	    
-	    $this->MultiCell(0, 20, $txt, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
+	    $this->MultiCell(0, 20, $datosComprador, 1, 'J', 1, 0, '', '', true, 0, false, true, 40, 'T');
 	    
 	    $this->Ln(30);
 	}

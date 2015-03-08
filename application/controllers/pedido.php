@@ -30,12 +30,16 @@ class Pedido extends CI_Controller
     {
         if ($this->login->usuario_logueado()) {
             $pedido = $this->pedido_model->getLineasById($id);
+            $idUsuario = $this->session->userdata("login")['id_usuario'];
+            $usuario = $this->usuario_model->getUsuarioById($idUsuario);
+            
+            
             if (empty($pedido))
                 redirect(site_url('usuario/panelUsuario') );
             
             $fechaCreacion = $pedido[0]['fecha_creacion'];
             
-            $nomfactura = $proforma == 0 ? 'FACTURA' : ' FACTURA PROFORMA';
+            $nomfactura = $proforma == 1 ? 'FACTURA' : ' FACTURA PROFORMA';
             
             // create new PDF document
             $pdf = new Pdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -87,7 +91,7 @@ class Pedido extends CI_Controller
             // add a page
             $pdf->AddPage();
             
-            $pdf->DatosFacturacion($nomfactura);
+            $pdf->DatosFacturacion($nomfactura,$usuario);
             
             $html = '<table border="1">
              <tr>
@@ -162,10 +166,9 @@ class Pedido extends CI_Controller
             $pdf->writeHTMLCell($w = 0, $h = 0, $x = '', $y = '', $tabla4, $border = 0, $ln = 1, $fill = 0, $reseth = true, $align = 'R', $autopadding = true);
             
             if ($dest == 'F') {
-                // guardamos factura
-               // $pdf->Output($_SERVER['DOCUMENT_ROOT'] . '/' . 'factura_' . $id . '.pdf', 'F');
-               // $pdf->Output(dirname(__FILE__) . '/' . 'factura_' . $id . '.pdf', 'F'); 
-                $pdf->Output('/upload' . '/' . 'factura_' . $id . '.pdf', 'F');
+                // guardamos factura               
+                $pdf->Output(dirname(__FILE__).'/../../uploads' . '/' . 'factura_' . $id . '.pdf', 'F');
+                
             } else {
                 // generamos factura navegador
                 $pdf->Output(site_url('factura_' . $id . '.pdf', 'I') );
@@ -229,7 +232,7 @@ class Pedido extends CI_Controller
         
         $this->form['form_confirmaPedido'] = form_open('pedido/confirmaPedido', array(
             'class' => 'form-horizontal',
-            'name' => 'form_confirmaPedido'
+            'name' => 'form_confirmaPedido'           
         ));
         
         $this->form_validation->set_rules('condicion', 'Condiciones', 'required');
@@ -252,7 +255,8 @@ class Pedido extends CI_Controller
                 if (! empty($id)) {
                     $this->pedido_model->insertaLineas($this->carrito->getCarrito(), $id);
                     $this->emailPedidoRealizado($id);
-                    redirect(site_url('carro/vaciaCarro'));
+                    $this->factura($id);
+                    //redirect(site_url('usuario/panelUsuario'));
                 } else {
                     // error
                 }
@@ -299,7 +303,7 @@ class Pedido extends CI_Controller
         $this->email->subject("Shopping Cart");
         $this->email->message($this->cuerpoEmail($id));
         $this->factura($id, 1, 'F');
-        $this->email->attach('/upload' . '/' . 'factura_' . $id . '.pdf');
+        $this->email->attach(dirname(__FILE__).'/../../uploads' . '/' . 'factura_' . $id . '.pdf');
         $this->email->send();
         // echo $this->email->print_debugger();
     }

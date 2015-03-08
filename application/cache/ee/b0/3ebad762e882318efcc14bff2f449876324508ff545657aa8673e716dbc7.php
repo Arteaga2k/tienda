@@ -138,7 +138,7 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t
 \t<div class=\"row\">
 \t<hr />
-\t\t\t<div class=\"col-sm-6 col-lg-6 col-md-6\">
+\t\t\t<div class=\"col-sm-12 col-lg-12 col-md-12\">
 \t\t\t\t<p>";
         // line 61
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "anuncio", array()), "html", null, true);
@@ -163,11 +163,12 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 \t\t\$('#add').click(function(){
 \t\t\t\t\t\t
 \t\t\tvar cantidad = parseInt(\$('#cantidad').val());  
+\t\t
 \t\t\t
 \t\t\t// filtramos valor
 \t\t\tif (\$.isNumeric(cantidad) && cantidad > 0){
 \t\t\t\t\$.get(\"";
-        // line 79
+        // line 80
         echo twig_escape_filter($this->env, site_url("carro/ajaxAddCart/"), "html", null, true);
         echo "/\"+cantidad+\"/";
         echo twig_escape_filter($this->env, $this->getAttribute((isset($context["producto"]) ? $context["producto"] : null), "idProducto", array()), "html", null, true);
@@ -231,6 +232,6 @@ class __TwigTemplate_eeb03ebad762e882318efcc14bff2f449876324508ff545657aa8673e71
 
     public function getDebugInfo()
     {
-        return array (  171 => 79,  157 => 67,  154 => 66,  144 => 61,  126 => 46,  119 => 42,  113 => 41,  110 => 40,  107 => 39,  104 => 38,  101 => 37,  99 => 36,  90 => 30,  83 => 26,  74 => 19,  68 => 18,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
+        return array (  172 => 80,  157 => 67,  154 => 66,  144 => 61,  126 => 46,  119 => 42,  113 => 41,  110 => 40,  107 => 39,  104 => 38,  101 => 37,  99 => 36,  90 => 30,  83 => 26,  74 => 19,  68 => 18,  58 => 10,  51 => 9,  45 => 8,  39 => 7,  32 => 2,  29 => 1,);
     }
 }

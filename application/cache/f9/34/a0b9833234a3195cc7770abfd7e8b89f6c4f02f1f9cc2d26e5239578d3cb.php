@@ -189,10 +189,12 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['producto'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
         // line 80
-        echo "\t\t";
+        echo "\t\t
+\t</div>
+\t";
+        // line 82
         echo (isset($context["pagination"]) ? $context["pagination"] : null);
         echo "
-\t</div>
 </div>
 
 
@@ -211,6 +213,6 @@ class __TwigTemplate_f934a0b9833234a3195cc7770abfd7e8b89f6c4f02f1f9cc2d26e523957
 
     public function getDebugInfo()
     {
-        return array (  192 => 80,  165 => 59,  160 => 57,  156 => 55,  153 => 54,  150 => 53,  147 => 52,  141 => 50,  138 => 49,  135 => 48,  132 => 47,  129 => 46,  127 => 45,  112 => 36,  109 => 35,  106 => 34,  103 => 33,  100 => 32,  98 => 31,  94 => 29,  88 => 28,  81 => 24,  77 => 22,  73 => 21,  66 => 17,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
+        return array (  196 => 82,  192 => 80,  165 => 59,  160 => 57,  156 => 55,  153 => 54,  150 => 53,  147 => 52,  141 => 50,  138 => 49,  135 => 48,  132 => 47,  129 => 46,  127 => 45,  112 => 36,  109 => 35,  106 => 34,  103 => 33,  100 => 32,  98 => 31,  94 => 29,  88 => 28,  81 => 24,  77 => 22,  73 => 21,  66 => 17,  57 => 10,  50 => 9,  44 => 8,  38 => 7,  31 => 2,  28 => 1,);
     }
 }
