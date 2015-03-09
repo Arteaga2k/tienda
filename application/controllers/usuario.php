@@ -310,10 +310,12 @@ class Usuario extends CI_Controller
             else
                 $this->creaUsuario();
         } else {
+                        
+           
             
             $usuario = array(
                 'username' => $this->input->post('username'),
-                'password' => $this->input->post('password'),
+                'password' => md5($this->input->post('password')),
                 'email' => $this->input->post('email'),
                 'nombre' => $this->input->post('nombre'),
                 'apellidos' => $this->input->post('apellidos'),
@@ -486,7 +488,8 @@ class Usuario extends CI_Controller
         // $this->email->bcc('them@their-example.com');
         
         $this->email->subject('Restablecimiento de contraseña');
-        $this->email->message("\n\nSu nueva contraseña es $clave \n");
+        $this->email->message("\n\nSu nueva contraseña es $clave \n");        
+        
         
         if ($this->email->send()) {
             return TRUE;
