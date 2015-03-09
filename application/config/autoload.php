@@ -64,7 +64,7 @@ $autoload['libraries'] = array('twig','carrito','moneda','pagination','session',
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('form','url');
+$autoload['helper'] = array('form','url','download');
 
 
 /*

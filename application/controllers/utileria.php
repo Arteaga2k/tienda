@@ -32,8 +32,11 @@ class Utileria extends CI_Controller
             "name" => "procesaFormUsuario"
         ));
         
+        $monedas = $this->moneda->get_monedas();
         echo $this->twig->render('ficheros/upload_formulario.twig', array(
-            'form' => $this->form
+            'form' => $this->form,
+            'monedas' => $monedas['monedas'],
+            'moneda' => $this->session->userdata('moneda')
         ));
     }
 
@@ -183,6 +186,11 @@ class Utileria extends CI_Controller
         $sxe = new SimpleXMLElement($xml);
         // exportamos lista categorías a fichero xml
         $sxe->asXML('uploads/categorias.xml');
+        
+        $data = file_get_contents("uploads/categorias.xml"); // Read the file's contents
+        $name = 'categorias.xml';
+        
+        force_download($name, $data);
     }
 
     /**
@@ -215,6 +223,13 @@ class Utileria extends CI_Controller
         $sxe = new SimpleXMLElement($xml);
         // exportamos categorias a fichero formato xml
         $sxe->asXML('uploads/productos.xml');
+        
+        $data = file_get_contents("uploads/productos.xml"); // Read the file's contents
+        $name = 'productos.xml';
+        
+        force_download($name, $data);
+        
+        
     }
 
     /**
